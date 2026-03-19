@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>COMANI.IT — ERP & CRM Web Agency</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init({ publicKey: "Tv5x37HiNBdpiIkdm" });
+  })();
+</script>
 <style>
 :root {
   --neon-cyan: #00ffff;
@@ -354,6 +360,8 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
     </div>
   </div>
 </section>
+  </div>
+</section>
 
 <hr class="neon-hr">
 
@@ -371,51 +379,47 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
         <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:marco7d@yahoo.com">marco7d@yahoo.com</a></div></div>
       </div>
       <div class="contact-item">
-        <div class="contact-icon">☎</div>
+        <div class="contact-icon">&#9742;</div>
         <div><div class="contact-label">Telefono / WhatsApp</div><div class="contact-value"><a href="tel:+393356854485">+39 335 685 4485</a></div></div>
       </div>
       <div class="contact-item">
-        <div class="contact-icon">◉</div>
-        <div><div class="contact-label">Sede operativa</div><div class="contact-value">Torino, Piemonte — Italia</div></div>
+        <div class="contact-icon">&#9685;</div>
+        <div><div class="contact-label">Sede operativa</div><div class="contact-value">Torino, Piemonte &mdash; Italia</div></div>
       </div>
       <div class="contact-item">
-        <div class="contact-icon">⊞</div>
+        <div class="contact-icon">&#8862;</div>
         <div><div class="contact-label">Web</div><div class="contact-value"><a href="https://www.comani.it" target="_blank">www.comani.it</a></div></div>
       </div>
       <div class="contact-item">
         <div class="contact-icon">in</div>
         <div><div class="contact-label">LinkedIn</div><div class="contact-value"><a href="https://linkedin.com/company/comani" target="_blank">linkedin.com/company/comani</a></div></div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon" style="font-size:10px;">IVA</div>
-        <div><div class="contact-label">Partita IVA</div><div class="contact-value">IT — da inserire</div></div>
-      </div>
       <div style="margin-top:24px;padding:18px;border:1px solid rgba(57,255,20,0.3);background:rgba(57,255,20,0.04);">
         <div style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--neon-green);margin-bottom:8px;">// ORARI</div>
-        <div style="font-size:14px;color:var(--text-muted);line-height:1.8;">Lun – Ven: 09:00 – 18:00<br>Sab: 09:00 – 13:00<br><span style="color:var(--neon-green);">Email support: 7/7</span></div>
+        <div style="font-size:14px;color:var(--text-muted);line-height:1.8;">Lun &ndash; Ven: 09:00 &ndash; 18:00<br>Sab: 09:00 &ndash; 13:00<br><span style="color:var(--neon-green);">Email support: 7/7</span></div>
       </div>
     </div>
     <div class="contact-form reveal">
       <h3>// DEMO GRATUITA</h3>
       <form onsubmit="submitForm(event)">
-        <div class="form-group"><label>Nome e Cognome</label><input type="text" placeholder="Mario Rossi" required></div>
-        <div class="form-group"><label>Email aziendale</label><input type="email" placeholder="mario@azienda.it" required></div>
-        <div class="form-group"><label>Azienda</label><input type="text" placeholder="Nome azienda" required></div>
+        <div class="form-group"><label>Nome e Cognome</label><input type="text" name="nome" placeholder="Mario Rossi" required></div>
+        <div class="form-group"><label>Email aziendale</label><input type="email" name="email" placeholder="mario@azienda.it" required></div>
+        <div class="form-group"><label>Azienda</label><input type="text" name="azienda" placeholder="Nome azienda" required></div>
         <div class="form-group">
           <label>Modulo di interesse</label>
-          <select>
-            <option>CRM — Pipeline vendite</option>
-            <option>SAP Sales — Fatturazione</option>
-            <option>MRP — Produzione</option>
-            <option>Finance — Budget & P&L</option>
-            <option>Procurement — Acquisti</option>
-            <option>Quality — ISO 9001</option>
-            <option>Operations — OEE</option>
-            <option>Bundle Enterprise — Tutto</option>
+          <select name="modulo">
+            <option>CRM &mdash; Pipeline vendite</option>
+            <option>SAP Sales &mdash; Fatturazione</option>
+            <option>MRP &mdash; Produzione</option>
+            <option>Finance &mdash; Budget e P&amp;L</option>
+            <option>Procurement &mdash; Acquisti</option>
+            <option>Quality &mdash; ISO 9001</option>
+            <option>Operations &mdash; OEE</option>
+            <option>Bundle Enterprise &mdash; Tutto</option>
           </select>
         </div>
-        <div class="form-group"><label>Messaggio</label><textarea placeholder="Raccontaci la tua realtà aziendale..."></textarea></div>
-        <button type="submit" class="btn-submit">▶ INVIA RICHIESTA DEMO</button>
+        <div class="form-group"><label>Messaggio</label><textarea name="messaggio" placeholder="Raccontaci la tua realta aziendale..."></textarea></div>
+        <button type="submit" class="btn-submit">&#9654; INVIA RICHIESTA DEMO</button>
       </form>
     </div>
   </div>
@@ -423,7 +427,7 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
 
 <footer>
   <div class="footer-logo">COM<span>AN</span>I<span style="font-size:12px;color:var(--text-muted);font-weight:400;">.IT</span></div>
-  <div class="footer-copy">© 2026 COMANI.IT — TORINO, ITALIA — ERP & CRM WEB AGENCY</div>
+  <div class="footer-copy">&copy; 2026 COMANI.IT &mdash; TORINO, ITALIA &mdash; ERP &amp; CRM WEB AGENCY</div>
   <div class="footer-links">
     <a href="#">Privacy</a>
     <a href="#">Cookie</a>
@@ -432,39 +436,39 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-// CURSOR
-const dot = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-document.addEventListener('mousemove', e => {
+(function(){ emailjs.init({ publicKey: "Tv5x37HiNBdpiIkdm" }); })();
+
+var dot = document.getElementById('cursorDot');
+var ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', function(e) {
   dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
   ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px';
 });
-document.querySelectorAll('a,button,.service-card,.pillar,.contact-item').forEach(el => {
-  el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.8)'; ring.style.borderColor = 'var(--neon-cyan)'; });
-  el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'var(--neon-pink)'; });
+document.querySelectorAll('a,button,.service-card,.pillar,.contact-item').forEach(function(el) {
+  el.addEventListener('mouseenter', function() { ring.style.transform = 'translate(-50%,-50%) scale(1.8)'; });
+  el.addEventListener('mouseleave', function() { ring.style.transform = 'translate(-50%,-50%) scale(1)'; });
 });
 
-// PARTICLES
-const pContainer = document.getElementById('particles');
-const colors = ['#00ffff','#ff0090','#39ff14','#ffff00','#bf00ff'];
-for (let i = 0; i < 40; i++) {
-  const p = document.createElement('div'); p.className = 'particle';
-  const color = colors[Math.floor(Math.random() * colors.length)];
-  p.style.cssText = `left:${Math.random()*100}%;background:${color};box-shadow:0 0 6px ${color};animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;`;
+var pContainer = document.getElementById('particles');
+var colors = ['#00ffff','#ff0090','#39ff14','#ffff00','#bf00ff'];
+for (var i = 0; i < 40; i++) {
+  var p = document.createElement('div'); p.className = 'particle';
+  var color = colors[Math.floor(Math.random() * colors.length)];
+  p.style.cssText = 'left:' + (Math.random()*100) + '%;background:' + color + ';box-shadow:0 0 6px ' + color + ';animation-duration:' + (6+Math.random()*10) + 's;animation-delay:' + (Math.random()*8) + 's;width:' + (1+Math.random()*2) + 'px;height:' + (1+Math.random()*2) + 'px;';
   pContainer.appendChild(p);
 }
 
-// TYPING
-const phrases = [
+var phrases = [
   'Automatizziamo i processi aziendali delle PMI italiane con tecnologia web enterprise.',
-  'Da zero a sistema operativo in 5-15 giorni lavorativi — sviluppo AI-accelerato.',
-  'CRM · MRP · SAP Sales · Procurement · Quality · Operations · Finance in un unico ecosistema.',
+  'Da zero a sistema operativo in 5-15 giorni lavorativi con sviluppo AI-accelerato.',
+  'CRM, MRP, SAP Sales, Procurement, Quality, Operations, Finance in un unico ecosistema.',
 ];
-let phraseIdx = 0, charIdx = 0, isDeleting = false;
-const typingEl = document.getElementById('typingText');
+var phraseIdx = 0, charIdx = 0, isDeleting = false;
+var typingEl = document.getElementById('typingText');
 function type() {
-  const phrase = phrases[phraseIdx];
+  var phrase = phrases[phraseIdx];
   if (!isDeleting) {
     typingEl.textContent = phrase.slice(0, ++charIdx);
     if (charIdx === phrase.length) { isDeleting = true; setTimeout(type, 2800); return; }
@@ -476,110 +480,99 @@ function type() {
 }
 type();
 
-// SCROLL REVEAL
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
+var reveals = document.querySelectorAll('.reveal');
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e, i) {
+    if (e.isIntersecting) setTimeout(function() { e.target.classList.add('visible'); }, i * 80);
+  });
 }, { threshold: 0.1 });
-reveals.forEach(r => observer.observe(r));
+reveals.forEach(function(r) { observer.observe(r); });
 
-// AUDIO — Web Audio API cyberpunk beat
-let audioCtx = null, isPlaying = false;
-
+var audioCtx = null, isPlaying = false;
 function createBeat() {
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  const master = audioCtx.createGain();
+  var master = audioCtx.createGain();
   master.gain.setValueAtTime(0.15, audioCtx.currentTime);
   master.connect(audioCtx.destination);
-
-  // Reverb
-  const conv = audioCtx.createConvolver();
-  const revGain = audioCtx.createGain();
-  revGain.gain.setValueAtTime(0.25, audioCtx.currentTime);
-  const rate = audioCtx.sampleRate, len = rate * 2;
-  const buf = audioCtx.createBuffer(2, len, rate);
-  for (let c = 0; c < 2; c++) { const d = buf.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1)*Math.pow(1-i/len,2); }
-  conv.buffer = buf; conv.connect(revGain); revGain.connect(master);
-
-  const bpm = 118, beat = 60/bpm;
-
-  function note(freq, start, dur, type='sine', vol=0.12) {
-    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+  var bpm = 118, beat = 60/bpm;
+  function note(freq, start, dur, type, vol) {
+    type = type || 'sine'; vol = vol || 0.12;
+    var o = audioCtx.createOscillator(), g = audioCtx.createGain();
     o.type = type; o.frequency.setValueAtTime(freq, start);
     g.gain.setValueAtTime(0, start);
     g.gain.linearRampToValueAtTime(vol, start+0.01);
     g.gain.exponentialRampToValueAtTime(0.001, start+dur);
-    o.connect(g); g.connect(master); g.connect(conv);
+    o.connect(g); g.connect(master);
     o.start(start); o.stop(start+dur+0.05);
   }
-
   function bar(t) {
-    // Bass
-    [0,0.5,1,1.5,2,2.5,3,3.5].forEach((off,i) => {
-      note([55,55,73.4,55,61.7,55,65.4,55][i]*beat, t+off*beat, beat*0.4, 'sawtooth', 0.07);
+    [0,0.5,1,1.5,2,2.5,3,3.5].forEach(function(off,i) {
+      note([55,55,73.4,55,61.7,55,65.4,55][i], t+off*beat, beat*0.4, 'sawtooth', 0.07);
     });
-    // Lead
-    [[0,220],[0.75,261.6],[1.5,246.9],[2,220],[2.5,196],[3,220],[3.75,261.6]].forEach(([off,f]) => {
-      note(f, t+off*beat, beat*0.55, 'triangle', 0.055);
+    [[0,220],[0.75,261.6],[1.5,246.9],[2,220],[2.5,196],[3,220],[3.75,261.6]].forEach(function(item) {
+      note(item[1], t+item[0]*beat, beat*0.55, 'triangle', 0.055);
     });
-    // Pad
-    [220,277.2,329.6].forEach(f => note(f, t, beat*4*0.9, 'sine', 0.035));
-    // Kick
-    [0,2].forEach(off => {
-      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-      o.type='sine'; o.frequency.setValueAtTime(140, t+off*beat); o.frequency.exponentialRampToValueAtTime(40, t+off*beat+0.25);
-      g.gain.setValueAtTime(0.22, t+off*beat); g.gain.exponentialRampToValueAtTime(0.001, t+off*beat+0.35);
+    [220,277.2,329.6].forEach(function(f) { note(f, t, beat*4*0.9, 'sine', 0.035); });
+    [0,2].forEach(function(off) {
+      var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type='sine'; o.frequency.setValueAtTime(140, t+off*beat);
+      o.frequency.exponentialRampToValueAtTime(40, t+off*beat+0.25);
+      g.gain.setValueAtTime(0.22, t+off*beat);
+      g.gain.exponentialRampToValueAtTime(0.001, t+off*beat+0.35);
       o.connect(g); g.connect(master); o.start(t+off*beat); o.stop(t+off*beat+0.4);
     });
-    // Snare
-    [1,3].forEach(off => {
-      const sn = audioCtx.createBufferSource(), sb = audioCtx.createBuffer(1,rate*0.12,rate);
-      const sd = sb.getChannelData(0); for(let j=0;j<sd.length;j++) sd[j]=(Math.random()*2-1)*Math.pow(1-j/sd.length,0.6);
-      sn.buffer=sb; const sg=audioCtx.createGain(), sf=audioCtx.createBiquadFilter();
-      sf.type='bandpass'; sf.frequency.value=1200; sf.Q.value=0.6;
-      sg.gain.setValueAtTime(0.1,t+off*beat); sg.gain.exponentialRampToValueAtTime(0.001,t+off*beat+0.12);
-      sn.connect(sf); sf.connect(sg); sg.connect(master); sn.start(t+off*beat);
-    });
-    // Hi-hat
-    for(let i=0;i<8;i++){
-      const hn=audioCtx.createBufferSource(),hb=audioCtx.createBuffer(1,rate*0.04,rate);
-      const hd=hb.getChannelData(0); for(let j=0;j<hd.length;j++) hd[j]=Math.random()*2-1;
-      hn.buffer=hb; const hg=audioCtx.createGain(),hf=audioCtx.createBiquadFilter();
-      hf.type='highpass'; hf.frequency.value=7000;
-      hg.gain.setValueAtTime(0.035,t+i*beat*0.5); hg.gain.exponentialRampToValueAtTime(0.001,t+i*beat*0.5+0.04);
-      hn.connect(hf); hf.connect(hg); hg.connect(master); hn.start(t+i*beat*0.5);
-    }
   }
-
-  let bt = audioCtx.currentTime + 0.1;
+  var bt = audioCtx.currentTime + 0.1;
   bar(bt);
-  const barDur = beat * 4 * 1000;
-  const loop = setInterval(() => { if (!isPlaying) { clearInterval(loop); return; } bt += beat*4; bar(bt); }, barDur - 60);
+  var barDur = beat * 4 * 1000;
+  var loop = setInterval(function() {
+    if (!isPlaying) { clearInterval(loop); return; }
+    bt += beat*4; bar(bt);
+  }, barDur - 60);
 }
-
 function toggleAudio() {
-  const label = document.getElementById('audioLabel');
-  const bars = document.querySelectorAll('.audio-bar');
+  var label = document.getElementById('audioLabel');
+  var bars = document.querySelectorAll('.audio-bar');
   if (!isPlaying) {
     isPlaying = true;
-    label.textContent = '⏸ SOUND OFF';
-    bars.forEach(b => b.classList.remove('paused'));
+    label.textContent = 'SOUND OFF';
+    bars.forEach(function(b) { b.classList.remove('paused'); });
     createBeat();
   } else {
     isPlaying = false;
-    label.textContent = '▶ SOUND ON';
-    bars.forEach(b => b.classList.add('paused'));
+    label.textContent = 'SOUND ON';
+    bars.forEach(function(b) { b.classList.add('paused'); });
     if (audioCtx) { audioCtx.close(); audioCtx = null; }
   }
 }
 
-// FORM
 function submitForm(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.btn-submit');
-  btn.textContent = '✓ RICHIESTA INVIATA — TI CONTATTIAMO ENTRO 24H';
-  btn.style.cssText += ';background:var(--neon-green);color:var(--dark-bg);border-color:var(--neon-green);';
-  setTimeout(() => { btn.textContent = '▶ INVIA RICHIESTA DEMO'; btn.style.background=''; btn.style.color='var(--neon-cyan)'; btn.style.borderColor='var(--neon-cyan)'; e.target.reset(); }, 4000);
+  var form = e.target;
+  var btn = form.querySelector('.btn-submit');
+  var templateParams = {
+    nome:      form.querySelector('[name=nome]').value,
+    email:     form.querySelector('[name=email]').value,
+    azienda:   form.querySelector('[name=azienda]').value,
+    modulo:    form.querySelector('[name=modulo]').value,
+    messaggio: form.querySelector('[name=messaggio]').value
+  };
+  btn.textContent = 'INVIO IN CORSO...';
+  btn.disabled = true;
+  emailjs.send('service_5lom6cr', 'template_hutgtie', templateParams)
+    .then(function() {
+      btn.textContent = 'RICHIESTA INVIATA - TI CONTATTIAMO ENTRO 24H';
+      btn.style.background = 'var(--neon-green)';
+      btn.style.color = '#020408';
+      btn.style.borderColor = 'var(--neon-green)';
+      form.reset();
+    })
+    .catch(function() {
+      btn.textContent = 'ERRORE - SCRIVI A marco7d@yahoo.com';
+      btn.style.borderColor = '#ff4444';
+      btn.style.color = '#ff4444';
+      btn.disabled = false;
+    });
 }
 </script>
 </body>
