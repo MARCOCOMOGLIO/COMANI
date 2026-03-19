@@ -376,7 +376,7 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
       <h3>// CONNETTITI</h3>
       <div class="contact-item">
         <div class="contact-icon">@</div>
-        <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:marco7d@yahoo.com">marco7d@yahoo.com</a></div></div>
+        <div><div class="contact-label">Email</div><div class="contact-value"><a href="/cdn-cgi/l/email-protection#3f525e4d5c50085b7f465e575050115c5052"><span class="__cf_email__" data-cfemail="731e1201101c4417330a121b1c1c5d101c1e">[email&#160;protected]</span></a></div></div>
       </div>
       <div class="contact-item">
         <div class="contact-icon">&#9742;</div>
@@ -436,7 +436,7 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function(){ emailjs.init({ publicKey: "Tv5x37HiNBdpiIkdm" }); })();
 
@@ -559,13 +559,13 @@ function submitForm(e) {
   };
   btn.textContent = 'INVIO IN CORSO...';
   btn.disabled = true;
-  emailjs.send('service_5lom6cr', 'template_hutgtie', templateParams)
+  emailjs.send('service_2lc5mtv', 'template_szlosyd', templateParams)
     .then(function() {
       btn.textContent = 'RICHIESTA INVIATA - TI CONTATTIAMO ENTRO 24H';
       btn.style.background = 'var(--neon-green)';
       btn.style.color = '#020408';
       btn.style.borderColor = 'var(--neon-green)';
-      form.reset();
+            form.reset();
     })
     .catch(function() {
       btn.textContent = 'ERRORE - SCRIVI A marco7d@yahoo.com';
