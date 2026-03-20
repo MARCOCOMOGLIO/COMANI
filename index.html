@@ -44,7 +44,7 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
 .grid-bg { position: fixed; inset: 0; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
 .cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--neon-cyan); border-radius: 50%; pointer-events: none; z-index: 10000; box-shadow: var(--glow-cyan); transform: translate(-50%,-50%); transition: transform 0.05s; }
 .cursor-ring { position: fixed; width: 30px; height: 30px; border: 1px solid var(--neon-pink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: all 0.12s ease; box-shadow: var(--glow-pink); }
-.audio-ctrl { position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; align-items: center; gap: 10px; background: rgba(0,255,255,0.05); border: 1px solid var(--neon-cyan); padding: 8px 16px; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--neon-cyan); cursor: pointer; text-transform: uppercase; letter-spacing: 2px; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); backdrop-filter: blur(10px); box-shadow: var(--glow-cyan); animation: borderPulse 2s infinite; }
+.audio-ctrl { display: flex; align-items: center; gap: 10px; background: rgba(0,255,255,0.05); border: 1px solid var(--neon-cyan); padding: 6px 14px; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--neon-cyan); cursor: pointer; text-transform: uppercase; letter-spacing: 2px; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); backdrop-filter: blur(10px); box-shadow: var(--glow-cyan); animation: borderPulse 2s infinite; }
 @keyframes borderPulse { 0%,100% { box-shadow: var(--glow-cyan); } 50% { box-shadow: 0 0 20px #00ffff, 0 0 60px #00ffff55; } }
 .audio-ctrl:hover { background: rgba(0,255,255,0.15); }
 .audio-visualizer { display: flex; gap: 2px; align-items: flex-end; height: 16px; }
@@ -230,9 +230,6 @@ body.light-mode .section-line { background: linear-gradient(90deg,#0077aa,#cc005
 
 
 
-<div class="audio-ctrl" id="audioCtrl" onclick="toggleAudio()">
-  <div class="audio-visualizer">
-    <div class="audio-bar paused" id="b1"></div>
     <div class="audio-bar paused" id="b2"></div>
     <div class="audio-bar paused" id="b3"></div>
     <div class="audio-bar paused" id="b4"></div>
@@ -243,21 +240,26 @@ body.light-mode .section-line { background: linear-gradient(90deg,#0077aa,#cc005
 
 <nav>
   <a href="#" class="nav-logo">COM<span>AN</span>I</a>
-  <ul class="nav-links">
+  <ul class="nav-links" style="position:absolute;left:50%;transform:translateX(-50%);">
     <li><a href="#servizi">Servizi</a></li>
     <li><a href="#mission">Mission</a></li>
     <li><a href="#contatti">Contatti</a></li>
   </ul>
-  <button id="lightToggle" onclick="toggleLight()" style="margin-left:auto;
-    display:flex;align-items:center;gap:6px;
-    background:rgba(0,255,255,0.05);border:1px solid var(--neon-cyan);
-    padding:6px 14px;font-family:Share Tech Mono,monospace;
-    font-size:10px;color:var(--neon-cyan);cursor:pointer;
-    text-transform:uppercase;letter-spacing:2px;
-    clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
-    box-shadow:var(--glow-cyan);transition:all .3s;">
-    ☀ LIGHT
-  </button>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+    <button id="lightToggle" onclick="toggleLight()" style="
+      display:flex;align-items:center;gap:6px;
+      background:rgba(0,255,255,0.05);border:1px solid var(--neon-cyan);
+      padding:6px 14px;font-family:Share Tech Mono,monospace;
+      font-size:10px;color:var(--neon-cyan);cursor:pointer;
+      text-transform:uppercase;letter-spacing:2px;
+      clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+      box-shadow:var(--glow-cyan);transition:all .3s;">
+      ☀ LIGHT
+    </button>
+    <div class="audio-ctrl" id="audioCtrl" onclick="toggleAudio()">
+  <div class="audio-visualizer">
+    <div class="audio-bar paused" id="b1"></div>
+  </div>
 </nav>
 
 <section class="hero" id="home">
@@ -492,7 +494,7 @@ body.light-mode .section-line { background: linear-gradient(90deg,#0077aa,#cc005
       <h3>// CONNETTITI</h3>
       <div class="contact-item">
         <div class="contact-icon">@</div>
-        <div><div class="contact-label">Email</div><div class="contact-value"><a href="/cdn-cgi/l/email-protection#3f525e4d5c50085b7f465e575050115c5052"><span class="__cf_email__" data-cfemail="731e1201101c4417330a121b1c1c5d101c1e">[email&#160;protected]</span></a></div></div>
+        <div><div class="contact-label">Email</div><div class="contact-value"><a href="#" id="email-link" style="color:inherit;text-decoration:none;">marco7d&#64;yahoo&#46;com</a><script>document.getElementById("email-link").href="mai"+"lto:"+"marco7d"+"@"+"yahoo.com";</script></div></div>
       </div>
       <div class="contact-item">
         <div class="contact-icon">&#9742;</div>
@@ -552,7 +554,7 @@ body.light-mode .section-line { background: linear-gradient(90deg,#0077aa,#cc005
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function(){ emailjs.init({ publicKey: "Tv5x37HiNBdpiIkdm" }); })();
 
@@ -707,7 +709,6 @@ function toggleLight() {
     btn.style.boxShadow = '';
   }
 }
-
 </script>
 </body>
 </html>
