@@ -44,7 +44,7 @@ body::before { content: ''; position: fixed; inset: 0; background: repeating-lin
 .grid-bg { position: fixed; inset: 0; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
 .cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--neon-cyan); border-radius: 50%; pointer-events: none; z-index: 10000; box-shadow: var(--glow-cyan); transform: translate(-50%,-50%); transition: transform 0.05s; }
 .cursor-ring { position: fixed; width: 30px; height: 30px; border: 1px solid var(--neon-pink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: all 0.12s ease; box-shadow: var(--glow-pink); }
-.audio-ctrl { position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; align-items: center; gap: 10px; background: rgba(0,255,255,0.05); border: 1px solid var(--neon-cyan); padding: 8px 16px; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--neon-cyan); cursor: pointer; text-transform: uppercase; letter-spacing: 2px; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); backdrop-filter: blur(10px); box-shadow: var(--glow-cyan); animation: borderPulse 2s infinite; }
+.audio-ctrl { display: flex; align-items: center; gap: 10px; background: rgba(0,255,255,0.05); border: 1px solid var(--neon-cyan); padding: 6px 14px; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--neon-cyan); cursor: pointer; text-transform: uppercase; letter-spacing: 2px; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); backdrop-filter: blur(10px); box-shadow: var(--glow-cyan); animation: borderPulse 2s infinite; }
 @keyframes borderPulse { 0%,100% { box-shadow: var(--glow-cyan); } 50% { box-shadow: 0 0 20px #00ffff, 0 0 60px #00ffff55; } }
 .audio-ctrl:hover { background: rgba(0,255,255,0.15); }
 .audio-visualizer { display: flex; gap: 2px; align-items: flex-end; height: 16px; }
@@ -167,6 +167,59 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
 @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 .neon-hr { border: none; height: 1px; background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-pink), transparent); margin: 0; box-shadow: 0 0 10px var(--neon-cyan); }
 @media (max-width: 768px) { nav { padding: 0 20px; } .nav-links { display: none; } section { padding: 70px 24px; } .contact-grid { grid-template-columns: 1fr; } footer { flex-direction: column; text-align: center; } }
+
+body.light-mode {
+  --neon-cyan: #0077aa;
+  --neon-pink: #cc0055;
+  --neon-green: #008800;
+  --text-primary: #111111;
+  --text-muted: rgba(0,0,0,0.55);
+  --dark-bg: #f0f4f8;
+  --dark-panel: #e2e8f0;
+  --dark-card: #ffffff;
+  background: #f0f4f8 !important;
+  color: #111111;
+}
+body.light-mode::before { display: none; }
+body.light-mode .grid-bg { display: none; }
+body.light-mode nav { background: rgba(240,244,248,0.97); border-bottom: 1px solid rgba(0,119,170,0.2); }
+body.light-mode .nav-logo { color: var(--neon-cyan); text-shadow: none; }
+body.light-mode .nav-links a { color: #444; }
+body.light-mode .nav-links a:hover { color: var(--neon-cyan); }
+body.light-mode .hero { background: linear-gradient(135deg, #e8f4fb 0%, #f0e8f8 100%); }
+body.light-mode .hero-title { color: #0077aa; text-shadow: none; }
+body.light-mode .hero-subtitle { color: #cc0055; text-shadow: none; }
+body.light-mode .hero-desc { color: #333; }
+body.light-mode .btn-primary { border-color: #0077aa; color: #0077aa; }
+body.light-mode .btn-secondary { border-color: #cc0055; color: #cc0055; background: transparent; }
+body.light-mode section { background: #f0f4f8; }
+body.light-mode .service-card { background: #ffffff; border-color: rgba(0,119,170,0.2); }
+body.light-mode .service-card:hover { border-color: #0077aa; box-shadow: 0 4px 20px rgba(0,119,170,0.1); }
+body.light-mode .service-name { color: #0077aa; text-shadow: none; }
+body.light-mode .service-price { color: #008800; text-shadow: none; }
+body.light-mode .service-desc { color: #555; }
+body.light-mode .section-title { color: #111; }
+body.light-mode .section-number { color: #cc0055; }
+body.light-mode .pillar { background: #ffffff; border-color: rgba(0,119,170,0.2); }
+body.light-mode .pillar-title { color: #0077aa; text-shadow: none; }
+body.light-mode .pillar-text { color: #555; }
+body.light-mode .contact-item { background: #ffffff; border-color: rgba(0,119,170,0.15); }
+body.light-mode .contact-label { color: #888; }
+body.light-mode .contact-value { color: #111; }
+body.light-mode .contact-value a { color: #0077aa; }
+body.light-mode .contact-icon { color: #0077aa; border-color: rgba(0,119,170,0.3); }
+body.light-mode .form-group input,
+body.light-mode .form-group select,
+body.light-mode .form-group textarea { background: #fff; border-color: rgba(0,119,170,0.25); color: #111; }
+body.light-mode .btn-submit { border-color: #0077aa; color: #0077aa; }
+body.light-mode footer { background: #e2e8f0; border-top-color: rgba(0,119,170,0.2); }
+body.light-mode .footer-copy { color: #666; }
+body.light-mode .footer-links a { color: #666; }
+body.light-mode .neon-hr { background: linear-gradient(90deg,transparent,#0077aa,#cc0055,transparent); box-shadow: none; }
+body.light-mode .audio-ctrl { background: rgba(0,119,170,0.08); border-color: #0077aa; color: #0077aa; box-shadow: none; animation: none; }
+body.light-mode #demo-video { background: #f0f4f8; }
+body.light-mode .section-line { background: linear-gradient(90deg,#0077aa,#cc0055); }
+
 </style>
 </head>
 <body>
@@ -175,9 +228,8 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<div class="audio-ctrl" id="audioCtrl" onclick="toggleAudio()">
-  <div class="audio-visualizer">
-    <div class="audio-bar paused" id="b1"></div>
+
+
     <div class="audio-bar paused" id="b2"></div>
     <div class="audio-bar paused" id="b3"></div>
     <div class="audio-bar paused" id="b4"></div>
@@ -188,11 +240,26 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
 
 <nav>
   <a href="#" class="nav-logo">COM<span>AN</span>I</a>
-  <ul class="nav-links">
+  <ul class="nav-links" style="position:absolute;left:50%;transform:translateX(-50%);">
     <li><a href="#servizi">Servizi</a></li>
     <li><a href="#mission">Mission</a></li>
     <li><a href="#contatti">Contatti</a></li>
   </ul>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+    <button id="lightToggle" onclick="toggleLight()" style="
+      display:flex;align-items:center;gap:6px;
+      background:rgba(0,255,255,0.05);border:1px solid var(--neon-cyan);
+      padding:6px 14px;font-family:Share Tech Mono,monospace;
+      font-size:10px;color:var(--neon-cyan);cursor:pointer;
+      text-transform:uppercase;letter-spacing:2px;
+      clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+      box-shadow:var(--glow-cyan);transition:all .3s;">
+      ☀ LIGHT
+    </button>
+    <div class="audio-ctrl" id="audioCtrl" onclick="toggleAudio()">
+  <div class="audio-visualizer">
+    <div class="audio-bar paused" id="b1"></div>
+  </div>
 </nav>
 
 <section class="hero" id="home">
@@ -625,6 +692,24 @@ function submitForm(e) {
       btn.disabled = false;
     });
 }
+
+function toggleLight() {
+  const body = document.body;
+  const btn = document.getElementById('lightToggle');
+  body.classList.toggle('light-mode');
+  if (body.classList.contains('light-mode')) {
+    btn.textContent = '◑ DARK';
+    btn.style.borderColor = '#cc0055';
+    btn.style.color = '#cc0055';
+    btn.style.boxShadow = '0 0 10px rgba(204,0,85,0.3)';
+  } else {
+    btn.textContent = '☀ LIGHT';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+    btn.style.boxShadow = '';
+  }
+}
+
 </script>
 </body>
 </html>
