@@ -698,29 +698,117 @@ footer{background:var(--navy-dk);padding:48px 7%}
     <div class="section-eyebrow reveal" style="color:rgba(255,255,255,.6)">Inizia adesso</div>
     <h2 class="section-title reveal d1">Demo gratuita.<br>In 30 minuti sai se fa per te.</h2>
     <p class="section-sub reveal d2">
-      Nessun impegno. Nessun contratto da firmare. Una call per capire quale modulo risolve il problema più urgente della tua PMI, e un preventivo chiaro entro 24 ore.
+      Nessun impegno. Nessun contratto da firmare. Compila il modulo — ti rispondiamo entro 24 ore con una proposta su misura.
     </p>
-    <div class="cta-btns reveal d3">
-      <a href="#cta" class="btn-white">Prenota la demo</a>
-      <a href="#moduli" class="btn-ghost-white">Esplora i moduli</a>
+    <div class="reveal d2" style="margin-top:20px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.7);font-size:.9rem">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Demo in 30 minuti su Zoom o Meet
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.7);font-size:.9rem">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Preventivo dettagliato entro 24 ore
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.7);font-size:.9rem">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Go-live garantito in 2–3 settimane
+      </div>
+      <div style="margin-top:8px">
+        <a href="partner-platform.html" style="color:rgba(255,255,255,.75);font-size:.88rem;text-decoration:underline;text-underline-offset:3px">Sei un commercialista? Scopri la Partner Platform →</a>
+      </div>
     </div>
   </div>
-  <div class="cta-items">
-    <div class="cta-item reveal">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Demo in 30 minuti</h5><p>Call su Zoom o Meet, nessuna installazione richiesta</p></div>
-    </div>
-    <div class="cta-item reveal d1">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Preventivo in 24 ore</h5><p>Dettagliato, senza sorprese, con timeline e costi fissi</p></div>
-    </div>
-    <div class="cta-item reveal d2">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Go-live in 2–3 settimane</h5><p>Consegna garantita per contratto, non una stima</p></div>
-    </div>
-    <div class="cta-item reveal d3">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Sei un commercialista?</h5><p><a href="partner-platform.html" style="color:rgba(255,255,255,.9);font-weight:500">Scopri la Partner Platform →</a></p></div>
+
+  <!-- Form -->
+  <div class="reveal d1">
+    <div id="demo-form" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label style="font-size:.8rem;font-weight:500;color:rgba(255,255,255,.7)">Nome *</label>
+          <input id="f-nome" type="text" placeholder="Mario" required
+            style="padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:.9rem;font-family:inherit;outline:none;transition:border .2s"
+            onfocus="this.style.borderColor='rgba(255,255,255,.6)'"
+            onblur="this.style.borderColor='rgba(255,255,255,.25)'">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label style="font-size:.8rem;font-weight:500;color:rgba(255,255,255,.7)">Cognome *</label>
+          <input id="f-cognome" type="text" placeholder="Rossi" required
+            style="padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:.9rem;font-family:inherit;outline:none;transition:border .2s"
+            onfocus="this.style.borderColor='rgba(255,255,255,.6)'"
+            onblur="this.style.borderColor='rgba(255,255,255,.25)'">
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="font-size:.8rem;font-weight:500;color:rgba(255,255,255,.7)">Azienda *</label>
+        <input id="f-azienda" type="text" placeholder="Rossi Srl" required
+          style="padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:.9rem;font-family:inherit;outline:none;transition:border .2s"
+          onfocus="this.style.borderColor='rgba(255,255,255,.6)'"
+          onblur="this.style.borderColor='rgba(255,255,255,.25)'">
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="font-size:.8rem;font-weight:500;color:rgba(255,255,255,.7)">Email *</label>
+        <input id="f-email" type="email" placeholder="mario@azienda.it" required
+          style="padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:.9rem;font-family:inherit;outline:none;transition:border .2s"
+          onfocus="this.style.borderColor='rgba(255,255,255,.6)'"
+          onblur="this.style.borderColor='rgba(255,255,255,.25)'">
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="font-size:.8rem;font-weight:500;color:rgba(255,255,255,.7)">Telefono</label>
+        <input id="f-tel" type="tel" placeholder="+39 02 1234567"
+          style="padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:.9rem;font-family:inherit;outline:none;transition:border .2s"
+          onfocus="this.style.borderColor='rgba(255,255,255,.6)'"
+          onblur="this.style.borderColor='rgba(255,255,255,.25)'">
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="font-size:.8rem;font-weight:500;color:rgba(255,255,255,.7)">Modulo di interesse</label>
+        <select id="f-modulo"
+          style="padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(30,58,95,.9);color:#fff;font-size:.9rem;font-family:inherit;outline:none;transition:border .2s;cursor:pointer"
+          onfocus="this.style.borderColor='rgba(255,255,255,.6)'"
+          onblur="this.style.borderColor='rgba(255,255,255,.25)'">
+          <option value="">Seleziona un modulo...</option>
+          <option>CRM — € 149/mese</option>
+          <option>SAP Sales — € 249/mese</option>
+          <option>Finance — € 249/mese</option>
+          <option>MRP / Produzione — € 199/mese</option>
+          <option>Procurement — € 199/mese</option>
+          <option>Operations — € 199/mese</option>
+          <option>Quality — € 149/mese</option>
+          <option>Sito Aziendale — € 79/mese</option>
+          <option>Bundle Business — € 579/mese</option>
+          <option>Bundle Enterprise — € 1.299/mese</option>
+          <option>Non so ancora, voglio capire</option>
+        </select>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="font-size:.8rem;font-weight:500;color:rgba(255,255,255,.7)">Messaggio (opzionale)</label>
+        <textarea id="f-msg" rows="3" placeholder="Descrivi brevemente il tuo processo o la problematica principale..."
+          style="padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:.9rem;font-family:inherit;outline:none;resize:vertical;transition:border .2s"
+          onfocus="this.style.borderColor='rgba(255,255,255,.6)'"
+          onblur="this.style.borderColor='rgba(255,255,255,.25)'"></textarea>
+      </div>
+
+      <button onclick="inviaDemo()" id="submit-btn"
+        style="background:#0F6E56;color:#fff;padding:14px 24px;border-radius:8px;border:none;font-weight:600;font-size:.95rem;cursor:pointer;font-family:inherit;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px"
+        onmouseover="this.style.background='#1D9E75';this.style.transform='translateY(-1px)'"
+        onmouseout="this.style.background='#0F6E56';this.style.transform='translateY(0)'">
+        Invia richiesta demo
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+
+      <p id="form-ok" style="display:none;text-align:center;color:#5DCAA5;font-size:.88rem;font-weight:500;padding:10px;background:rgba(15,110,86,.2);border-radius:8px">
+        ✓ Richiesta inviata! Ti risponderemo entro 24 ore.
+      </p>
+      <p id="form-err" style="display:none;text-align:center;color:#FCA5A5;font-size:.85rem;padding:10px;background:rgba(220,38,38,.15);border-radius:8px"></p>
+
+      <p style="font-size:.75rem;color:rgba(255,255,255,.4);text-align:center;margin-top:-4px">
+        I tuoi dati non vengono condivisi con terze parti.
+      </p>
     </div>
   </div>
 </section>
@@ -791,6 +879,53 @@ const onScroll = () => {
   });
 };
 window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+<script>
+function inviaDemo() {
+  const nome    = document.getElementById('f-nome').value.trim();
+  const cognome = document.getElementById('f-cognome').value.trim();
+  const azienda = document.getElementById('f-azienda').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const tel     = document.getElementById('f-tel').value.trim();
+  const modulo  = document.getElementById('f-modulo').value;
+  const msg     = document.getElementById('f-msg').value.trim();
+  const ok      = document.getElementById('form-ok');
+  const err     = document.getElementById('form-err');
+  const btn     = document.getElementById('submit-btn');
+
+  ok.style.display  = 'none';
+  err.style.display = 'none';
+
+  if (!nome || !cognome || !azienda || !email) {
+    err.textContent = 'Compila tutti i campi obbligatori (*)';
+    err.style.display = 'block';
+    return;
+  }
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!re.test(email)) {
+    err.textContent = 'Inserisci un indirizzo email valido';
+    err.style.display = 'block';
+    return;
+  }
+
+  const subject = encodeURIComponent('Richiesta demo COMANI — ' + azienda);
+  const body = encodeURIComponent(
+    'Nuova richiesta demo dal sito COMANI\n\n' +
+    'Nome: ' + nome + ' ' + cognome + '\n' +
+    'Azienda: ' + azienda + '\n' +
+    'Email: ' + email + '\n' +
+    (tel ? 'Telefono: ' + tel + '\n' : '') +
+    (modulo ? 'Modulo di interesse: ' + modulo + '\n' : '') +
+    (msg ? '\nMessaggio:\n' + msg : '')
+  );
+
+  window.location.href = 'mailto:marco7@yahoo.com?subject=' + subject + '&body=' + body;
+
+  btn.disabled = true;
+  btn.textContent = 'Richiesta inviata ✓';
+  btn.style.background = '#085041';
+  ok.style.display = 'block';
+}
 </script>
 </body>
 </html>
