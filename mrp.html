@@ -222,7 +222,7 @@ section{padding:96px 7%}
 .metric-val .n{font-size:.95rem;font-weight:600;color:var(--navy)}
 .metric-val .p{font-size:.72rem;color:var(--muted)}
 .metric-val.good .n{color:var(--teal)}
-.cta-section{background:var(--teal);padding:96px 7%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.cta-section{background:var(--teal);padding:96px 7%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .cta-section .section-eyebrow{color:rgba(255,255,255,.6)}
 .cta-section .section-title{color:var(--white)}
 .cta-section .section-sub{color:rgba(255,255,255,.75);max-width:none}
@@ -233,17 +233,14 @@ section{padding:96px 7%}
 .cta-form-header{margin-bottom:24px}
 .cta-form-header h4{font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:4px}
 .cta-form-header p{font-size:.83rem;color:rgba(255,255,255,.6)}
-.cta-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.cta-field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
-.cta-field label{font-size:.78rem;font-weight:500;color:rgba(255,255,255,.7)}
-.cta-field input,.cta-field select,.cta-field textarea{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:var(--r-sm);padding:10px 14px;font-size:.88rem;color:var(--white);font-family:var(--font-body);outline:none;transition:border-color .2s;width:100%}
-.cta-field input::placeholder,.cta-field textarea::placeholder{color:rgba(255,255,255,.35)}
-.cta-field input:focus,.cta-field select:focus,.cta-field textarea:focus{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.15)}
-.cta-field select option{background:var(--teal);color:var(--white)}
-.cta-field textarea{resize:vertical;min-height:80px}
-#mrp-submit{width:100%;background:var(--white);color:var(--teal);border:none;padding:13px 24px;border-radius:8px;font-weight:600;font-size:.95rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;font-family:var(--font-body)}
-#mrp-submit:hover{background:#f0f9f6;transform:translateY(-1px)}
-#mrp-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.cta-mailto-body{display:flex;flex-direction:column;gap:16px}
+.cta-mailto-preview{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:var(--r-md);padding:16px 20px;display:flex;flex-direction:column;gap:10px}
+.cta-mailto-row{display:flex;align-items:center;gap:12px}
+.cta-mailto-lbl{font-size:.75rem;font-weight:600;color:rgba(255,255,255,.4);width:54px;flex-shrink:0;text-transform:uppercase;letter-spacing:.05em}
+.cta-mailto-val{font-size:.88rem;color:rgba(255,255,255,.85)}
+.cta-mailto-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--white);color:var(--teal);padding:15px 28px;border-radius:8px;font-weight:600;font-size:1rem;text-decoration:none;transition:all .2s}
+.cta-mailto-btn:hover{background:#f0f9f6;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.cta-mailto-note{font-size:.75rem;color:rgba(255,255,255,.4);text-align:center}
 .btn-white{background:var(--white);color:var(--teal);padding:14px 32px;border-radius:8px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s}
 .btn-white:hover{background:#f0f9f6;transform:translateY(-1px)}
 .btn-ghost-white{background:transparent;color:rgba(255,255,255,.8);padding:14px 28px;border-radius:8px;font-weight:400;font-size:.95rem;text-decoration:none;border:1px solid rgba(255,255,255,.3);transition:all .2s}
@@ -757,55 +754,20 @@ footer{background:var(--navy-dk);padding:48px 7%;display:flex;align-items:center
   <div class="cta-form-box fade-right">
     <div class="cta-form-header">
       <h4>Richiedi la demo MRP gratuita</h4>
-      <p>Ti rispondiamo entro 24 ore lavorative</p>
+      <p>Clicca il bottone — si apre la tua app mail con tutto precompilato</p>
     </div>
-    <div id="mrp-form-fields">
-      <div class="cta-form-row">
-        <div class="cta-field">
-          <label>Nome e cognome *</label>
-          <input type="text" id="mrp-name" placeholder="Mario Rossi" />
-        </div>
-        <div class="cta-field">
-          <label>Azienda</label>
-          <input type="text" id="mrp-company" placeholder="Rossi Srl" />
-        </div>
+    <div class="cta-mailto-body">
+      <div class="cta-mailto-preview">
+        <div class="cta-mailto-row"><span class="cta-mailto-lbl">A:</span><span class="cta-mailto-val">marco7d@yahoo.com</span></div>
+        <div class="cta-mailto-row"><span class="cta-mailto-lbl">Oggetto:</span><span class="cta-mailto-val">Richiesta demo COMANI MRP</span></div>
+        <div class="cta-mailto-row" style="align-items:flex-start"><span class="cta-mailto-lbl">Corpo:</span><span class="cta-mailto-val" style="opacity:.6;font-size:.8rem">Nome, azienda, tipo di produzione e disponibilità oraria…</span></div>
       </div>
-      <div class="cta-form-row">
-        <div class="cta-field">
-          <label>Email *</label>
-          <input type="email" id="mrp-email" placeholder="mario@rossi.it" />
-        </div>
-        <div class="cta-field">
-          <label>Telefono</label>
-          <input type="tel" id="mrp-phone" placeholder="+39 333 000 0000" />
-        </div>
-      </div>
-      <div class="cta-field">
-        <label>Tipo di produzione</label>
-        <select id="mrp-type">
-          <option value="">— Seleziona —</option>
-          <option>Lavorazione meccanica</option>
-          <option>Assemblaggio</option>
-          <option>Processo / Chimica</option>
-          <option>Food &amp; Beverage</option>
-          <option>Packaging / Stampa</option>
-          <option>Altro</option>
-        </select>
-      </div>
-      <div class="cta-field">
-        <label>Messaggio (opzionale)</label>
-        <textarea id="mrp-message" placeholder="Descrivi brevemente la tua esigenza produttiva…" rows="3"></textarea>
-      </div>
-      <button id="mrp-submit" onclick="sendMrpForm()">
-        Richiedi demo MRP
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </button>
-      <p id="mrp-error" style="display:none;color:#FCA5A5;font-size:.82rem;margin-top:10px;"></p>
-    </div>
-    <div id="mrp-success" style="display:none;text-align:center;padding:32px 0;">
-      <div style="font-size:2.5rem;margin-bottom:12px">✅</div>
-      <h4 style="color:var(--white);font-size:1.1rem;margin-bottom:8px">Richiesta inviata!</h4>
-      <p style="color:rgba(255,255,255,.65);font-size:.9rem">Ti contatteremo entro 24 ore lavorative per fissare la demo del modulo MRP.</p>
+      <a class="cta-mailto-btn"
+         href="mailto:marco7d@yahoo.com?subject=Richiesta%20demo%20COMANI%20MRP&body=Buongiorno%2C%0A%0Avorrei%20richiedere%20una%20demo%20gratuita%20del%20modulo%20MRP%20di%20COMANI.%0A%0ANome%3A%20%0AAzienda%3A%20%0ATelefono%3A%20%0ATipo%20di%20produzione%3A%20%0ANumero%20dipendenti%3A%20%0ADisponibilit%C3%A0%3A%20%0A%0AGrazie">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Scrivi a COMANI
+      </a>
+      <p class="cta-mailto-note">Apre Gmail, Outlook, Apple Mail o qualsiasi altro client configurato sul tuo dispositivo</p>
     </div>
   </div>
 </section>
@@ -817,7 +779,7 @@ footer{background:var(--navy-dk);padding:48px 7%;display:flex;align-items:center
     <li><a href="partner-platform.html">Partner Platform</a></li>
     <li><a href="#features">MRP Features</a></li>
     <li><a href="#pricing">Prezzi</a></li>
-    <li><a href="/cdn-cgi/l/email-protection#7c110e0c3c1f13111d1215521508">Contatti</a></li>
+    <li><a href="mailto:marco7d@yahoo.com">Contatti</a></li>
     <li><a href="#">Privacy Policy</a></li>
   </ul>
   <p class="footer-legal">© 2026 COMANI — ERP & CRM Web Agency per PMI italiane. Tutti i diritti riservati.</p>
