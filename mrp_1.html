@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COMANI MRP — Gestione Produzione per PMI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E3A5F;--navy-dk:#132843;--teal:#0F6E56;--teal-lt:#D6F0E8;--teal-md:#1D9E75;
+  --amber:#F59E0B;--ice:#EBF4FA;--white:#FFFFFF;--off:#F7F9FC;--gray:#64748B;
+  --dark:#1E293B;--muted:#94A3B8;--border:#E2E8F0;
+  --orange:#EA580C;--orange-lt:#FFF0E8;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --r-sm:6px;--r-md:12px;--r-lg:20px;
+  scroll-behavior:smooth
+}
+html{font-size:16px}
+body{font-family:var(--font-body);color:var(--dark);background:var(--white);line-height:1.65;overflow-x:hidden}
+.alert-banner{background:var(--teal);color:var(--white);text-align:center;padding:12px 24px;font-size:.875rem;font-weight:500;letter-spacing:.01em;position:relative;z-index:100}
+.alert-banner a{color:var(--white);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.alert-tag{display:inline-block;background:rgba(255,255,255,.2);color:var(--white);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-radius:20px;margin-right:10px;vertical-align:middle}
+nav{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:var(--font-display);font-size:1.4rem;color:var(--navy);text-decoration:none;letter-spacing:-.02em}
+.nav-logo span{color:var(--teal)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:.9rem;color:var(--gray);text-decoration:none;font-weight:400;transition:color .2s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{background:var(--navy);color:var(--white)!important;padding:9px 22px;border-radius:8px;font-weight:500!important;font-size:.875rem!important;transition:background .2s!important}
+.nav-cta:hover{background:var(--teal)!important}
+.hero{background:var(--navy-dk);min-height:92vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 7%;gap:60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:500px;height:500px;background:var(--teal);border-radius:50%;opacity:.07}
+.hero::after{content:'';position:absolute;bottom:-80px;left:30%;width:300px;height:300px;background:var(--orange);border-radius:50%;opacity:.05}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(15,110,86,.25);border:1px solid rgba(29,158,117,.4);color:#5DCAA5;font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:24px}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:var(--teal-md);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.4rem,4vw,3.6rem);color:var(--white);line-height:1.15;letter-spacing:-.02em;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:#5DCAA5}
+.hero-sub{font-size:1.1rem;color:#A8C4D8;line-height:1.7;margin-bottom:40px;font-weight:300;max-width:480px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--teal);color:var(--white);padding:14px 32px;border-radius:8px;font-weight:500;font-size:.95rem;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--teal-md);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:#A8C4D8;padding:14px 28px;border-radius:8px;font-weight:400;font-size:.95rem;text-decoration:none;border:1px solid rgba(168,196,216,.3);transition:all .2s}
+.btn-secondary:hover{border-color:rgba(168,196,216,.7);color:var(--white)}
+.mrp-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);overflow:hidden;backdrop-filter:blur(4px)}
+.mrp-topbar{background:rgba(255,255,255,.08);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08)}
+.mrp-dots{display:flex;gap:6px}
+.mrp-dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2)}
+.mrp-topbar-title{font-size:.8rem;color:rgba(255,255,255,.5)}
+.mrp-badge{background:rgba(234,88,12,.3);color:#FCA06A;font-size:.72rem;padding:3px 10px;border-radius:20px;font-weight:500}
+.mrp-body{padding:18px}
+.oee-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.oee-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;text-align:center}
+.oee-item .oee-val{font-size:1.3rem;font-weight:700;color:var(--white);font-family:var(--font-display);line-height:1}
+.oee-item.ok .oee-val{color:#5DCAA5}
+.oee-item.warn .oee-val{color:#FCA06A}
+.oee-item.bad .oee-val{color:#F87171}
+.oee-item .oee-lbl{font-size:.68rem;color:rgba(255,255,255,.4);margin-top:3px}
+.gantt-header{font-size:.7rem;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.gantt-rows{display:flex;flex-direction:column;gap:5px}
+.gantt-row{display:flex;align-items:center;gap:8px}
+.gantt-label{font-size:.7rem;color:rgba(255,255,255,.5);width:56px;flex-shrink:0;text-align:right}
+.gantt-track{flex:1;height:18px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;position:relative}
+.gantt-bar{height:100%;border-radius:4px;position:absolute;display:flex;align-items:center;padding:0 6px}
+.gantt-bar span{font-size:.62rem;color:rgba(255,255,255,.75);white-space:nowrap;font-weight:500}
+.intro-strip{background:var(--orange);padding:28px 7%;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.intro-strip p{font-size:1.05rem;color:var(--white);font-weight:400;max-width:680px;opacity:.95}
+.intro-strip p strong{font-weight:600}
+.intro-strip-stat{display:flex;gap:32px}
+.intro-stat{text-align:center;color:var(--white)}
+.intro-stat .n{font-family:var(--font-display);font-size:2rem;line-height:1;display:block}
+.intro-stat .d{font-size:.78rem;opacity:.75;margin-top:3px}
+section{padding:96px 7%}
+.section-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.section-title{font-family:var(--font-display);font-size:clamp(1.9rem,3vw,2.8rem);color:var(--navy);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
+.section-sub{font-size:1.05rem;color:var(--gray);line-height:1.7;max-width:580px;font-weight:300}
+.problem{background:var(--off)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px}
+.problem-list{display:flex;flex-direction:column;gap:16px}
+.problem-item{display:flex;gap:16px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px 24px;transition:box-shadow .2s}
+.problem-item:hover{box-shadow:0 4px 20px rgba(30,58,95,.08)}
+.problem-num{flex-shrink:0;width:32px;height:32px;background:#FEF3C7;color:#92400E;font-size:.8rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.problem-item h4{font-size:.95rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.problem-item p{font-size:.88rem;color:var(--gray);line-height:1.6}
+.opportunity-box{background:var(--navy);border-radius:var(--r-lg);padding:40px;color:var(--white)}
+.opportunity-box h3{font-family:var(--font-display);font-size:1.5rem;margin-bottom:16px;color:#5DCAA5}
+.opportunity-box p{font-size:.95rem;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:14px}
+.opportunity-box p:last-child{margin-bottom:0}
+.opportunity-box strong{color:var(--white);font-weight:500}
+.features{background:var(--white)}
+.features-header{max-width:640px;margin-bottom:64px}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feature-card{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.feature-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(30,58,95,.1)}
+.feature-card-top{padding:28px 28px 24px;background:var(--navy)}
+.feature-card-num{font-family:var(--font-display);font-size:3rem;color:rgba(255,255,255,.12);line-height:1;margin-bottom:12px}
+.feature-card-top h3{font-size:1.05rem;font-weight:600;color:var(--white);line-height:1.3}
+.feature-card-top h3 em{font-style:normal;color:#5DCAA5}
+.feature-card-body{padding:24px 28px;background:var(--white)}
+.feature-card-body p{font-size:.9rem;color:var(--gray);line-height:1.7;margin-bottom:16px}
+.feature-card-body p:last-child{margin-bottom:0}
+.feature-tag{display:inline-block;background:var(--teal-lt);color:var(--teal);font-size:.75rem;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+.feature-tag.orange{background:var(--orange-lt);color:var(--orange)}
+.moduli{background:var(--off)}
+.moduli-header{max-width:600px;margin-bottom:48px}
+.moduli-tabs{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap}
+.tab-btn{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:10px 20px;font-size:.88rem;font-weight:500;color:var(--gray);cursor:pointer;transition:all .2s;font-family:var(--font-body)}
+.tab-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.tab-btn:hover:not(.active){border-color:var(--navy);color:var(--navy)}
+.tab-panel{display:none;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.tab-panel.active{display:grid}
+.tab-desc h3{font-family:var(--font-display);font-size:1.5rem;color:var(--navy);margin-bottom:12px;line-height:1.25}
+.tab-desc p{font-size:.92rem;color:var(--gray);line-height:1.7;margin-bottom:16px}
+.tab-feature-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.tab-feature-list li{font-size:.88rem;color:var(--dark);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.tab-feature-list li::before{content:'';flex-shrink:0;width:16px;height:16px;background:var(--teal-lt);border-radius:50%;margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 4.5' stroke='%230F6E56' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:contain}
+.tab-visual{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;min-height:260px}
+.tab-visual-title{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+.metric-bar-row{margin-bottom:14px}
+.metric-bar-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.metric-bar-label span:first-child{font-size:.83rem;color:var(--dark);font-weight:500}
+.metric-bar-label span:last-child{font-size:.83rem;color:var(--teal);font-weight:600}
+.metric-bar-track{height:8px;background:var(--off);border-radius:8px;overflow:hidden}
+.metric-bar-fill{height:100%;border-radius:8px;background:var(--teal);transition:width 1.2s ease}
+.machine-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.machine-item{background:var(--off);border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px}
+.machine-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.machine-dot.ok{background:#10B981}
+.machine-dot.warn{background:var(--amber)}
+.machine-dot.stop{background:#EF4444}
+.machine-name{font-size:.83rem;font-weight:500;color:var(--navy)}
+.machine-status{font-size:.72rem;color:var(--gray);margin-top:1px}
+.bom-table{width:100%;border-collapse:collapse}
+.bom-table th{font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--border);text-align:left}
+.bom-table td{font-size:.83rem;color:var(--dark);padding:10px 0;border-bottom:1px solid var(--border)}
+.bom-table td:last-child,.bom-table th:last-child{text-align:right}
+.bom-status{display:inline-block;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:10px}
+.bom-status.ok{background:var(--teal-lt);color:var(--teal)}
+.bom-status.low{background:#FEF3C7;color:#92400E}
+.bom-status.out{background:#FEE2E2;color:#991B1B}
+.ordini-list{display:flex;flex-direction:column;gap:8px}
+.ordine-item{background:var(--off);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ordine-info h5{font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:2px}
+.ordine-info p{font-size:.75rem;color:var(--gray)}
+.ordine-badge{font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:10px;white-space:nowrap}
+.ordine-badge.prog{background:#DBEAFE;color:#1E40AF}
+.ordine-badge.att{background:#FEF3C7;color:#92400E}
+.ordine-badge.done{background:var(--teal-lt);color:var(--teal)}
+.ordine-pct{font-size:.85rem;font-weight:600;color:var(--navy);white-space:nowrap}
+.pricing{background:var(--white)}
+.pricing-header{max-width:560px;margin-bottom:56px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:28px}
+.pricing-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;position:relative;transition:box-shadow .2s}
+.pricing-card:hover{box-shadow:0 8px 32px rgba(30,58,95,.1)}
+.pricing-card.featured{border-color:var(--teal);border-width:2px;box-shadow:0 8px 32px rgba(15,110,86,.15)}
+.pricing-featured-label{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--teal);color:var(--white);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 18px;border-radius:0 0 8px 8px}
+.pricing-header-box{padding:32px 28px 20px;border-bottom:1px solid var(--border)}
+.pricing-name{font-family:var(--font-display);font-size:1.4rem;color:var(--navy);margin-bottom:4px}
+.pricing-desc{font-size:.83rem;color:var(--gray);margin-bottom:16px}
+.pricing-price{display:flex;align-items:baseline;gap:4px}
+.pricing-price .amt{font-family:var(--font-display);font-size:2.2rem;color:var(--navy)}
+.pricing-price .period{font-size:.83rem;color:var(--muted)}
+.pricing-body{padding:24px 28px}
+.pricing-perks{list-style:none;display:flex;flex-direction:column;gap:10px}
+.pricing-perks li{font-size:.88rem;color:var(--dark);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.pricing-perks li::before{content:'';flex-shrink:0;width:16px;height:16px;background:var(--teal-lt);border-radius:50%;margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 4.5' stroke='%230F6E56' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:contain}
+.pricing-footer{padding:0 28px 28px}
+.pricing-cta{display:block;text-align:center;padding:12px;border-radius:8px;font-weight:500;font-size:.9rem;text-decoration:none;transition:all .2s}
+.pricing-cta.outline{border:1px solid var(--border);color:var(--navy)}
+.pricing-cta.outline:hover{border-color:var(--navy);background:var(--off)}
+.pricing-cta.solid{background:var(--navy);color:var(--white)}
+.pricing-cta.solid:hover{background:var(--teal)}
+.pricing-note{background:var(--navy);border-radius:var(--r-md);padding:20px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.pricing-note p{color:rgba(255,255,255,.7);font-size:.88rem;flex:1}
+.pricing-note p strong{color:var(--white)}
+.pricing-note-badge{background:var(--teal);color:var(--white);padding:6px 16px;border-radius:20px;font-size:.8rem;font-weight:600;white-space:nowrap}
+.kpis{background:var(--navy);padding:80px 7%}
+.kpis .section-title{color:var(--white)}
+.kpis .section-sub{color:rgba(255,255,255,.55)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
+.kpi-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:32px 28px;text-align:center;transition:background .2s}
+.kpi-box:hover{background:rgba(255,255,255,.08)}
+.kpi-box.hl{background:rgba(15,110,86,.2);border-color:rgba(29,158,117,.4)}
+.kpi-box.or{background:rgba(234,88,12,.15);border-color:rgba(234,88,12,.3)}
+.kpi-val{font-family:var(--font-display);font-size:2.8rem;color:var(--white);line-height:1;margin-bottom:10px}
+.kpi-box.hl .kpi-val{color:#5DCAA5}
+.kpi-box.or .kpi-val{color:#FCA06A}
+.kpi-lbl{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:4px}
+.kpi-sub{font-size:.78rem;color:rgba(255,255,255,.35)}
+.integrations{background:var(--off);padding:80px 7%}
+.integrations-header{max-width:560px;margin-bottom:56px}
+.integrations-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.int-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:24px 20px;text-align:center;transition:box-shadow .2s}
+.int-card:hover{box-shadow:0 4px 16px rgba(30,58,95,.08)}
+.int-icon{width:48px;height:48px;border-radius:12px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.int-name{font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.int-desc{font-size:.75rem;color:var(--gray);line-height:1.5}
+.int-tag{display:inline-block;font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:8px}
+.int-tag.live{background:var(--teal-lt);color:var(--teal)}
+.int-tag.soon{background:#F1F5F9;color:var(--muted)}
+.howto{background:var(--white)}
+.howto-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:56px}
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:20px;padding:24px 0;border-left:2px solid var(--border);padding-left:28px;position:relative;transition:border-color .2s}
+.step:hover{border-color:var(--teal)}
+.step::before{content:attr(data-n);position:absolute;left:-14px;top:24px;width:26px;height:26px;background:var(--white);border:2px solid var(--border);border-radius:50%;font-size:.75rem;font-weight:600;color:var(--navy);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.step:hover::before{background:var(--teal);border-color:var(--teal);color:var(--white)}
+.step:last-child{border-color:transparent}
+.step-content h4{font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.step-timing{display:inline-block;font-size:.72rem;color:var(--teal);font-weight:600;background:var(--teal-lt);padding:2px 8px;border-radius:10px;margin-bottom:8px}
+.step-content p{font-size:.88rem;color:var(--gray);line-height:1.65}
+.howto-visual{background:var(--off);border-radius:var(--r-lg);padding:36px}
+.howto-visual h4{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:20px}
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+.metric-row:last-child{border-bottom:none}
+.metric-label{font-size:.85rem;color:var(--gray)}
+.metric-values{display:flex;gap:20px}
+.metric-val{text-align:right}
+.metric-val .n{font-size:.95rem;font-weight:600;color:var(--navy)}
+.metric-val .p{font-size:.72rem;color:var(--muted)}
+.metric-val.good .n{color:var(--teal)}
+.cta-section{background:var(--teal);padding:96px 7%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.cta-section .section-title{color:var(--white)}
+.cta-section .section-sub{color:rgba(255,255,255,.75);max-width:none}
+.cta-actions{display:flex;flex-direction:column;gap:12px}
+.cta-item{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:var(--r-md);padding:16px 20px;display:flex;align-items:center;gap:16px}
+.cta-item-icon{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cta-item-icon svg{width:18px;height:18px;stroke:var(--white);fill:none}
+.cta-item-text h5{font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:2px}
+.cta-item-text p{font-size:.8rem;color:rgba(255,255,255,.65)}
+.cta-btns{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn-white{background:var(--white);color:var(--teal);padding:14px 32px;border-radius:8px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s}
+.btn-white:hover{background:#f0f9f6;transform:translateY(-1px)}
+.btn-ghost-white{background:transparent;color:rgba(255,255,255,.8);padding:14px 28px;border-radius:8px;font-weight:400;font-size:.95rem;text-decoration:none;border:1px solid rgba(255,255,255,.3);transition:all .2s}
+.btn-ghost-white:hover{border-color:rgba(255,255,255,.7);color:var(--white)}
+footer{background:var(--navy-dk);padding:48px 7%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-brand{font-family:var(--font-display);font-size:1.3rem;color:var(--white)}
+.footer-brand span{color:#5DCAA5}
+.footer-links{display:flex;gap:28px;list-style:none;flex-wrap:wrap}
+.footer-links a{font-size:.85rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.8)}
+.footer-legal{font-size:.78rem;color:rgba(255,255,255,.3);width:100%;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
+.breadcrumb{font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.breadcrumb a{color:rgba(255,255,255,.5);text-decoration:none}
+.breadcrumb a:hover{color:rgba(255,255,255,.8)}
+.breadcrumb span{color:rgba(255,255,255,.25)}
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.fade-left{opacity:0;transform:translateX(-28px);transition:opacity .6s ease,transform .6s ease}
+.fade-left.visible{opacity:1;transform:translateX(0)}
+.fade-right{opacity:0;transform:translateX(28px);transition:opacity .6s ease,transform .6s ease}
+.fade-right.visible{opacity:1;transform:translateX(0)}
+.scale-in{opacity:0;transform:scale(.94);transition:opacity .5s ease,transform .5s ease}
+.scale-in.visible{opacity:1;transform:scale(1)}
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding:60px 6%}
+  .hero-visual{display:none}
+  .problem-grid,.howto-grid,.cta-section,.tab-panel.active{grid-template-columns:1fr;gap:40px}
+  .features-grid,.pricing-grid{grid-template-columns:1fr}
+  .kpi-grid,.integrations-grid{grid-template-columns:repeat(2,1fr)}
+  nav .nav-links{display:none}
+  .intro-strip{flex-direction:column}
+}
+@media(max-width:600px){
+  section,.integrations{padding:64px 5%}
+  .kpi-grid,.integrations-grid{grid-template-columns:1fr 1fr}
+  .hero{padding:50px 5%}
+  .oee-strip{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="alert-banner">
+  <span class="alert-tag">Modulo</span>
+  <strong>COMANI MRP</strong> — Pianificazione e controllo della produzione per PMI manifatturiere. <a href="#pricing">Vedi i piani →</a>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">COMA<span>NI</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#features">Funzionalità</a></li>
+    <li><a href="#moduli">Moduli</a></li>
+    <li><a href="#pricing">Prezzi</a></li>
+    <li><a href="#cta" class="nav-cta">Richiedi demo</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">COMANI</a>
+      <span>›</span>
+      <span style="color:rgba(255,255,255,.6)">Modulo MRP</span>
+    </div>
+    <div class="hero-eyebrow">MRP — Material Requirements Planning</div>
+    <h1>Produzione sotto<br>controllo, <em>ordini</em><br>consegnati in tempo.</h1>
+    <p class="hero-sub">Da fogli Excel e telefonate ai fornitori, a un sistema MRP web-based che pianifica la produzione, gestisce la distinta base e monitora l'OEE in tempo reale. Pensato per le PMI manifatturiere italiane.</p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-primary">Richiedi demo gratuita <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a href="#moduli" class="btn-secondary">Esplora i moduli</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="mrp-card">
+      <div class="mrp-topbar">
+        <div class="mrp-dots"><span></span><span></span><span></span></div>
+        <span class="mrp-topbar-title">COMANI MRP — Reparto produzione</span>
+        <span class="mrp-badge">Live</span>
+      </div>
+      <div class="mrp-body">
+        <div class="oee-strip">
+          <div class="oee-item ok"><div class="oee-val">87%</div><div class="oee-lbl">OEE Linea A</div></div>
+          <div class="oee-item warn"><div class="oee-val">71%</div><div class="oee-lbl">OEE Linea B</div></div>
+          <div class="oee-item bad"><div class="oee-val">58%</div><div class="oee-lbl">OEE Linea C</div></div>
+        </div>
+        <div class="gantt-header">Ordini di produzione — settimana corrente</div>
+        <div class="gantt-rows">
+          <div class="gantt-row">
+            <span class="gantt-label">OP-1042</span>
+            <div class="gantt-track"><div class="gantt-bar" style="left:0;width:75%;background:#1D9E75"><span>Lavorazione acciaio · 75%</span></div></div>
+          </div>
+          <div class="gantt-row">
+            <span class="gantt-label">OP-1043</span>
+            <div class="gantt-track"><div class="gantt-bar" style="left:20%;width:40%;background:#0F6E56"><span>Assemblaggio · 40%</span></div></div>
+          </div>
+          <div class="gantt-row">
+            <span class="gantt-label">OP-1044</span>
+            <div class="gantt-track"><div class="gantt-bar" style="left:0;width:95%;background:#F59E0B"><span style="color:#1E293B">⚠ Ritardo 2gg</span></div></div>
+          </div>
+          <div class="gantt-row">
+            <span class="gantt-label">OP-1045</span>
+            <div class="gantt-track"><div class="gantt-bar" style="left:50%;width:20%;background:rgba(255,255,255,.15)"><span>In attesa</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="intro-strip">
+  <p>Il <strong>60% delle PMI manifatturiere italiane</strong> pianifica ancora la produzione su Excel o a voce. Il risultato: ritardi medi di 3,2 giorni per ordine, scorte in eccesso del 18% e OEE medio sotto il 65%. COMANI MRP risolve questo a un costo accessibile.</p>
+  <div class="intro-strip-stat">
+    <div class="intro-stat"><span class="n">+22%</span><span class="d">OEE medio</span></div>
+    <div class="intro-stat"><span class="n">−31%</span><span class="d">scorte eccesso</span></div>
+    <div class="intro-stat"><span class="n">−3,2gg</span><span class="d">ritardi medi</span></div>
+  </div>
+</div>
+
+<section class="problem" id="problem">
+  <div class="section-eyebrow">Il problema che risolviamo</div>
+  <h2 class="section-title">Excel non è un MRP. Mai lo sarà.</h2>
+  <p class="section-sub">Le PMI manifatturiere italiane hanno bisogno di pianificazione seria. Non di SAP (troppo caro, troppo complesso). Di qualcosa di intermedio — che funziona davvero.</p>
+  <div class="problem-grid">
+    <div class="problem-list fade-left">
+      <div class="problem-item">
+        <div class="problem-num">1</div>
+        <div><h4>Pianificazione cieca</h4><p>Senza visibilità real-time su macchine, scorte e ordini aperti, il responsabile di produzione pianifica "a memoria". Gli errori di scheduling costano giorni e margine.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">2</div>
+        <div><h4>Distinta base non aggiornata</h4><p>La BOM cartacea o su Excel diverge dalla realtà produttiva nel giro di settimane. Il risultato: ordini di acquisto sbagliati, fermi macchina per mancanza componenti.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">3</div>
+        <div><h4>OEE invisibile</h4><p>L'efficienza delle linee si misura a fine mese, quando il problema è già costato. Senza monitoraggio live, la manutenzione è sempre reattiva — mai preventiva.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">4</div>
+        <div><h4>Acquisti scollegati dalla produzione</h4><p>Il responsabile acquisti non sa cosa serve produzione questa settimana. Il responsabile produzione non sa cosa c'è in magazzino. Due silos, un'azienda.</p></div>
+      </div>
+    </div>
+    <div class="opportunity-box fade-right">
+      <h3>La soluzione COMANI</h3>
+      <p>COMANI MRP integra in un unico sistema web-based: <strong>distinta base (BOM), ordini di produzione, schedulazione macchine, monitoraggio OEE</strong> e collegamento diretto con il modulo Procurement per gli ordini di acquisto automatici.</p>
+      <p>Non è SAP — è meglio per te. Niente consulenti costosi, niente mesi di implementazione. <strong>Online in 2 settimane</strong>, con i tuoi dati reali importati da Excel.</p>
+      <p>L'interfaccia è web: funziona da PC in ufficio, da tablet in reparto e da telefono per il direttore di produzione che controlla lo stato degli ordini dal cantiere.</p>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="features-header">
+    <div class="section-eyebrow">Funzionalità principali</div>
+    <h2 class="section-title">Tutto quello che serve per produrre bene.</h2>
+    <p class="section-sub">Sei aree funzionali integrate. Nessuna app esterna da connettere, nessun modulo da acquistare separatamente.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card fade-up">
+      <div class="feature-card-top">
+        <div class="feature-card-num">01</div>
+        <h3>Distinta Base <em>(BOM)</em></h3>
+      </div>
+      <div class="feature-card-body">
+        <span class="feature-tag">Disponibile</span>
+        <p>Struttura multi-livello illimitata, versioning automatico, collegamento diretto alle giacenze di magazzino. Ogni modifica alla BOM genera un alert sugli ordini in corso che usano quel componente.</p>
+        <p>Import da Excel con mapping guidato. Export in PDF per i fornitori di lavorazioni esterne.</p>
+      </div>
+    </div>
+    <div class="feature-card fade-up" style="transition-delay:.12s">
+      <div class="feature-card-top" style="background:var(--teal)">
+        <div class="feature-card-num">02</div>
+        <h3>Ordini di Produzione <em>e Scheduling</em></h3>
+      </div>
+      <div class="feature-card-body">
+        <span class="feature-tag">Disponibile</span>
+        <p>Creazione ordini di produzione con drag & drop sul Gantt. Schedulazione automatica basata su capacità macchine, disponibilità operatori e urgenza cliente.</p>
+        <p>Ogni ordine mostra in real-time: stato avanzamento, componenti mancanti, ritardi previsti e impatto su consegne già confermate al cliente.</p>
+      </div>
+    </div>
+    <div class="feature-card fade-up" style="transition-delay:.24s">
+      <div class="feature-card-top" style="background:var(--navy-dk)">
+        <div class="feature-card-num">03</div>
+        <h3>Monitoraggio OEE <em>real-time</em></h3>
+      </div>
+      <div class="feature-card-body">
+        <span class="feature-tag orange">Piano Advanced</span>
+        <p>Dashboard OEE per ogni linea e macchina: Disponibilità, Prestazioni, Qualità. Storico trend con benchmark settoriale italiano. Alert automatici sotto soglia configurabile.</p>
+        <p>Integrazione con sistemi SCADA e PLC via API REST. Per impianti senza automazione: inserimento manuale da tablet con firma operatore.</p>
+      </div>
+    </div>
+    <div class="feature-card fade-up" style="transition-delay:.1s">
+      <div class="feature-card-top">
+        <div class="feature-card-num">04</div>
+        <h3>Pianificazione Materiali <em>automatica</em></h3>
+      </div>
+      <div class="feature-card-body">
+        <span class="feature-tag">Disponibile</span>
+        <p>Il motore MRP calcola i fabbisogni di materiali a partire dagli ordini clienti e dalla BOM. Genera automaticamente le proposte di acquisto con date e quantità suggerite.</p>
+        <p>Collegamento diretto al modulo Procurement: le proposte MRP diventano ordini fornitore in un click.</p>
+      </div>
+    </div>
+    <div class="feature-card fade-up" style="transition-delay:.22s">
+      <div class="feature-card-top" style="background:var(--teal)">
+        <div class="feature-card-num">05</div>
+        <h3>Magazzino <em>WIP e Prodotti Finiti</em></h3>
+      </div>
+      <div class="feature-card-body">
+        <span class="feature-tag">Disponibile</span>
+        <p>Gestione magazzino semilavorati (WIP) e prodotti finiti integrata con la produzione. Ogni movimentazione aggiorna le giacenze in real-time e ricalcola i fabbisogni MRP.</p>
+        <p>Barcode e QR code per tracciabilità lotti. Inventario fisico assistito da app mobile.</p>
+      </div>
+    </div>
+    <div class="feature-card fade-up" style="transition-delay:.34s">
+      <div class="feature-card-top" style="background:var(--navy-dk)">
+        <div class="feature-card-num">06</div>
+        <h3>Analisi Costi <em>di Produzione</em></h3>
+      </div>
+      <div class="feature-card-body">
+        <span class="feature-tag orange">Piano Advanced</span>
+        <p>Costo standard vs costo consuntivo per ogni ordine di produzione. Analisi scostamenti con drill-down su materie prime, manodopera diretta e costi macchina.</p>
+        <p>Report marginalità prodotto automatico, esportabile in PDF e integrato col modulo Finance per il commercialista.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="moduli" id="moduli">
+  <div class="moduli-header">
+    <div class="section-eyebrow">Esplora i moduli</div>
+    <h2 class="section-title">Ogni area produttiva, una vista dedicata.</h2>
+    <p class="section-sub">Quattro moduli specializzati, un'unica piattaforma. I dati fluiscono automaticamente tra un modulo e l'altro — senza export, senza copia-incolla.</p>
+  </div>
+  <div class="moduli-tabs">
+    <button class="tab-btn active" data-tab="bom">Distinta Base</button>
+    <button class="tab-btn" data-tab="ordini">Ordini Produzione</button>
+    <button class="tab-btn" data-tab="macchine">Macchine &amp; OEE</button>
+    <button class="tab-btn" data-tab="pianif">Pianificazione MRP</button>
+  </div>
+  <div class="tab-panel active" id="tab-bom">
+    <div class="tab-desc fade-left">
+      <h3>Distinta Base strutturata e sempre aggiornata</h3>
+      <p>Costruisci la struttura dei tuoi prodotti in modo visuale. Ogni componente ha il suo fornitore preferenziale, lead time e punto di riordino. La BOM è il cuore del sistema MRP.</p>
+      <ul class="tab-feature-list">
+        <li>Struttura ad albero multi-livello illimitata</li>
+        <li>Versioning con storico modifiche e autore</li>
+        <li>Collegamento automatico a giacenze e ordini fornitore</li>
+        <li>Alert se un componente BOM scende sotto il minimo di scorta</li>
+        <li>Import guidato da Excel in meno di 30 minuti</li>
+        <li>Export PDF per subfornitori e lavorazioni esterne</li>
+      </ul>
+    </div>
+    <div class="tab-visual fade-right">
+      <div class="tab-visual-title">BOM — Prodotto: Gruppo Idraulico GI-220</div>
+      <table class="bom-table">
+        <thead><tr><th>Componente</th><th>Cod.</th><th>Q.tà</th><th>Scorta</th></tr></thead>
+        <tbody>
+          <tr><td>Corpo valvola acciaio</td><td>CV-01</td><td>1</td><td><span class="bom-status ok">OK</span></td></tr>
+          <tr><td>Kit guarnizioni EPDM</td><td>KG-14</td><td>3</td><td><span class="bom-status low">Bassa</span></td></tr>
+          <tr><td>Attuatore pneum. ∅50</td><td>AP-50</td><td>1</td><td><span class="bom-status ok">OK</span></td></tr>
+          <tr><td>Vite M8×30 inox</td><td>VI-08</td><td>8</td><td><span class="bom-status ok">OK</span></td></tr>
+          <tr><td>Raccordo F 1/2" ottone</td><td>RF-12</td><td>2</td><td><span class="bom-status out">Esaurita</span></td></tr>
+          <tr><td>Sensore pressione 4-20mA</td><td>SP-20</td><td>1</td><td><span class="bom-status low">Bassa</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="tab-panel" id="tab-ordini">
+    <div class="tab-desc fade-left">
+      <h3>Ordini di produzione con avanzamento in tempo reale</h3>
+      <p>Ogni ordine di produzione mostra lo stato di avanzamento aggiornato dall'operatore in reparto via tablet. Il responsabile vede tutto dal suo PC senza alzarsi dalla sedia.</p>
+      <ul class="tab-feature-list">
+        <li>Creazione ordine da ordine cliente in un click</li>
+        <li>Schedulazione automatica o manuale su Gantt</li>
+        <li>Avanzamento aggiornato da tablet in reparto</li>
+        <li>Alert automatico su ritardi previsti oltre soglia</li>
+        <li>Tracciabilità completa: operatore, macchina, batch</li>
+        <li>Collegamento automatico a DDT e fattura cliente</li>
+      </ul>
+    </div>
+    <div class="tab-visual fade-right">
+      <div class="tab-visual-title">Ordini in corso — aggiornamento live</div>
+      <div class="ordini-list">
+        <div class="ordine-item"><div class="ordine-info"><h5>OP-1042 · GI-220 × 12 pz</h5><p>Cliente: Meccanica Rossi · Consegna 28 mar</p></div><span class="ordine-badge prog">In corso</span><span class="ordine-pct">75%</span></div>
+        <div class="ordine-item"><div class="ordine-info"><h5>OP-1043 · FV-110 × 5 pz</h5><p>Cliente: Logistica Verdi · Consegna 2 apr</p></div><span class="ordine-badge prog">In corso</span><span class="ordine-pct">40%</span></div>
+        <div class="ordine-item"><div class="ordine-info"><h5>OP-1044 · PN-330 × 20 pz</h5><p>Cliente: TecnoImpianti · Consegna 1 apr ⚠</p></div><span class="ordine-badge att">Ritardo +2gg</span><span class="ordine-pct">95%</span></div>
+        <div class="ordine-item"><div class="ordine-info"><h5>OP-1045 · GI-220 × 8 pz</h5><p>Cliente: Metalli Bianchi · Consegna 10 apr</p></div><span class="ordine-badge att">Attesa mat.</span><span class="ordine-pct">0%</span></div>
+        <div class="ordine-item"><div class="ordine-info"><h5>OP-1040 · FV-110 × 30 pz</h5><p>Cliente: Carpenteria Nord · Consegnato 20 mar</p></div><span class="ordine-badge done">Completato</span><span class="ordine-pct">100%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-panel" id="tab-macchine">
+    <div class="tab-desc fade-left">
+      <h3>Macchine e OEE — efficienza sempre visibile</h3>
+      <p>Monitora l'efficienza di ogni macchina e linea in tempo reale. Imposta soglie di allerta e ricevi notifiche prima che un'anomalia diventi un fermo non pianificato.</p>
+      <ul class="tab-feature-list">
+        <li>Dashboard OEE per macchina, linea e impianto</li>
+        <li>Trend storici con analisi scostamenti</li>
+        <li>Integrazione SCADA/PLC via API REST</li>
+        <li>Inserimento manuale da tablet per impianti non automatizzati</li>
+        <li>Manutenzione preventiva con calendario e reminder</li>
+        <li>Alert al commercialista partner via Portal Gold</li>
+      </ul>
+    </div>
+    <div class="tab-visual fade-right">
+      <div class="tab-visual-title">Stato macchine — reparto lavorazioni</div>
+      <div class="machine-grid">
+        <div class="machine-item"><div class="machine-dot ok"></div><div><div class="machine-name">Tornio CNC T-200</div><div class="machine-status">OEE 87% · In produzione</div></div></div>
+        <div class="machine-item"><div class="machine-dot ok"></div><div><div class="machine-name">Centro fresatura CF-5</div><div class="machine-status">OEE 91% · In produzione</div></div></div>
+        <div class="machine-item"><div class="machine-dot warn"></div><div><div class="machine-name">Pressa idraulica P-80</div><div class="machine-status">OEE 71% · Setup in corso</div></div></div>
+        <div class="machine-item"><div class="machine-dot warn"></div><div><div class="machine-name">Saldatrice robotiz. SR-3</div><div class="machine-status">OEE 68% · Cambio utensile</div></div></div>
+        <div class="machine-item"><div class="machine-dot stop"></div><div><div class="machine-name">Linea verniciatura LV-1</div><div class="machine-status">FERMO — guasto pompa</div></div></div>
+        <div class="machine-item"><div class="machine-dot ok"></div><div><div class="machine-name">Isola assemblaggio IA-2</div><div class="machine-status">OEE 83% · In produzione</div></div></div>
+      </div>
+      <div style="margin-top:16px">
+        <div class="metric-bar-row"><div class="metric-bar-label"><span>OEE medio impianto</span><span>78%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:78%"></div></div></div>
+        <div class="metric-bar-row"><div class="metric-bar-label"><span>Disponibilità</span><span>91%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:91%"></div></div></div>
+        <div class="metric-bar-row" style="margin-bottom:0"><div class="metric-bar-label"><span>Qualità</span><span>86%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:86%"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-panel" id="tab-pianif">
+    <div class="tab-desc fade-left">
+      <h3>Motore MRP — fabbisogni calcolati in automatico</h3>
+      <p>Il motore MRP calcola ogni notte (o on-demand) i fabbisogni di materiali a partire dagli ordini confermati, dalle giacenze attuali e dai lead time dei fornitori. Zero calcoli manuali.</p>
+      <ul class="tab-feature-list">
+        <li>Calcolo MRP automatico o on-demand</li>
+        <li>Proposte acquisto con date e quantità ottimali</li>
+        <li>Analisi "what-if" su nuovi ordini clienti</li>
+        <li>Gestione lotti minimi e lead time per fornitore</li>
+        <li>Piano produzione vs piano acquisti integrati</li>
+        <li>Export piano settimanale in PDF per la riunione</li>
+      </ul>
+    </div>
+    <div class="tab-visual fade-right">
+      <div class="tab-visual-title">Piano MRP — prossimi 14 giorni</div>
+      <div style="margin-bottom:16px">
+        <div class="metric-bar-row"><div class="metric-bar-label"><span>Fabbisogno coperto da scorte</span><span>64%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:64%"></div></div></div>
+        <div class="metric-bar-row"><div class="metric-bar-label"><span>Ordini fornitore aperti</span><span>28%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:28%;background:var(--amber)"></div></div></div>
+        <div class="metric-bar-row"><div class="metric-bar-label"><span>Proposte da emettere</span><span>8%</span></div><div class="metric-bar-track"><div class="metric-bar-fill" style="width:8%;background:#EF4444"></div></div></div>
+      </div>
+      <table class="bom-table">
+        <thead><tr><th>Componente</th><th>Fabbis.</th><th>Scorta</th><th>Azione</th></tr></thead>
+        <tbody>
+          <tr><td>Raccordo F 1/2"</td><td>40 pz</td><td>0</td><td><span class="bom-status out">Ordine urgente</span></td></tr>
+          <tr><td>Kit guarnizioni</td><td>24 pz</td><td>6</td><td><span class="bom-status low">Entro 3gg</span></td></tr>
+          <tr><td>Sensore pressione</td><td>12 pz</td><td>3</td><td><span class="bom-status low">Entro 5gg</span></td></tr>
+          <tr><td>Corpo valvola</td><td>20 pz</td><td>22</td><td><span class="bom-status ok">Coperto</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="pricing-header">
+    <div class="section-eyebrow">Piani e prezzi</div>
+    <h2 class="section-title">Senza sorprese. Senza lock-in.</h2>
+    <p class="section-sub">Mensile, cancellabile in qualsiasi momento. Tuoi i dati, sempre. 30 giorni di prova gratuita inclusi.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card fade-up">
+      <div class="pricing-header-box">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-desc">PMI fino a 10 dipendenti in produzione</div>
+        <div class="pricing-price"><span class="amt">€ 149</span><span class="period">/ mese + IVA</span></div>
+      </div>
+      <div class="pricing-body">
+        <ul class="pricing-perks">
+          <li>Distinta base illimitata (BOM multi-livello)</li>
+          <li>Ordini di produzione e Gantt base</li>
+          <li>Pianificazione MRP automatica</li>
+          <li>Magazzino materie prime e prodotti finiti</li>
+          <li>3 utenti inclusi</li>
+          <li>App mobile (iOS/Android) per reparto</li>
+          <li>Supporto via chat</li>
+        </ul>
+      </div>
+      <div class="pricing-footer"><a href="#cta" class="pricing-cta outline">Inizia con Starter</a></div>
+    </div>
+    <div class="pricing-card featured fade-up" style="transition-delay:.12s">
+      <div class="pricing-featured-label">Più scelto</div>
+      <div class="pricing-header-box">
+        <div class="pricing-name">Professional</div>
+        <div class="pricing-desc">PMI con linee multiple e fornitori strutturati</div>
+        <div class="pricing-price"><span class="amt">€ 299</span><span class="period">/ mese + IVA</span></div>
+      </div>
+      <div class="pricing-body">
+        <ul class="pricing-perks">
+          <li>Tutto di Starter</li>
+          <li>OEE monitoring real-time</li>
+          <li>Scheduling avanzato multi-risorsa</li>
+          <li>Analisi costi di produzione</li>
+          <li>10 utenti inclusi</li>
+          <li>Integrazione con modulo Procurement</li>
+          <li>Visibilità partner per commercialista</li>
+          <li>Supporto prioritario</li>
+        </ul>
+      </div>
+      <div class="pricing-footer"><a href="#cta" class="pricing-cta solid">Scegli Professional</a></div>
+    </div>
+    <div class="pricing-card fade-up" style="transition-delay:.24s">
+      <div class="pricing-header-box">
+        <div class="pricing-name">Advanced</div>
+        <div class="pricing-desc">PMI con automazione di impianto o MES</div>
+        <div class="pricing-price"><span class="amt">€ 499</span><span class="period">/ mese + IVA</span></div>
+      </div>
+      <div class="pricing-body">
+        <ul class="pricing-perks">
+          <li>Tutto di Professional</li>
+          <li>API REST per SCADA/PLC</li>
+          <li>Analisi "what-if" avanzata</li>
+          <li>Integrazione Finance e CRM completa</li>
+          <li>Utenti illimitati</li>
+          <li>SLA 99,5% uptime garantito</li>
+          <li>Onboarding dedicato 4h incluso</li>
+          <li>Export API Zucchetti / TeamSystem</li>
+        </ul>
+      </div>
+      <div class="pricing-footer"><a href="#cta" class="pricing-cta outline">Parla con un consulente</a></div>
+    </div>
+  </div>
+  <div class="pricing-note fade-up">
+    <p><strong>Sconto lancio 30%</strong> per i primi 3 mesi — valido per attivazioni entro il lancio ufficiale del modulo. Tutti i piani includono <strong>30 giorni di prova gratuita</strong> e migrazione dati da Excel inclusa. Nessuna carta di credito richiesta.</p>
+    <span class="pricing-note-badge">Offerta lancio</span>
+  </div>
+</section>
+
+<section class="kpis">
+  <div class="section-eyebrow" style="color:#5DCAA5">Risultati misurabili</div>
+  <h2 class="section-title">Il ritorno sull'investimento è reale.</h2>
+  <p class="section-sub">Dati aggregati dai clienti pilota nel primo anno di utilizzo del modulo MRP.</p>
+  <div class="kpi-grid">
+    <div class="kpi-box hl scale-in"><div class="kpi-val">+22%</div><div class="kpi-lbl">OEE medio</div><div class="kpi-sub">vs baseline pre-COMANI</div></div>
+    <div class="kpi-box scale-in" style="transition-delay:.1s"><div class="kpi-val">−31%</div><div class="kpi-lbl">Scorte in eccesso</div><div class="kpi-sub">riduzione valore magazzino</div></div>
+    <div class="kpi-box or scale-in" style="transition-delay:.2s"><div class="kpi-val">−3,2gg</div><div class="kpi-lbl">Ritardi medi consegna</div><div class="kpi-sub">da 4,8 a 1,6 giorni</div></div>
+    <div class="kpi-box hl scale-in" style="transition-delay:.3s"><div class="kpi-val">6,2×</div><div class="kpi-lbl">ROI medio a 12 mesi</div><div class="kpi-sub">abbonamento vs benefici</div></div>
+  </div>
+</section>
+
+<div class="integrations">
+  <div class="integrations-header">
+    <div class="section-eyebrow">Integrazioni</div>
+    <h2 class="section-title">Già connesso con il tuo ecosistema.</h2>
+    <p class="section-sub">COMANI MRP parla con i software che usi già. Nessuna migrazione forzata, nessun dato perso.</p>
+  </div>
+  <div class="integrations-grid">
+    <div class="int-card fade-up"><div class="int-icon" style="background:#FEF3C7">📊</div><div class="int-name">Excel / CSV</div><div class="int-desc">Import BOM, ordini e giacenze da Excel con mapping guidato</div><span class="int-tag live">Disponibile</span></div>
+    <div class="int-card fade-up" style="transition-delay:.08s"><div class="int-icon" style="background:var(--teal-lt)">🔗</div><div class="int-name">Procurement COMANI</div><div class="int-desc">Ordini MRP → ordini fornitore automatici, nessun copia-incolla</div><span class="int-tag live">Nativo</span></div>
+    <div class="int-card fade-up" style="transition-delay:.16s"><div class="int-icon" style="background:#DBEAFE">💼</div><div class="int-name">Finance COMANI</div><div class="int-desc">Costi di produzione → P&L automatico per il commercialista</div><span class="int-tag live">Nativo</span></div>
+    <div class="int-card fade-up" style="transition-delay:.24s"><div class="int-icon" style="background:#F3E8FF">⚙️</div><div class="int-name">SCADA / PLC</div><div class="int-desc">Dati OEE da impianto via API REST o webhook</div><span class="int-tag soon">Advanced</span></div>
+    <div class="int-card fade-up" style="transition-delay:.08s"><div class="int-icon" style="background:#FEE2E2">📋</div><div class="int-name">Zucchetti</div><div class="int-desc">Sync bidirezionale ordini, articoli e movimenti magazzino</div><span class="int-tag soon">2025 Q4</span></div>
+    <div class="int-card fade-up" style="transition-delay:.16s"><div class="int-icon" style="background:#FEF9C3">🔧</div><div class="int-name">TeamSystem</div><div class="int-desc">Export contabilità analitica e cespiti automatico</div><span class="int-tag soon">2025 Q4</span></div>
+    <div class="int-card fade-up" style="transition-delay:.24s"><div class="int-icon" style="background:var(--orange-lt)">📱</div><div class="int-name">App Reparto</div><div class="int-desc">iOS e Android per avanzamento produzione da tablet</div><span class="int-tag live">Inclusa</span></div>
+    <div class="int-card fade-up" style="transition-delay:.32s"><div class="int-icon" style="background:#ECFDF5">🤖</div><div class="int-name">Claude AI</div><div class="int-desc">Report produzione e analisi scostamenti generati da AI</div><span class="int-tag live">Incluso</span></div>
+  </div>
+</div>
+
+<section class="howto" id="howto">
+  <div class="section-eyebrow">Come si inizia</div>
+  <h2 class="section-title">Operativi in 2 settimane,<br>non in 6 mesi.</h2>
+  <div class="howto-grid">
+    <div class="steps fade-left">
+      <div class="step" data-n="1">
+        <div class="step-content"><span class="step-timing">Giorno 1</span><h4>Demo e analisi del processo produttivo</h4><p>Una call di 45 minuti con un consulente COMANI. Mappiamo il flusso produttivo attuale, identifichiamo i punti critici e configuriamo le priorità di implementazione.</p></div>
+      </div>
+      <div class="step" data-n="2">
+        <div class="step-content"><span class="step-timing">Giorni 2–5</span><h4>Import dati e configurazione</h4><p>Importi BOM e giacenze da Excel con il tool guidato. Configuriamo macchine, reparti e flussi. Il team COMANI è disponibile per supporto tecnico dedicato.</p></div>
+      </div>
+      <div class="step" data-n="3">
+        <div class="step-content"><span class="step-timing">Giorni 5–10</span><h4>Training team e go-live pilota</h4><p>Formazione di 2h per il responsabile produzione e di 1h per gli operatori reparto sull'app mobile. Prima settimana in parallelo con il sistema attuale.</p></div>
+      </div>
+      <div class="step" data-n="4">
+        <div class="step-content"><span class="step-timing">Settimana 3</span><h4>Go-live completo</h4><p>Spegni Excel. Tutto sulla piattaforma COMANI. Il motore MRP inizia a calcolare i fabbisogni automaticamente dalla prima notte dopo il go-live.</p></div>
+      </div>
+      <div class="step" data-n="5">
+        <div class="step-content"><span class="step-timing">Mese 1–3</span><h4>Ottimizzazione e risultati misurabili</h4><p>Review mensile di 30 minuti con il team COMANI. Analizziamo i KPI, ottimizziamo i parametri MRP e identifichiamo le opportunità di miglioramento successivo.</p></div>
+      </div>
+    </div>
+    <div class="howto-visual fade-right">
+      <h4>KPI di implementazione tipici</h4>
+      <div class="metric-row"><span class="metric-label">Tempo al go-live</span><div class="metric-values"><div class="metric-val good"><div class="n">10–14gg</div><div class="p">dalla firma</div></div></div></div>
+      <div class="metric-row"><span class="metric-label">Riduzione errori schedulazione</span><div class="metric-values"><div class="metric-val good"><div class="n">−78%</div><div class="p">mese 1</div></div></div></div>
+      <div class="metric-row"><span class="metric-label">OEE visibile da subito</span><div class="metric-values"><div class="metric-val good"><div class="n">Giorno 1</div><div class="p">go-live</div></div></div></div>
+      <div class="metric-row"><span class="metric-label">Tempo medio formazione</span><div class="metric-values"><div class="metric-val good"><div class="n">3h</div><div class="p">totali</div></div></div></div>
+      <div class="metric-row"><span class="metric-label">Payback medio abbonamento</span><div class="metric-values"><div class="metric-val good"><div class="n">&lt; 60gg</div><div class="p">ROI positivo</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="cta">
+  <div class="fade-left">
+    <div class="section-eyebrow" style="color:rgba(255,255,255,.6)">Inizia adesso</div>
+    <h2 class="section-title">30 giorni gratis.<br>Nessuna carta di credito.</h2>
+    <p class="section-sub">Attivi la prova gratuita oggi. Importi i tuoi dati da Excel. In 10 giorni sai già se COMANI MRP è la soluzione giusta per la tua produzione — senza rischiare niente.</p>
+    <div class="cta-btns">
+      <a href="mailto:mrp@comani.it" class="btn-white">Richiedi demo gratuita</a>
+      <a href="#pricing" class="btn-ghost-white">Confronta i piani</a>
+    </div>
+  </div>
+  <div class="cta-actions fade-right">
+    <div class="cta-item">
+      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cta-item-text"><h5>30 giorni di prova gratuita</h5><p>Nessun contratto, nessuna carta di credito richiesta</p></div>
+    </div>
+    <div class="cta-item">
+      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cta-item-text"><h5>Migrazione dati da Excel inclusa</h5><p>BOM, giacenze e ordini importati con tool guidato</p></div>
+    </div>
+    <div class="cta-item">
+      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cta-item-text"><h5>Onboarding dedicato incluso</h5><p>Un consulente COMANI ti affianca per le prime 2 settimane</p></div>
+    </div>
+    <div class="cta-item">
+      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cta-item-text"><h5>Connesso al tuo commercialista</h5><p>Se usa COMANI Partner Platform, vede tutto in tempo reale</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">COMA<span>NI</span></div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="partner-platform.html">Partner Platform</a></li>
+    <li><a href="#features">MRP Features</a></li>
+    <li><a href="#pricing">Prezzi</a></li>
+    <li><a href="mailto:mrp@comani.it">Contatti</a></li>
+    <li><a href="#">Privacy Policy</a></li>
+  </ul>
+  <p class="footer-legal">© 2026 COMANI — ERP & CRM Web Agency per PMI italiane. Tutti i diritti riservati.</p>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in').forEach(el => io.observe(el));
+
+const secs = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  links.forEach(a => {
+    const active = a.getAttribute('href') === '#' + cur;
+    a.style.color = active ? 'var(--navy)' : '';
+    a.style.fontWeight = active ? '500' : '';
+  });
+}, { passive: true });
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById('tab-' + btn.dataset.tab);
+    panel.classList.add('active');
+    panel.querySelectorAll('.fade-left, .fade-right, .fade-up').forEach(el => {
+      el.classList.remove('visible');
+      setTimeout(() => el.classList.add('visible'), 50);
+    });
+  });
+});
+
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.metric-bar-fill').forEach(bar => {
+        const w = bar.style.width; bar.style.width = '0';
+        setTimeout(() => bar.style.width = w, 100);
+      });
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.tab-visual, .howto-visual').forEach(el => barObserver.observe(el));
+</script>
+</body>
+</html>
