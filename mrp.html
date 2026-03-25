@@ -894,13 +894,15 @@ function sendMrpForm() {
   const params = {
     from_name:  name,
     from_email: email,
-    company:    company || '—',
-    phone:      phone   || '—',
-    module:     'MRP / Produzione — ' + (type || '—'),
-    message:    message || '—',
-    to_email:   'marco7d@yahoo.com',
     reply_to:   email,
-    subject:    'Demo MRP COMANI — ' + name + (company ? ' (' + company + ')' : ''),
+    message:
+      '📋 RICHIESTA DEMO MRP — COMANI\n\n' +
+      'Nome: '              + name                  + '\n' +
+      'Email: '             + email                 + '\n' +
+      'Azienda: '           + (company || '—')      + '\n' +
+      'Telefono: '          + (phone   || '—')      + '\n' +
+      'Tipo di produzione: '+ (type    || '—')      + '\n\n' +
+      'Messaggio:\n'        + (message || '(nessun messaggio)'),
   };
 
   emailjs.send('service_2lc5mtv', 'template_szlosyd', params)
