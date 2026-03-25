@@ -216,6 +216,29 @@ footer{background:var(--navy-dk);padding:48px 7%}
 .footer-legal{font-size:.78rem;color:rgba(255,255,255,.3)}
 .footer-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(15,110,86,.2);border:1px solid rgba(29,158,117,.3);color:#5DCAA5;font-size:.75rem;padding:4px 12px;border-radius:20px}
 
+/* ── CTA Form ── */
+.cta-section{background:var(--teal);padding:96px 7%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.cta-section .section-title{color:var(--white)}
+.cta-section .section-sub{color:rgba(255,255,255,.75);max-width:none}
+.cta-promises{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+.cta-promise-item{display:flex;align-items:center;gap:10px;font-size:.9rem;color:rgba(255,255,255,.85)}
+.cta-promise-item svg{flex-shrink:0;stroke:rgba(255,255,255,.8)}
+.cta-form-box{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:var(--r-lg);padding:32px;backdrop-filter:blur(8px)}
+.cta-form-header{margin-bottom:24px}
+.cta-form-header h4{font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:4px}
+.cta-form-header p{font-size:.83rem;color:rgba(255,255,255,.6)}
+.cta-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cta-field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.cta-field label{font-size:.78rem;font-weight:500;color:rgba(255,255,255,.7)}
+.cta-field input,.cta-field select,.cta-field textarea{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:var(--r-sm);padding:10px 14px;font-size:.88rem;color:var(--white);font-family:var(--fb);outline:none;transition:border-color .2s;width:100%}
+.cta-field input::placeholder,.cta-field textarea::placeholder{color:rgba(255,255,255,.35)}
+.cta-field input:focus,.cta-field select:focus,.cta-field textarea:focus{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.15)}
+.cta-field select option{background:var(--teal);color:var(--white)}
+.cta-field textarea{resize:vertical;min-height:80px}
+#cta-submit{width:100%;background:var(--white);color:var(--teal);border:none;padding:13px 24px;border-radius:8px;font-weight:600;font-size:.95rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;font-family:var(--fb)}
+#cta-submit:hover{background:#f0f9f6;transform:translateY(-1px)}
+#cta-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
 /* ── Responsive ── */
 @media(max-width:960px){
   .hero{grid-template-columns:1fr;min-height:auto;padding:60px 6%}
@@ -704,27 +727,74 @@ footer{background:var(--navy-dk);padding:48px 7%}
     <p class="section-sub reveal d2">
       Nessun impegno. Nessun contratto da firmare. Una call per capire quale modulo risolve il problema più urgente della tua PMI, e un preventivo chiaro entro 24 ore.
     </p>
-    <div class="cta-btns reveal d3">
-      <a href="https://calendly.com/comani" class="btn-white">Prenota la demo</a>
-      <a href="#moduli" class="btn-ghost-white">Esplora i moduli</a>
+    <div class="cta-promises reveal d3">
+      <div class="cta-promise-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Demo in 30 minuti via Zoom o Meet
+      </div>
+      <div class="cta-promise-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Preventivo dettagliato entro 24 ore
+      </div>
+      <div class="cta-promise-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Go-live garantito in 2–3 settimane
+      </div>
     </div>
   </div>
-  <div class="cta-items">
-    <div class="cta-item reveal">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Demo in 30 minuti</h5><p>Call su Zoom o Meet, nessuna installazione richiesta</p></div>
+  <div class="cta-form-box reveal d1">
+    <div class="cta-form-header">
+      <h4>Richiedi la demo gratuita</h4>
+      <p>Ti rispondiamo entro 24 ore lavorative</p>
     </div>
-    <div class="cta-item reveal d1">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Preventivo in 24 ore</h5><p>Dettagliato, senza sorprese, con timeline e costi fissi</p></div>
+    <div id="cta-form-fields">
+      <div class="cta-form-row">
+        <div class="cta-field">
+          <label>Nome e cognome *</label>
+          <input type="text" id="cta-name" placeholder="Mario Rossi" />
+        </div>
+        <div class="cta-field">
+          <label>Azienda</label>
+          <input type="text" id="cta-company" placeholder="Rossi Srl" />
+        </div>
+      </div>
+      <div class="cta-form-row">
+        <div class="cta-field">
+          <label>Email *</label>
+          <input type="email" id="cta-email" placeholder="mario@rossi.it" />
+        </div>
+        <div class="cta-field">
+          <label>Telefono</label>
+          <input type="tel" id="cta-phone" placeholder="+39 333 000 0000" />
+        </div>
+      </div>
+      <div class="cta-field">
+        <label>Modulo di interesse</label>
+        <select id="cta-module">
+          <option value="">— Seleziona —</option>
+          <option>CRM</option>
+          <option>MRP / Produzione</option>
+          <option>Finance</option>
+          <option>Procurement</option>
+          <option>Operations</option>
+          <option>Partner Platform (Commercialista)</option>
+          <option>Bundle completo</option>
+        </select>
+      </div>
+      <div class="cta-field">
+        <label>Messaggio (opzionale)</label>
+        <textarea id="cta-message" placeholder="Descrivi brevemente la tua esigenza…" rows="3"></textarea>
+      </div>
+      <button id="cta-submit" onclick="sendCtaForm()">
+        Invia richiesta demo
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+      <p id="cta-error" style="display:none;color:#FCA5A5;font-size:.82rem;margin-top:10px;"></p>
     </div>
-    <div class="cta-item reveal d2">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Go-live in 2–3 settimane</h5><p>Consegna garantita per contratto, non una stima</p></div>
-    </div>
-    <div class="cta-item reveal d3">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Sei un commercialista?</h5><p><a href="partner-platform.html" style="color:rgba(255,255,255,.9);font-weight:500">Scopri la Partner Platform →</a></p></div>
+    <div id="cta-success" style="display:none;text-align:center;padding:32px 0;">
+      <div style="font-size:2.5rem;margin-bottom:12px">✅</div>
+      <h4 style="color:var(--white);font-size:1.1rem;margin-bottom:8px">Richiesta inviata!</h4>
+      <p style="color:rgba(255,255,255,.65);font-size:.9rem">Ti contatteremo entro 24 ore lavorative per fissare la demo.</p>
     </div>
   </div>
 </section>
@@ -795,6 +865,55 @@ const onScroll = () => {
   });
 };
 window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+// EmailJS init
+emailjs.init('Tv5x37HiNBdpiIkdm');
+
+function sendCtaForm() {
+  const name    = document.getElementById('cta-name').value.trim();
+  const email   = document.getElementById('cta-email').value.trim();
+  const company = document.getElementById('cta-company').value.trim();
+  const phone   = document.getElementById('cta-phone').value.trim();
+  const module  = document.getElementById('cta-module').value;
+  const message = document.getElementById('cta-message').value.trim();
+  const errEl   = document.getElementById('cta-error');
+  const btn     = document.getElementById('cta-submit');
+
+  errEl.style.display = 'none';
+
+  if (!name) { errEl.textContent = 'Il nome è obbligatorio.'; errEl.style.display='block'; return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Inserisci un\'email valida.'; errEl.style.display='block'; return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Invio in corso…';
+
+  const params = {
+    from_name:    name,
+    from_email:   email,
+    company:      company || '—',
+    phone:        phone   || '—',
+    module:       module  || '—',
+    message:      message || '—',
+    to_email:     'marco7d@yahoo.com',
+    reply_to:     email,
+    subject:      'Richiesta demo COMANI da ' + name + (company ? ' (' + company + ')' : ''),
+  };
+
+  emailjs.send('service_2lc5mtv', 'template_szlosyd', params)
+    .then(() => {
+      document.getElementById('cta-form-fields').style.display = 'none';
+      document.getElementById('cta-success').style.display = 'block';
+    })
+    .catch((err) => {
+      console.error('EmailJS error', err);
+      errEl.textContent = 'Errore nell\'invio. Riprova o scrivici direttamente.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = 'Invia richiesta demo <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+    });
+}
 </script>
 </body>
 </html>

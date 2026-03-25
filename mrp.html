@@ -222,16 +222,28 @@ section{padding:96px 7%}
 .metric-val .n{font-size:.95rem;font-weight:600;color:var(--navy)}
 .metric-val .p{font-size:.72rem;color:var(--muted)}
 .metric-val.good .n{color:var(--teal)}
-.cta-section{background:var(--teal);padding:96px 7%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.cta-section{background:var(--teal);padding:96px 7%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.cta-section .section-eyebrow{color:rgba(255,255,255,.6)}
 .cta-section .section-title{color:var(--white)}
 .cta-section .section-sub{color:rgba(255,255,255,.75);max-width:none}
-.cta-actions{display:flex;flex-direction:column;gap:12px}
-.cta-item{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:var(--r-md);padding:16px 20px;display:flex;align-items:center;gap:16px}
-.cta-item-icon{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.cta-item-icon svg{width:18px;height:18px;stroke:var(--white);fill:none}
-.cta-item-text h5{font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:2px}
-.cta-item-text p{font-size:.8rem;color:rgba(255,255,255,.65)}
-.cta-btns{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.cta-promises{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+.cta-promise-item{display:flex;align-items:center;gap:10px;font-size:.9rem;color:rgba(255,255,255,.85)}
+.cta-promise-item svg{flex-shrink:0}
+.cta-form-box{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:var(--r-lg);padding:32px;backdrop-filter:blur(8px)}
+.cta-form-header{margin-bottom:24px}
+.cta-form-header h4{font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:4px}
+.cta-form-header p{font-size:.83rem;color:rgba(255,255,255,.6)}
+.cta-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cta-field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.cta-field label{font-size:.78rem;font-weight:500;color:rgba(255,255,255,.7)}
+.cta-field input,.cta-field select,.cta-field textarea{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:var(--r-sm);padding:10px 14px;font-size:.88rem;color:var(--white);font-family:var(--font-body);outline:none;transition:border-color .2s;width:100%}
+.cta-field input::placeholder,.cta-field textarea::placeholder{color:rgba(255,255,255,.35)}
+.cta-field input:focus,.cta-field select:focus,.cta-field textarea:focus{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.15)}
+.cta-field select option{background:var(--teal);color:var(--white)}
+.cta-field textarea{resize:vertical;min-height:80px}
+#mrp-submit{width:100%;background:var(--white);color:var(--teal);border:none;padding:13px 24px;border-radius:8px;font-weight:600;font-size:.95rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;font-family:var(--font-body)}
+#mrp-submit:hover{background:#f0f9f6;transform:translateY(-1px)}
+#mrp-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .btn-white{background:var(--white);color:var(--teal);padding:14px 32px;border-radius:8px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s}
 .btn-white:hover{background:#f0f9f6;transform:translateY(-1px)}
 .btn-ghost-white{background:transparent;color:rgba(255,255,255,.8);padding:14px 28px;border-radius:8px;font-weight:400;font-size:.95rem;text-decoration:none;border:1px solid rgba(255,255,255,.3);transition:all .2s}
@@ -725,29 +737,75 @@ footer{background:var(--navy-dk);padding:48px 7%;display:flex;align-items:center
 <section class="cta-section" id="cta">
   <div class="fade-left">
     <div class="section-eyebrow" style="color:rgba(255,255,255,.6)">Inizia adesso</div>
-    <h2 class="section-title">30 giorni gratis.<br>Nessuna carta di credito.</h2>
-    <p class="section-sub">Attivi la prova gratuita oggi. Importi i tuoi dati da Excel. In 10 giorni sai già se COMANI MRP è la soluzione giusta per la tua produzione — senza rischiare niente.</p>
-    <div class="cta-btns">
-      <a href="mailto:mrp@comani.it" class="btn-white">Richiedi demo gratuita</a>
-      <a href="#pricing" class="btn-ghost-white">Confronta i piani</a>
+    <h2 class="section-title">30 minuti di demo.<br>Poi decidi tu.</h2>
+    <p class="section-sub">Nessuna pressione commerciale. Nessun contratto. Una call dove ti mostriamo il modulo MRP sul tuo tipo di produzione — meccanica, assemblaggio, processo, o food.</p>
+    <div class="cta-promises">
+      <div class="cta-promise-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Attivazione in meno di 24 ore
+      </div>
+      <div class="cta-promise-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Dati tuoi, export completo, nessun lock-in
+      </div>
+      <div class="cta-promise-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        ROI stimabile prima di firmare
+      </div>
     </div>
   </div>
-  <div class="cta-actions fade-right">
-    <div class="cta-item">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>30 giorni di prova gratuita</h5><p>Nessun contratto, nessuna carta di credito richiesta</p></div>
+  <div class="cta-form-box fade-right">
+    <div class="cta-form-header">
+      <h4>Richiedi la demo MRP gratuita</h4>
+      <p>Ti rispondiamo entro 24 ore lavorative</p>
     </div>
-    <div class="cta-item">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Migrazione dati da Excel inclusa</h5><p>BOM, giacenze e ordini importati con tool guidato</p></div>
+    <div id="mrp-form-fields">
+      <div class="cta-form-row">
+        <div class="cta-field">
+          <label>Nome e cognome *</label>
+          <input type="text" id="mrp-name" placeholder="Mario Rossi" />
+        </div>
+        <div class="cta-field">
+          <label>Azienda</label>
+          <input type="text" id="mrp-company" placeholder="Rossi Srl" />
+        </div>
+      </div>
+      <div class="cta-form-row">
+        <div class="cta-field">
+          <label>Email *</label>
+          <input type="email" id="mrp-email" placeholder="mario@rossi.it" />
+        </div>
+        <div class="cta-field">
+          <label>Telefono</label>
+          <input type="tel" id="mrp-phone" placeholder="+39 333 000 0000" />
+        </div>
+      </div>
+      <div class="cta-field">
+        <label>Tipo di produzione</label>
+        <select id="mrp-type">
+          <option value="">— Seleziona —</option>
+          <option>Lavorazione meccanica</option>
+          <option>Assemblaggio</option>
+          <option>Processo / Chimica</option>
+          <option>Food &amp; Beverage</option>
+          <option>Packaging / Stampa</option>
+          <option>Altro</option>
+        </select>
+      </div>
+      <div class="cta-field">
+        <label>Messaggio (opzionale)</label>
+        <textarea id="mrp-message" placeholder="Descrivi brevemente la tua esigenza produttiva…" rows="3"></textarea>
+      </div>
+      <button id="mrp-submit" onclick="sendMrpForm()">
+        Richiedi demo MRP
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+      <p id="mrp-error" style="display:none;color:#FCA5A5;font-size:.82rem;margin-top:10px;"></p>
     </div>
-    <div class="cta-item">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Onboarding dedicato incluso</h5><p>Un consulente COMANI ti affianca per le prime 2 settimane</p></div>
-    </div>
-    <div class="cta-item">
-      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="cta-item-text"><h5>Connesso al tuo commercialista</h5><p>Se usa COMANI Partner Platform, vede tutto in tempo reale</p></div>
+    <div id="mrp-success" style="display:none;text-align:center;padding:32px 0;">
+      <div style="font-size:2.5rem;margin-bottom:12px">✅</div>
+      <h4 style="color:var(--white);font-size:1.1rem;margin-bottom:8px">Richiesta inviata!</h4>
+      <p style="color:rgba(255,255,255,.65);font-size:.9rem">Ti contatteremo entro 24 ore lavorative per fissare la demo del modulo MRP.</p>
     </div>
   </div>
 </section>
@@ -759,13 +817,13 @@ footer{background:var(--navy-dk);padding:48px 7%;display:flex;align-items:center
     <li><a href="partner-platform.html">Partner Platform</a></li>
     <li><a href="#features">MRP Features</a></li>
     <li><a href="#pricing">Prezzi</a></li>
-    <li><a href="mailto:mrp@comani.it">Contatti</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#7c110e0c3c1f13111d1215521508">Contatti</a></li>
     <li><a href="#">Privacy Policy</a></li>
   </ul>
   <p class="footer-legal">© 2026 COMANI — ERP & CRM Web Agency per PMI italiane. Tutti i diritti riservati.</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
@@ -804,12 +862,60 @@ const barObserver = new IntersectionObserver((entries) => {
     if (e.isIntersecting) {
       e.target.querySelectorAll('.metric-bar-fill').forEach(bar => {
         const w = bar.style.width; bar.style.width = '0';
-        setTimeout(() => bar.style.width = w, 100);
-      });
+        setTimeout(() => bar.style.width = w, 100); });
+      barObserver.unobserve(e.target);
     }
   });
 }, { threshold: 0.2 });
-document.querySelectorAll('.tab-visual, .howto-visual').forEach(el => barObserver.observe(el));
+document.querySelectorAll('.metric-bar-row').forEach(el => barObserver.observe(el));
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+emailjs.init('Tv5x37HiNBdpiIkdm');
+
+function sendMrpForm() {
+  const name    = document.getElementById('mrp-name').value.trim();
+  const email   = document.getElementById('mrp-email').value.trim();
+  const company = document.getElementById('mrp-company').value.trim();
+  const phone   = document.getElementById('mrp-phone').value.trim();
+  const type    = document.getElementById('mrp-type').value;
+  const message = document.getElementById('mrp-message').value.trim();
+  const errEl   = document.getElementById('mrp-error');
+  const btn     = document.getElementById('mrp-submit');
+
+  errEl.style.display = 'none';
+
+  if (!name)  { errEl.textContent = 'Il nome è obbligatorio.'; errEl.style.display='block'; return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = "Inserisci un'email valida."; errEl.style.display='block'; return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Invio in corso…';
+
+  const params = {
+    from_name:  name,
+    from_email: email,
+    company:    company || '—',
+    phone:      phone   || '—',
+    module:     'MRP / Produzione — ' + (type || '—'),
+    message:    message || '—',
+    to_email:   'marco7d@yahoo.com',
+    reply_to:   email,
+    subject:    'Demo MRP COMANI — ' + name + (company ? ' (' + company + ')' : ''),
+  };
+
+  emailjs.send('service_2lc5mtv', 'template_szlosyd', params)
+    .then(() => {
+      document.getElementById('mrp-form-fields').style.display = 'none';
+      document.getElementById('mrp-success').style.display = 'block';
+    })
+    .catch((err) => {
+      console.error('EmailJS error', err);
+      errEl.textContent = "Errore nell'invio. Riprova o scrivici direttamente.";
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = 'Richiedi demo MRP <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+    });
+}
 </script>
 </body>
 </html>
