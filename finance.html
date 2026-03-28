@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COMANI Finance — Controllo Finanziario per PMI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E3A5F;--navy-dk:#132843;
+  --teal:#0F6E56;--teal-lt:#D6F0E8;--teal-md:#1D9E75;
+  --fin:#1E6FB5;--fin-dk:#154F85;--fin-lt:#EBF4FF;--fin-md:#2E88D4;
+  --white:#FFFFFF;--off:#F7F9FC;--gray:#64748B;
+  --dark:#1E293B;--muted:#94A3B8;--border:#E2E8F0;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --r-sm:6px;--r-md:12px;--r-lg:20px;
+  scroll-behavior:smooth
+}
+html{font-size:16px}
+body{font-family:var(--font-body);color:var(--dark);background:var(--white);line-height:1.65;overflow-x:hidden}
+.alert-banner{background:var(--fin);color:var(--white);text-align:center;padding:12px 24px;font-size:.875rem;font-weight:500;position:relative;z-index:100}
+.alert-banner a{color:rgba(255,255,255,.85);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.alert-tag{display:inline-block;background:rgba(255,255,255,.2);color:var(--white);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-radius:20px;margin-right:10px;vertical-align:middle}
+nav{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:var(--font-display);font-size:1.4rem;color:var(--navy);text-decoration:none;letter-spacing:-.02em}
+.nav-logo span{color:var(--teal)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:.9rem;color:var(--gray);text-decoration:none;font-weight:400;transition:color .2s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{background:var(--fin)!important;color:var(--white)!important;padding:9px 22px;border-radius:8px;font-weight:500!important;font-size:.875rem!important}
+.nav-cta:hover{background:var(--fin-dk)!important}
+.hero{background:var(--navy-dk);min-height:92vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 7%;gap:60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:500px;height:500px;background:var(--fin);border-radius:50%;opacity:.08}
+.hero::after{content:'';position:absolute;bottom:-80px;left:30%;width:300px;height:300px;background:var(--fin-md);border-radius:50%;opacity:.05}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(30,111,181,.25);border:1px solid rgba(46,136,212,.4);color:#7EC4F5;font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:24px}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:var(--fin-md);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.4rem,4vw,3.6rem);color:var(--white);line-height:1.15;letter-spacing:-.02em;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:#7EC4F5}
+.hero-sub{font-size:1.1rem;color:#A8C4D8;line-height:1.7;margin-bottom:40px;font-weight:300;max-width:480px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--fin);color:var(--white);padding:14px 32px;border-radius:8px;font-weight:500;font-size:.95rem;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--fin-md);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:#A8C4D8;padding:14px 28px;border-radius:8px;font-weight:400;font-size:.95rem;text-decoration:none;border:1px solid rgba(168,196,216,.3);transition:all .2s}
+.btn-secondary:hover{border-color:rgba(168,196,216,.7);color:var(--white)}
+.dashboard-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);overflow:hidden;backdrop-filter:blur(4px)}
+.dash-topbar{background:rgba(255,255,255,.08);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08)}
+.dash-dots{display:flex;gap:6px}
+.dash-dots span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2)}
+.dash-title{font-size:.78rem;color:rgba(255,255,255,.5)}
+.dash-badge{background:rgba(30,111,181,.5);color:#7EC4F5;font-size:.7rem;padding:3px 10px;border-radius:20px;font-weight:500}
+.dash-body{padding:16px}
+.dash-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.dash-kpi{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 10px;text-align:center}
+.dash-kpi .dv{font-family:var(--font-display);font-size:1.25rem;font-weight:600;color:var(--white);line-height:1}
+.dash-kpi .dl{font-size:.68rem;color:rgba(255,255,255,.4);margin-top:3px}
+.dash-kpi.acc .dv{color:#7EC4F5}
+.dash-kpi.warn .dv{color:#FBBF24}
+.dash-chart-label{font-size:.68rem;color:rgba(255,255,255,.4);margin-bottom:8px;letter-spacing:.06em;text-transform:uppercase}
+.dash-chart{display:flex;align-items:flex-end;gap:5px;height:80px;padding:0 4px}
+.dash-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%}
+.dash-bar{width:100%;border-radius:3px 3px 0 0;min-height:4px}
+.dash-bar.pos{background:var(--fin-md);opacity:.85}
+.dash-bar.neg{background:#EF4444;opacity:.7}
+.dash-bar-mo{font-size:.6rem;color:rgba(255,255,255,.3)}
+.dash-alerts{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.dash-alert{background:rgba(255,255,255,.04);border-left:3px solid;border-radius:0 6px 6px 0;padding:8px 10px;display:flex;justify-content:space-between;align-items:center}
+.dash-alert.ok{border-color:#1D9E75}
+.dash-alert.warn{border-color:#FBBF24}
+.dash-alert.danger{border-color:#EF4444}
+.dash-alert-text{font-size:.72rem;color:rgba(255,255,255,.7)}
+.dash-alert-val{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.9)}
+.intro-strip{background:var(--fin);padding:28px 7%;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.intro-strip p{font-size:1.05rem;color:var(--white);font-weight:400;max-width:680px;opacity:.92}
+.intro-strip p strong{font-weight:600}
+.intro-strip-stat{display:flex;gap:32px}
+.intro-stat{text-align:center;color:var(--white)}
+.intro-stat .n{font-family:var(--font-display);font-size:2rem;line-height:1;display:block}
+.intro-stat .d{font-size:.78rem;opacity:.7;margin-top:3px}
+section{padding:96px 7%}
+.section-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--fin);margin-bottom:12px}
+.section-title{font-family:var(--font-display);font-size:clamp(1.9rem,3vw,2.8rem);color:var(--navy);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
+.section-sub{font-size:1.05rem;color:var(--gray);line-height:1.7;max-width:580px;font-weight:300}
+.pain{background:var(--off)}
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px}
+.pain-list{display:flex;flex-direction:column;gap:16px}
+.pain-item{display:flex;gap:16px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px 24px;transition:box-shadow .2s}
+.pain-item:hover{box-shadow:0 4px 20px rgba(30,58,95,.08)}
+.pain-num{flex-shrink:0;width:32px;height:32px;background:#DBEAFE;color:#1E40AF;font-size:.8rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.pain-item h4{font-size:.95rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.pain-item p{font-size:.88rem;color:var(--gray);line-height:1.6}
+.solution-box{background:var(--navy);border-radius:var(--r-lg);padding:40px;color:var(--white)}
+.solution-box h3{font-family:var(--font-display);font-size:1.5rem;margin-bottom:16px;color:#7EC4F5}
+.solution-box p{font-size:.95rem;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:14px}
+.solution-box p:last-child{margin-bottom:0}
+.solution-box strong{color:var(--white);font-weight:500}
+.features{background:var(--white)}
+.features-header{max-width:640px;margin-bottom:64px}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feat-card{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.feat-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(30,58,95,.1)}
+.feat-card-top{padding:28px 28px 24px}
+.feat-card-num{font-family:var(--font-display);font-size:3rem;color:rgba(255,255,255,.12);line-height:1;margin-bottom:12px}
+.feat-card-top h3{font-size:1.05rem;font-weight:600;color:var(--white);line-height:1.3}
+.feat-card-top h3 em{font-style:normal;color:#7EC4F5}
+.feat-card-body{padding:24px 28px;background:var(--white)}
+.feat-card-body p{font-size:.9rem;color:var(--gray);line-height:1.7;margin-bottom:12px}
+.feat-card-body p:last-child{margin-bottom:0}
+.feat-tag{display:inline-block;background:var(--fin-lt);color:var(--fin);font-size:.75rem;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+.demo-section{background:var(--off);padding:96px 7%}
+.demo-section .section-eyebrow{color:var(--fin)}
+.demo-wrap{margin-top:56px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 8px 40px rgba(30,58,95,.08)}
+.demo-toolbar{background:var(--navy);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.demo-toolbar-title{font-size:.9rem;font-weight:500;color:var(--white)}
+.demo-period-tabs{display:flex;gap:4px}
+.demo-tab{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);font-size:.8rem;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .2s;font-family:var(--font-body)}
+.demo-tab.active{background:var(--fin);color:var(--white)}
+.demo-tab:hover:not(.active){background:rgba(255,255,255,.18)}
+.demo-body{display:grid;grid-template-columns:2fr 1fr;min-height:380px}
+.demo-chart-area{padding:28px;border-right:1px solid var(--border)}
+.demo-chart-title{font-size:.8rem;font-weight:600;color:var(--gray);letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
+.demo-bars{display:flex;align-items:flex-end;gap:8px;height:200px;margin-bottom:16px}
+.b-ent,.b-usc{border-radius:3px 3px 0 0;transition:height .4s ease;min-height:4px}
+.b-ent{background:var(--fin)}
+.b-usc{background:#E2E8F0}
+.demo-bar-mo{font-size:.68rem;color:var(--muted);margin-top:6px;text-align:center}
+.demo-legend{display:flex;gap:20px}
+.demo-leg-item{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--gray)}
+.demo-leg-dot{width:10px;height:10px;border-radius:2px}
+.demo-sidebar{padding:28px;display:flex;flex-direction:column;gap:16px}
+.demo-kpi-box{background:var(--off);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 18px}
+.demo-kpi-box .label{font-size:.75rem;color:var(--gray);margin-bottom:4px}
+.demo-kpi-box .value{font-family:var(--font-display);font-size:1.6rem;color:var(--navy);line-height:1}
+.demo-kpi-box .delta{font-size:.78rem;margin-top:4px}
+.demo-kpi-box .delta.pos{color:var(--teal)}
+.demo-kpi-box .delta.neg{color:#EF4444}
+.demo-kpi-box .delta.warn{color:#D97706}
+.demo-alert-list{display:flex;flex-direction:column;gap:8px}
+.demo-alert-row{background:var(--off);border-left:3px solid;border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 14px}
+.demo-alert-row.ok{border-color:var(--teal)}
+.demo-alert-row.warn{border-color:#F59E0B}
+.demo-alert-row.danger{border-color:#EF4444}
+.demo-alert-row .ar-title{font-size:.8rem;font-weight:500;color:var(--navy);margin-bottom:2px}
+.demo-alert-row .ar-sub{font-size:.72rem;color:var(--gray)}
+.integrations{background:var(--white)}
+.int-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.int-card{border:1px solid var(--border);border-radius:var(--r-md);padding:20px;text-align:center;transition:box-shadow .2s}
+.int-card:hover{box-shadow:0 4px 20px rgba(30,58,95,.08)}
+.int-icon{width:40px;height:40px;border-radius:10px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.int-card h4{font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.int-card p{font-size:.78rem;color:var(--gray);line-height:1.5}
+.kpis{background:var(--navy);padding:80px 7%}
+.kpis .section-title{color:var(--white)}
+.kpis .section-sub{color:rgba(255,255,255,.55)}
+.kpis .section-eyebrow{color:#7EC4F5}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
+.kpi-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:32px 28px;text-align:center;transition:background .2s}
+.kpi-box:hover{background:rgba(255,255,255,.08)}
+.kpi-box.hl{background:rgba(30,111,181,.2);border-color:rgba(46,136,212,.4)}
+.kpi-val{font-family:var(--font-display);font-size:2.8rem;color:var(--white);line-height:1;margin-bottom:10px}
+.kpi-box.hl .kpi-val{color:#7EC4F5}
+.kpi-lbl{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:4px}
+.kpi-sub{font-size:.78rem;color:rgba(255,255,255,.35)}
+.pricing{background:var(--off)}
+.pricing-header{max-width:580px;margin-bottom:56px}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.price-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;position:relative;transition:box-shadow .2s}
+.price-card:hover{box-shadow:0 8px 32px rgba(30,58,95,.1)}
+.price-card.featured{border-color:var(--fin);border-width:2px;box-shadow:0 8px 32px rgba(30,111,181,.15)}
+.price-featured-label{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--fin);color:var(--white);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 18px;border-radius:0 0 8px 8px}
+.price-header{padding:32px 28px 20px;border-bottom:1px solid var(--border)}
+.price-name{font-family:var(--font-display);font-size:1.4rem;color:var(--navy);margin-bottom:4px}
+.price-desc{font-size:.83rem;color:var(--gray);margin-bottom:20px}
+.price-amount{display:flex;align-items:baseline;gap:4px;margin-bottom:6px}
+.price-amount .eur{font-size:1.1rem;font-weight:600;color:var(--navy)}
+.price-amount .val{font-family:var(--font-display);font-size:2.2rem;color:var(--navy);line-height:1}
+.price-amount .per{font-size:.85rem;color:var(--gray)}
+.price-note{font-size:.75rem;color:var(--muted)}
+.price-body{padding:24px 28px}
+.price-perks{list-style:none;display:flex;flex-direction:column;gap:10px}
+.price-perks li{font-size:.88rem;color:var(--dark);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.price-perks li::before{content:'';flex-shrink:0;width:16px;height:16px;background:var(--fin-lt);border-radius:50%;margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 4.5' stroke='%231E6FB5' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:contain}
+.price-footer{padding:0 28px 28px}
+.price-cta{display:block;text-align:center;padding:12px;border-radius:8px;font-weight:500;font-size:.9rem;text-decoration:none;transition:all .2s}
+.price-cta.outline{border:1px solid var(--border);color:var(--navy)}
+.price-cta.outline:hover{border-color:var(--navy);background:var(--off)}
+.price-cta.solid{background:var(--fin);color:var(--white)}
+.price-cta.solid:hover{background:var(--fin-dk)}
+.cta-section{background:var(--fin);padding:96px 7%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.cta-section .section-title{color:var(--white)}
+.cta-section .section-sub{color:rgba(255,255,255,.8);max-width:none}
+.cta-section .section-eyebrow{color:rgba(255,255,255,.65)}
+.cta-actions-list{display:flex;flex-direction:column;gap:12px}
+.cta-item{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:var(--r-md);padding:16px 20px;display:flex;align-items:center;gap:16px}
+.cta-item-icon{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cta-item-icon svg{width:18px;height:18px;stroke:var(--white);fill:none}
+.cta-item-text h5{font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:2px}
+.cta-item-text p{font-size:.8rem;color:rgba(255,255,255,.65)}
+.cta-btns{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn-white{background:var(--white);color:var(--fin);padding:14px 32px;border-radius:8px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s}
+.btn-white:hover{background:#EBF4FF;transform:translateY(-1px)}
+.btn-ghost-white{background:transparent;color:rgba(255,255,255,.8);padding:14px 28px;border-radius:8px;font-weight:400;font-size:.95rem;text-decoration:none;border:1px solid rgba(255,255,255,.3);transition:all .2s}
+.btn-ghost-white:hover{border-color:rgba(255,255,255,.7);color:var(--white)}
+footer{background:var(--navy-dk);padding:48px 7%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-brand{font-family:var(--font-display);font-size:1.3rem;color:var(--white)}
+.footer-brand span{color:#5DCAA5}
+.footer-links{display:flex;gap:28px;list-style:none}
+.footer-links a{font-size:.85rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.8)}
+.footer-legal{font-size:.78rem;color:rgba(255,255,255,.3);width:100%;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.fade-left{opacity:0;transform:translateX(-28px);transition:opacity .6s ease,transform .6s ease}
+.fade-left.visible{opacity:1;transform:translateX(0)}
+.fade-right{opacity:0;transform:translateX(28px);transition:opacity .6s ease,transform .6s ease}
+.fade-right.visible{opacity:1;transform:translateX(0)}
+.scale-in{opacity:0;transform:scale(.94);transition:opacity .5s ease,transform .5s ease}
+.scale-in.visible{opacity:1;transform:scale(1)}
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding:60px 6%}
+  .hero-visual{display:none}
+  .pain-grid,.cta-section{grid-template-columns:1fr;gap:40px}
+  .feat-grid,.price-grid{grid-template-columns:1fr}
+  .kpi-grid,.int-grid{grid-template-columns:repeat(2,1fr)}
+  .demo-body{grid-template-columns:1fr}
+  nav .nav-links{display:none}
+  .intro-strip{flex-direction:column}
+}
+@media(max-width:600px){section,.demo-section{padding:64px 5%}.hero{padding:50px 5%}.kpi-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="alert-banner">
+  <span class="alert-tag">Modulo</span>
+  <strong>COMANI Finance</strong> — Cash flow, P&amp;L e budget sempre aggiornati. Integrato con il tuo ERP.
+  <a href="#pricing">Vedi i piani &rarr;</a>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">COMA<span>NI</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#features">Funzionalità</a></li>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#pricing">Prezzi</a></li>
+    <li><a href="#cta" class="nav-cta">Prova gratis</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Modulo Finance</div>
+    <h1>Il tuo cash flow,<br><em>sotto controllo</em><br>ogni giorno.</h1>
+    <p class="hero-sub">Stop ai fogli Excel aggiornati a fine mese. COMANI Finance ti dà visibilità in tempo reale su entrate, uscite, liquidità e budget — integrato direttamente con ordini, fatture e produzione.</p>
+    <div class="hero-actions">
+      <a href="#demo" class="btn-primary">Vedi la demo live <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a href="#features" class="btn-secondary">Scopri le funzionalità</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="dashboard-card">
+      <div class="dash-topbar">
+        <div class="dash-dots"><span></span><span></span><span></span></div>
+        <span class="dash-title">COMANI Finance — Dashboard</span>
+        <span class="dash-badge">Live aggiornato</span>
+      </div>
+      <div class="dash-body">
+        <div class="dash-kpis">
+          <div class="dash-kpi acc"><div class="dv">€ 142K</div><div class="dl">Liquidità disponibile</div></div>
+          <div class="dash-kpi"><div class="dv">€ 38K</div><div class="dl">Crediti in scadenza</div></div>
+          <div class="dash-kpi warn"><div class="dv">−12%</div><div class="dl">vs budget mese</div></div>
+        </div>
+        <div class="dash-chart-label">Cash flow — ultimi 6 mesi</div>
+        <div class="dash-chart">
+          <div class="dash-bar-wrap"><div class="dash-bar pos" style="height:55%"></div><div class="dash-bar-mo">Set</div></div>
+          <div class="dash-bar-wrap"><div class="dash-bar pos" style="height:70%"></div><div class="dash-bar-mo">Ott</div></div>
+          <div class="dash-bar-wrap"><div class="dash-bar neg" style="height:30%"></div><div class="dash-bar-mo">Nov</div></div>
+          <div class="dash-bar-wrap"><div class="dash-bar pos" style="height:85%"></div><div class="dash-bar-mo">Dic</div></div>
+          <div class="dash-bar-wrap"><div class="dash-bar pos" style="height:60%"></div><div class="dash-bar-mo">Gen</div></div>
+          <div class="dash-bar-wrap"><div class="dash-bar pos" style="height:75%"></div><div class="dash-bar-mo">Feb</div></div>
+        </div>
+        <div class="dash-alerts">
+          <div class="dash-alert ok"><span class="dash-alert-text">Incasso Rossi Srl confermato</span><span class="dash-alert-val">+€ 18.400</span></div>
+          <div class="dash-alert warn"><span class="dash-alert-text">F24 scadenza 16/03</span><span class="dash-alert-val">€ 4.200</span></div>
+          <div class="dash-alert danger"><span class="dash-alert-text">Fornitore Verdi — 45gg scaduto</span><span class="dash-alert-val">€ 9.800</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <p>Le PMI italiane perdono in media <strong>3–5 giorni al mese</strong> a raccogliere dati finanziari da sistemi diversi. COMANI Finance centralizza tutto: ordini, fatture, banca e produzione in un'unica dashboard aggiornata ogni giorno.</p>
+  <div class="intro-strip-stat">
+    <div class="intro-stat"><span class="n">–72%</span><span class="d">tempo report finanziari</span></div>
+    <div class="intro-stat"><span class="n">30 gg</span><span class="d">visibilità anticipata</span></div>
+    <div class="intro-stat"><span class="n">100%</span><span class="d">integrato con ERP</span></div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section class="pain" id="pain">
+  <div class="section-eyebrow">Il problema che risolviamo</div>
+  <h2 class="section-title">Il CFO della PMI lavora sempre in ritardo.</h2>
+  <p class="section-sub">Non per mancanza di competenza — ma perché i dati finanziari arrivano da fonti diverse, sempre in ritardo rispetto alle decisioni che contano.</p>
+  <div class="pain-grid">
+    <div class="pain-list fade-left">
+      <div class="pain-item">
+        <div class="pain-num">1</div>
+        <div><h4>Excel aggiornato a fine mese</h4><p>Le situazioni contabili arrivano settimane dopo i fatti. Quando il cash flow è in tensione, il problema è già stato preso — spesso nel modo sbagliato.</p></div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">2</div>
+        <div><h4>Dati frammentati su più sistemi</h4><p>Banca su un conto, fatture sul gestionale, ordini su un altro foglio. Costruire una vista unica richiede ore — e i dati sono già vecchi quando finisci.</p></div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">3</div>
+        <div><h4>Budget vs consuntivo mai allineati</h4><p>Il budget viene fatto a gennaio e dimenticato ad aprile. Senza uno strumento che aggiorni automaticamente il confronto, il piano resta solo un documento.</p></div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">4</div>
+        <div><h4>Scadenze fiscali a sorpresa</h4><p>F24, IVA, rate di finanziamento: senza un calendario integrato con la liquidità disponibile, ogni scadenza è una sorpresa — spesso sgradevole.</p></div>
+      </div>
+    </div>
+    <div class="solution-box fade-right">
+      <h3>La soluzione COMANI Finance</h3>
+      <p>COMANI Finance aggrega in automatico i dati da <strong>ordini (Sales), fatture attive e passive, banca e produzione</strong> — costruendo una vista finanziaria aggiornata ogni giorno, senza inserimento manuale.</p>
+      <p>Il cash flow proiettato a 30 e 90 giorni si costruisce partendo dagli ordini confermati, non dai pagamenti già ricevuti. <strong>Vedi il problema prima che arrivi in banca.</strong></p>
+      <p>Il modulo Finance è il cuore del sistema: ogni altro modulo COMANI (MRP, Procurement, Sales) alimenta automaticamente la dashboard finanziaria, eliminando i silos informativi che rallentano le decisioni.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-header">
+    <div class="section-eyebrow">Funzionalità</div>
+    <h2 class="section-title">Tutto ciò che serve al controllo finanziario.</h2>
+    <p class="section-sub">Non un software contabile: un sistema di controllo. La differenza sta nella velocità con cui i dati diventano decisioni.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card fade-up">
+      <div class="feat-card-top" style="background:var(--navy)">
+        <div class="feat-card-num">01</div>
+        <h3>Cash flow <em>in tempo reale</em></h3>
+      </div>
+      <div class="feat-card-body">
+        <span class="feat-tag">Core</span>
+        <p>Dashboard con saldo di cassa aggiornato, entrate e uscite del giorno, settimana e mese. Proiezione automatica a 30 e 90 giorni basata sugli ordini confermati e le scadenze attive.</p>
+        <p>Alert configurabili quando la liquidità scende sotto la soglia di sicurezza — prima che il conto vada in rosso.</p>
+      </div>
+    </div>
+    <div class="feat-card fade-up" style="transition-delay:.12s">
+      <div class="feat-card-top" style="background:var(--fin)">
+        <div class="feat-card-num">02</div>
+        <h3>P&amp;L <em>e analisi margini</em></h3>
+      </div>
+      <div class="feat-card-body">
+        <span class="feat-tag">Business</span>
+        <p>Conto economico mensile e YTD, con dettaglio per business unit, prodotto o commessa. Confronto automatico con budget e anno precedente — senza costruirlo a mano.</p>
+        <p>Analisi dei margini per linea di prodotto integrata con i costi di produzione dal modulo MRP.</p>
+      </div>
+    </div>
+    <div class="feat-card fade-up" style="transition-delay:.24s">
+      <div class="feat-card-top" style="background:var(--navy-dk)">
+        <div class="feat-card-num">03</div>
+        <h3>Budget <em>e scostamenti</em></h3>
+      </div>
+      <div class="feat-card-body">
+        <span class="feat-tag">Business</span>
+        <p>Inserisci il budget annuale per voce di costo e ricavo. Il sistema calcola automaticamente lo scostamento mensile, evidenzia le voci fuori controllo e proietta il consuntivo a fine anno.</p>
+        <p>Report di variance pronto per il CDA o per il commercialista — esportabile in PDF in un clic.</p>
+      </div>
+    </div>
+    <div class="feat-card fade-up" style="transition-delay:.06s">
+      <div class="feat-card-top" style="background:var(--fin-dk)">
+        <div class="feat-card-num">04</div>
+        <h3>Scadenzario <em>attivo e passivo</em></h3>
+      </div>
+      <div class="feat-card-body">
+        <span class="feat-tag">Core</span>
+        <p>Tutte le fatture da incassare e da pagare, ordinate per data di scadenza e con semaforo di rischio. Integrato con Procurement per i pagamenti fornitori e con Sales per gli incassi clienti.</p>
+        <p>Notifica automatica ai responsabili 7 e 3 giorni prima della scadenza.</p>
+      </div>
+    </div>
+    <div class="feat-card fade-up" style="transition-delay:.18s">
+      <div class="feat-card-top" style="background:var(--teal)">
+        <div class="feat-card-num">05</div>
+        <h3>Calendario fiscale <em>integrato</em></h3>
+      </div>
+      <div class="feat-card-body">
+        <span class="feat-tag">Business</span>
+        <p>F24, IVA trimestrale, INPS, rate di leasing e finanziamenti — tutti nel calendario, con importo stimato e impatto sulla liquidità disponibile. Nessuna scadenza dimenticata.</p>
+        <p>Possibilità di collegare il calendario al commercialista partner tramite la Partner Platform.</p>
+      </div>
+    </div>
+    <div class="feat-card fade-up" style="transition-delay:.3s">
+      <div class="feat-card-top" style="background:#1A3550">
+        <div class="feat-card-num">06</div>
+        <h3>Report <em>per istituti di credito</em></h3>
+      </div>
+      <div class="feat-card-body">
+        <span class="feat-tag">Enterprise</span>
+        <p>Situazione patrimoniale e finanziaria generata automaticamente in formato adatto alle richieste bancarie. Con AI assistant integrato per la relazione accompagnatoria.</p>
+        <p>Riduce il tempo di preparazione della pratica di fido da giorni a ore — in collaborazione con il commercialista.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO INTERATTIVA -->
+<div class="demo-section" id="demo">
+  <div class="section-eyebrow">Demo live</div>
+  <h2 class="section-title">Esplora la dashboard Finance.</h2>
+  <p class="section-sub">Dati simulati di una PMI manifatturiera. Cambia il periodo e vedi come reagisce il cash flow proiettato.</p>
+  <div class="demo-wrap fade-up">
+    <div class="demo-toolbar">
+      <span class="demo-toolbar-title">Acme Meccanica Srl — Finance Q1 2026</span>
+      <div class="demo-period-tabs">
+        <button class="demo-tab active" onclick="setView('month')">Mensile</button>
+        <button class="demo-tab" onclick="setView('quarter')">Trimestrale</button>
+        <button class="demo-tab" onclick="setView('year')">Annuale</button>
+      </div>
+    </div>
+    <div class="demo-body">
+      <div class="demo-chart-area">
+        <div class="demo-chart-title" id="chart-title">Entrate vs Uscite — Mensile (Gen–Giu 2025)</div>
+        <div class="demo-bars" id="demo-bars"></div>
+        <div class="demo-legend">
+          <div class="demo-leg-item"><div class="demo-leg-dot" style="background:var(--fin)"></div>Entrate</div>
+          <div class="demo-leg-item"><div class="demo-leg-dot" style="background:#E2E8F0"></div>Uscite</div>
+        </div>
+      </div>
+      <div class="demo-sidebar">
+        <div class="demo-kpi-box">
+          <div class="label">Liquidità disponibile</div>
+          <div class="value" id="kpi-liq">€ 142.300</div>
+          <div class="delta pos" id="kpi-liq-d">▲ +8,4% vs mese prec.</div>
+        </div>
+        <div class="demo-kpi-box">
+          <div class="label">Cash flow netto periodo</div>
+          <div class="value" id="kpi-cf">€ +22.800</div>
+          <div class="delta pos" id="kpi-cf-d">▲ Positivo</div>
+        </div>
+        <div class="demo-kpi-box">
+          <div class="label">DSO (giorni incasso medio)</div>
+          <div class="value" id="kpi-dso">38 gg</div>
+          <div class="delta warn" id="kpi-dso-d">⚠ Target: 30 gg</div>
+        </div>
+        <div class="demo-alert-list">
+          <div class="demo-alert-row ok"><div class="ar-title">Budget rispettato</div><div class="ar-sub">Scostamento: −2,1%</div></div>
+          <div class="demo-alert-row warn"><div class="ar-title">2 fatture in scadenza</div><div class="ar-sub">Totale: € 31.200 entro 7 gg</div></div>
+          <div class="demo-alert-row danger"><div class="ar-title">Fornitore scaduto</div><div class="ar-sub">€ 9.800 — 45 gg in ritardo</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INTEGRATIONS -->
+<section class="integrations" id="integrations">
+  <div class="section-eyebrow">Integrazioni</div>
+  <h2 class="section-title">Finance è il hub di tutto il sistema.</h2>
+  <p class="section-sub">Ogni modulo COMANI alimenta automaticamente la dashboard finanziaria. Zero inserimento manuale, zero silos informativi.</p>
+  <div class="int-grid">
+    <div class="int-card fade-up">
+      <div class="int-icon" style="background:#FFF3E0;color:#E65100">📦</div>
+      <h4>MRP / Produzione</h4>
+      <p>Costi di produzione e OEE impattano automaticamente sul P&amp;L in tempo reale</p>
+    </div>
+    <div class="int-card fade-up" style="transition-delay:.08s">
+      <div class="int-icon" style="background:#E8F5E9;color:#2E7D32">🛒</div>
+      <h4>Procurement</h4>
+      <p>Ordini fornitori e scadenze pagamento integrati nello scadenzario passivo</p>
+    </div>
+    <div class="int-card fade-up" style="transition-delay:.16s">
+      <div class="int-icon" style="background:var(--fin-lt);color:var(--fin-dk)">💼</div>
+      <h4>SAP Sales</h4>
+      <p>Ordini clienti confermati proiettano automaticamente gli incassi futuri</p>
+    </div>
+    <div class="int-card fade-up" style="transition-delay:.24s">
+      <div class="int-icon" style="background:#F3E5F5;color:#6A1B9A">🤝</div>
+      <h4>Partner Platform</h4>
+      <p>Il commercialista ha vista read-only su P&amp;L e cash flow in tempo reale</p>
+    </div>
+  </div>
+</section>
+
+<!-- KPI -->
+<section class="kpis">
+  <div class="section-eyebrow">Impatto reale</div>
+  <h2 class="section-title">Numeri concreti, non promesse.</h2>
+  <p class="section-sub">Basati su medie di adozione su PMI manifatturiere con fatturato € 2M–€ 20M.</p>
+  <div class="kpi-grid">
+    <div class="kpi-box scale-in"><div class="kpi-val">–72%</div><div class="kpi-lbl">Tempo preparazione report</div><div class="kpi-sub">da ore a minuti, automatico</div></div>
+    <div class="kpi-box hl scale-in" style="transition-delay:.1s"><div class="kpi-val">30 gg</div><div class="kpi-lbl">Visibilità anticipata</div><div class="kpi-sub">cash flow proiettato su ordini</div></div>
+    <div class="kpi-box scale-in" style="transition-delay:.2s"><div class="kpi-val">–40%</div><div class="kpi-lbl">Giorni di ritardo incassi</div><div class="kpi-sub">grazie allo scadenzario attivo</div></div>
+    <div class="kpi-box hl scale-in" style="transition-delay:.3s"><div class="kpi-val">4,2×</div><div class="kpi-lbl">ROI medio primo anno</div><div class="kpi-sub">sul costo del modulo Finance</div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header">
+    <div class="section-eyebrow">Piani e Prezzi</div>
+    <h2 class="section-title">Inizia con il piano giusto per la tua PMI.</h2>
+    <p class="section-sub">Tutti i piani includono onboarding guidato, supporto e aggiornamenti automatici. Nessun costo nascosto.</p>
+  </div>
+  <div class="price-grid">
+    <div class="price-card fade-up">
+      <div class="price-header">
+        <div class="price-name">Starter</div>
+        <div class="price-desc">PMI fino a 10 utenti</div>
+        <div class="price-amount"><span class="eur">€</span><span class="val">149</span><span class="per">/mese</span></div>
+        <div class="price-note">+ IVA · fatturazione mensile</div>
+      </div>
+      <div class="price-body">
+        <ul class="price-perks">
+          <li>Dashboard cash flow in tempo reale</li>
+          <li>Scadenzario attivo e passivo</li>
+          <li>Calendario fiscale integrato</li>
+          <li>3 utenti inclusi</li>
+          <li>Export PDF e Excel</li>
+        </ul>
+      </div>
+      <div class="price-footer"><a href="#cta" class="price-cta outline">Inizia con Starter</a></div>
+    </div>
+    <div class="price-card featured fade-up" style="transition-delay:.12s">
+      <div class="price-featured-label">Più scelto</div>
+      <div class="price-header">
+        <div class="price-name">Business</div>
+        <div class="price-desc">PMI con più business unit</div>
+        <div class="price-amount"><span class="eur">€</span><span class="val">299</span><span class="per">/mese</span></div>
+        <div class="price-note">+ IVA · fatturazione mensile</div>
+      </div>
+      <div class="price-body">
+        <ul class="price-perks">
+          <li>Tutto di Starter</li>
+          <li>P&amp;L e analisi margini per BU</li>
+          <li>Budget vs consuntivo automatico</li>
+          <li>Integrazione MRP e Procurement</li>
+          <li>Vista Partner Platform per commercialista</li>
+          <li>10 utenti inclusi</li>
+        </ul>
+      </div>
+      <div class="price-footer"><a href="#cta" class="price-cta solid">Scegli Business</a></div>
+    </div>
+    <div class="price-card fade-up" style="transition-delay:.24s">
+      <div class="price-header">
+        <div class="price-name">Enterprise</div>
+        <div class="price-desc">Gruppi e aziende strutturate</div>
+        <div class="price-amount"><span class="eur">€</span><span class="val">599</span><span class="per">/mese</span></div>
+        <div class="price-note">+ IVA · fatturazione annuale disponibile</div>
+      </div>
+      <div class="price-body">
+        <ul class="price-perks">
+          <li>Tutto di Business</li>
+          <li>Report per istituti di credito con AI</li>
+          <li>Consolidato multi-società</li>
+          <li>API e integrazione Zucchetti / SAP</li>
+          <li>Utenti illimitati</li>
+          <li>SLA dedicato e account manager</li>
+        </ul>
+      </div>
+      <div class="price-footer"><a href="#cta" class="price-cta outline">Contatta le vendite</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="fade-left">
+    <div class="section-eyebrow">Inizia oggi</div>
+    <h2 class="section-title">Il tuo cash flow non può<br>aspettare fine mese.</h2>
+    <p class="section-sub">30 minuti di onboarding e hai la tua dashboard finanziaria live. Nessun dato da importare manualmente — si connette al tuo gestionale esistente.</p>
+    <div class="cta-btns">
+      <a href="mailto:marco7d@yahoo.com?subject=Richiesta%20demo%20COMANI%20Finance&body=Salve%2C%20sono%20interessato%20a%20una%20demo%20del%20modulo%20Finance%20di%20COMANI." class="btn-white">Prenota una demo gratuita</a>
+      <a href="partner-platform.html" class="btn-ghost-white">Sei un commercialista?</a>
+    </div>
+  </div>
+  <div class="cta-actions-list fade-right">
+    <div class="cta-item">
+      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cta-item-text"><h5>Demo gratuita 30 minuti</h5><p>Con dati reali della tua azienda, non simulazioni</p></div>
+    </div>
+    <div class="cta-item">
+      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cta-item-text"><h5>Operativo in 30 minuti</h5><p>Connessione al gestionale esistente inclusa nell'onboarding</p></div>
+    </div>
+    <div class="cta-item">
+      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cta-item-text"><h5>Nessun lock-in</h5><p>Contratto mensile, cancellazione in qualsiasi momento</p></div>
+    </div>
+    <div class="cta-item">
+      <div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="cta-item-text"><h5>Integrazione con il tuo commercialista</h5><p>Accesso diretto alla Partner Platform per il tuo studio</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">COMA<span>NI</span></div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="mrp.html">MRP / Produzione</a></li>
+    <li><a href="partner-platform.html">Partner Platform</a></li>
+    <li><a href="mailto:marco7d@yahoo.com">Contatti</a></li>
+    <li><a href="#">Privacy Policy</a></li>
+  </ul>
+  <p class="footer-legal">© 2026 COMANI — ERP &amp; CRM Web Agency per PMI italiane. Tutti i diritti riservati.</p>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in').forEach(el => io.observe(el));
+
+const secs = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  links.forEach(a => {
+    const active = a.getAttribute('href') === '#' + cur;
+    a.style.color = active ? 'var(--navy)' : '';
+    a.style.fontWeight = active ? '500' : '';
+  });
+}, { passive: true });
+
+const views = {
+  month: {
+    title: 'Entrate vs Uscite — Mensile (Gen–Giu 2025)',
+    bars: [{mo:'Gen',ent:62,usc:55},{mo:'Feb',ent:71,usc:60},{mo:'Mar',ent:48,usc:72},{mo:'Apr',ent:85,usc:58},{mo:'Mag',ent:78,usc:65},{mo:'Giu',ent:90,usc:62}],
+    liq:'€ 142.300',liqD:'▲ +8,4% vs mese prec.',liqPos:true,
+    cf:'€ +22.800',cfD:'▲ Positivo',cfPos:true,
+    dso:'38 gg',dsoD:'⚠ Target: 30 gg',dsoWarn:true
+  },
+  quarter: {
+    title: 'Entrate vs Uscite — Trimestrale (2025)',
+    bars: [{mo:'Q1',ent:55,usc:68},{mo:'Q2',ent:80,usc:62},{mo:'Q3',ent:90,usc:71},{mo:'Q4',ent:100,usc:75}],
+    liq:'€ 198.500',liqD:'▲ +14% vs Q prec.',liqPos:true,
+    cf:'€ +63.200',cfD:'▲ Anno positivo',cfPos:true,
+    dso:'35 gg',dsoD:'✓ Nei target',dsoWarn:false
+  },
+  year: {
+    title: 'Entrate vs Uscite — Annuale (2023–2025)',
+    bars: [{mo:'2023',ent:58,usc:70},{mo:'2024',ent:75,usc:68},{mo:'2025',ent:92,usc:72}],
+    liq:'€ 142.300',liqD:'▲ +24% vs 2023',liqPos:true,
+    cf:'€ +89.400',cfD:'▲ CAGR +18%',cfPos:true,
+    dso:'38 gg',dsoD:'⚠ Da migliorare',dsoWarn:true
+  }
+};
+
+function setView(key) {
+  const v = views[key];
+  document.getElementById('chart-title').textContent = v.title;
+  const ld = document.getElementById('kpi-liq-d');
+  document.getElementById('kpi-liq').textContent = v.liq;
+  ld.textContent = v.liqD; ld.className = 'delta ' + (v.liqPos ? 'pos' : 'neg');
+  const cd = document.getElementById('kpi-cf-d');
+  document.getElementById('kpi-cf').textContent = v.cf;
+  cd.textContent = v.cfD; cd.className = 'delta ' + (v.cfPos ? 'pos' : 'neg');
+  const dd = document.getElementById('kpi-dso-d');
+  document.getElementById('kpi-dso').textContent = v.dso;
+  dd.textContent = v.dsoD; dd.className = 'delta ' + (v.dsoWarn ? 'warn' : 'pos');
+
+  const bars = document.getElementById('demo-bars');
+  bars.innerHTML = '';
+  const max = Math.max(...v.bars.map(b => Math.max(b.ent, b.usc)));
+  v.bars.forEach(b => {
+    const eH = Math.round((b.ent / max) * 100);
+    const uH = Math.round((b.usc / max) * 100);
+    bars.innerHTML += `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%">
+      <div style="display:flex;gap:3px;align-items:flex-end;height:calc(100% - 20px);width:100%">
+        <div class="b-ent" style="height:${eH}%;flex:1"></div>
+        <div class="b-usc" style="height:${uH}%;flex:1"></div>
+      </div>
+      <div class="demo-bar-mo">${b.mo}</div>
+    </div>`;
+  });
+
+  document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.demo-tab[onclick="setView('${key}')"]`).classList.add('active');
+}
+setView('month');
+</script>
+</body>
+</html>
