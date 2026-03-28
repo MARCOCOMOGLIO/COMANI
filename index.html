@@ -47,6 +47,8 @@ nav{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.96);backdrop-f
 .nav-partner:hover{background:var(--teal)!important;color:var(--white)!important}
 .nav-mrp{background:#FEF0E6!important;color:#EA580C!important;padding:9px 18px;border-radius:8px;font-weight:500!important;font-size:.875rem!important;border:1px solid rgba(234,88,12,.25)!important;transition:all .2s!important}
 .nav-mrp:hover{background:#EA580C!important;color:var(--white)!important}
+.nav-fin{background:#EBF4FF!important;color:#1E6FB5!important;padding:9px 18px;border-radius:8px;font-weight:500!important;font-size:.875rem!important;border:1px solid rgba(30,111,181,.25)!important;transition:all .2s!important}
+.nav-fin:hover{background:#1E6FB5!important;color:var(--white)!important}
 
 /* ── Hero ── */
 .hero{background:var(--navy-dk);min-height:92vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 7%;gap:60px;position:relative;overflow:hidden}
@@ -259,11 +261,11 @@ footer{background:var(--navy-dk);padding:48px 7%}
 </head>
 <body>
 
-<!-- Alert Banner: MRP -->
+<!-- Alert Banner: Finance -->
 <div class="alert-banner">
-  <span class="alert-tag">Nuovo modulo</span>
-  <strong>MRP / Produzione</strong> è ora disponibile — OEE in tempo reale, ordini di lavoro digitali, Gantt capacità.
-  <a href="mrp.html">Scopri il modulo →</a>
+  <span class="alert-tag">In arrivo</span>
+  <strong>COMANI Finance</strong> — Cash flow in tempo reale, P&amp;L, budget e scadenzario integrati con il tuo ERP.
+  <a href="finance.html">Scopri il modulo →</a>
 </div>
 
 <!-- Nav -->
@@ -274,6 +276,7 @@ footer{background:var(--navy-dk);padding:48px 7%}
     <li><a href="#bundle">Prezzi</a></li>
     <li><a href="#processo">Come funziona</a></li>
     <li><a href="mrp.html" class="nav-mrp">MRP / Produzione</a></li>
+    <li><a href="finance.html" class="nav-fin">Finance</a></li>
     <li><a href="partner-platform.html" class="nav-partner">Per Commercialisti</a></li>
     <li><a href="#cta" class="nav-cta">Richiedi demo</a></li>
   </ul>
@@ -309,11 +312,11 @@ footer{background:var(--navy-dk);padding:48px 7%}
         <div class="mod-name">SAP Sales</div>
         <div class="mod-price">€ 249/mese</div>
       </div>
-      <div class="mod-card">
+      <a href="finance.html" class="mod-card featured" style="text-decoration:none">
         <div class="mod-icon">💰</div>
         <div class="mod-name">Finance</div>
         <div class="mod-price">€ 249/mese</div>
-      </div>
+      </a>
       <a href="mrp.html" class="mod-card featured" style="text-decoration:none">
         <div class="mod-icon">🏭</div>
         <div class="mod-name">MRP / Prod.</div>
@@ -452,6 +455,7 @@ footer{background:var(--navy-dk);padding:48px 7%}
           <li>Cash flow previsionale</li>
           <li>Export per commercialista</li>
         </ul>
+        <a href="finance.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.83rem;font-weight:600;color:#1E6FB5;text-decoration:none;">Scopri il modulo <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
     </div>
 
@@ -745,8 +749,7 @@ footer{background:var(--navy-dk);padding:48px 7%}
       <p>Clicca il bottone — si apre la tua app mail con tutto precompilato</p>
     </div>
     <div class="cta-mailto-body">
-      <a class="cta-mailto-btn"
-         href="mailto:marco7d@yahoo.com?subject=Richiesta%20demo%20COMANI&body=Buongiorno%2C%0A%0Avorrei%20richiedere%20una%20demo%20gratuita%20di%20COMANI.%0A%0ANome%3A%20%0AAzienda%3A%20%0ATelefono%3A%20%0AModulo%20di%20interesse%3A%20%0ADisponibilit%C3%A0%3A%20%0A%0AGrazie">
+      <a class="cta-mailto-btn" href="/cdn-cgi/l/email-protection#8be6eaf9e8e4bcefcbf2eae3e4e4a5e8e4e6b4f8fee9e1eee8ffb6d9e2e8e3e2eef8ffeaaeb9bbefeee6e4aeb9bbc8c4c6cac5c2ade9e4eff2b6c9fee4e5ece2e4f9e5e4aeb9c8aebbcaaebbcafde4f9f9eee2aeb9bbf9e2e8e3e2eeefeef9eeaeb9bbfee5eaaeb9bbefeee6e4aeb9bbecf9eafffee2ffeaaeb9bbefe2aeb9bbc8c4c6cac5c2a5aebbcaaebbcac5e4e6eeaeb8caaeb9bbaebbcacaf1e2eee5efeaaeb8caaeb9bbaebbcadfeee7eeede4e5e4aeb8caaeb9bbaebbcac6e4effee7e4aeb9bbefe2aeb9bbe2e5ffeef9eef8f8eeaeb8caaeb9bbaebbcacfe2f8fbe4e5e2e9e2e7e2ffaec8b8aecabbaeb8caaeb9bbaebbcaaebbcaccf9eaf1e2ee">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Scrivi a COMANI
       </a>
@@ -767,7 +770,7 @@ footer{background:var(--navy-dk);padding:48px 7%}
       <ul>
         <li><a href="#moduli">CRM</a></li>
         <li><a href="#moduli">SAP Sales</a></li>
-        <li><a href="#moduli">Finance</a></li>
+        <li><a href="finance.html">Finance</a></li>
         <li><a href="mrp.html">MRP / Produzione</a></li>
         <li><a href="#moduli">Procurement</a></li>
         <li><a href="#moduli">Operations</a></li>
@@ -801,7 +804,7 @@ footer{background:var(--navy-dk);padding:48px 7%}
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
@@ -865,13 +868,4 @@ function sendCtaForm() {
       document.getElementById('cta-success').style.display = 'block';
     })
     .catch((err) => {
-      console.error('EmailJS error', err);
-      errEl.textContent = 'Errore nell\'invio. Riprova o scrivici direttamente.';
-      errEl.style.display = 'block';
-      btn.disabled = false;
-      btn.innerHTML = 'Invia richiesta demo <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
-    });
-}
-</script>
-</body>
-</html>
+      console.error('EmailJS erro
