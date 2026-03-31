@@ -115,6 +115,10 @@ section { position: relative; padding: 100px 60px; }
 .service-name { font-family: 'Orbitron', monospace; font-size: 13px; font-weight: 700; letter-spacing: 3px; color: var(--text-primary); margin-bottom: 10px; text-transform: uppercase; }
 .service-desc { font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
 .service-price { font-family: 'Share Tech Mono', monospace; font-size: 18px; color: var(--c1, var(--neon-cyan)); text-shadow: 0 0 10px var(--c1, var(--neon-cyan)); }
+.new-badge { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; padding: 3px 8px; background: rgba(255,149,0,0.15); border: 1px solid rgba(255,149,0,0.6); color: #ff9500; text-shadow: 0 0 8px #ff9500; border-radius: 2px; margin-bottom: 10px; animation: newPulse 2s ease-in-out infinite; }
+@keyframes newPulse { 0%,100% { box-shadow: 0 0 4px rgba(255,149,0,0.3); } 50% { box-shadow: 0 0 12px rgba(255,149,0,0.7); } }
+.demo-link { display: inline-block; margin-top: 14px; font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--c1, var(--neon-cyan)); text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.2s; }
+.demo-link:hover { border-bottom-color: var(--c1, var(--neon-cyan)); text-shadow: 0 0 8px var(--c1, var(--neon-cyan)); }
 #mission { background: radial-gradient(ellipse at 50% 50%, rgba(0,255,255,0.05) 0%, transparent 70%); text-align: center; }
 .mission-text { font-size: clamp(20px, 3vw, 30px); font-weight: 700; line-height: 1.6; max-width: 820px; margin: 0 auto 48px; color: var(--text-primary); }
 .mission-text em { font-style: normal; color: var(--neon-cyan); text-shadow: var(--glow-cyan); }
@@ -204,7 +208,7 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
   </div>
   <div class="particles" id="particles"></div>
   <div class="hero-content">
-    <p class="hero-sub">// ERP · CRM · MRP · SAP · FINANCE //</p>
+    <p class="hero-sub">// ERP · CRM · MRP · SAP · FINANCE · <span style="color:#ff9500;text-shadow:0 0 10px #ff9500;">PROCUREMENT</span> //</p>
     <h1 class="glitch-title" data-text="COMANI">COMANI</h1>
     <p class="hero-sub" style="color:var(--neon-cyan);margin-top:8px;font-size:13px;">WEB AGENCY — DIGITAL ENTERPRISE SYSTEMS</p>
     <p class="hero-tagline" style="margin-top:32px;">
@@ -281,11 +285,13 @@ footer { background: var(--dark-bg); border-top: 1px solid rgba(0,255,255,0.1); 
       <div class="service-desc">Offerte cliente, ordini, fatturazione attiva, pipeline commerciale avanzata. Il potere di SAP per le PMI.</div>
       <div class="service-price">€ 249 / mese</div>
     </div>
-    <div class="service-card reveal" style="--c1:var(--neon-orange);--c2:var(--neon-pink);">
+    <div class="service-card reveal" style="--c1:var(--neon-orange);--c2:var(--neon-pink);border-color:rgba(255,149,0,0.35);box-shadow:0 0 20px rgba(255,149,0,0.08);">
+      <span class="new-badge">✦ NUOVO MODULO</span>
       <span class="service-icon">📦</span>
       <div class="service-name">Procurement</div>
       <div class="service-desc">Richieste acquisto, ordini fornitore, tracking consegne, valutazione vendor. Controllo totale acquisti.</div>
       <div class="service-price">€ 199 / mese</div>
+      <a href="procurement_demo.html" class="demo-link">▶ VEDI DEMO LIVE →</a>
     </div>
     <div class="service-card reveal" style="--c1:var(--neon-purple);--c2:var(--neon-cyan);">
       <span class="service-icon">✅</span>
@@ -472,6 +478,7 @@ var phrases = [
   'Automatizziamo i processi aziendali delle PMI italiane con tecnologia web enterprise.',
   'Da zero a sistema operativo in 5-15 giorni lavorativi con sviluppo AI-accelerato.',
   'CRM, MRP, SAP Sales, Procurement, Quality, Operations, Finance in un unico ecosistema.',
+  '[ NUOVO ] Modulo Procurement — RdA, OdA, vendor rating e contratti in un unico pannello.',
 ];
 var phraseIdx = 0, charIdx = 0, isDeleting = false;
 var typingEl = document.getElementById('typingText');
