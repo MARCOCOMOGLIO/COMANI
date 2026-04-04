@@ -70,8 +70,8 @@ nav{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.96);backdrop-f
 .nav-dropdown-toggle{font-size:.88rem;color:var(--gray);text-decoration:none;font-weight:400;cursor:pointer;display:flex;align-items:center;gap:4px;transition:color .2s;background:none;border:none;font-family:var(--fb);padding:0}
 .nav-dropdown-toggle:hover{color:var(--navy)}
 .nav-dropdown-toggle::after{content:'▾';font-size:.65rem;opacity:.6}
-.nav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:8px;min-width:200px;box-shadow:0 8px 32px rgba(30,58,95,.1);opacity:0;pointer-events:none;transform:translateY(-8px);transition:all .2s;z-index:200}
-.nav-dropdown:hover .nav-dropdown-menu{opacity:1;pointer-events:all;transform:translateY(0)}
+.nav-dropdown-menu{position:absolute;top:100%;left:0;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:8px;padding-top:14px;min-width:200px;box-shadow:0 8px 32px rgba(30,58,95,.1);opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .2s,transform .2s;z-index:200}
+.nav-dropdown-menu.is-open{opacity:1;pointer-events:all;transform:translateY(0)}
 .nav-dropdown-menu a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:7px;font-size:.85rem;color:var(--dark);text-decoration:none;font-weight:400;transition:background .15s}
 .nav-dropdown-menu a:hover{background:var(--off);color:var(--navy)}
 .nav-dropdown-menu a span{font-size:1rem}
@@ -360,10 +360,10 @@ footer{background:var(--navy-dk);padding:48px 7%}
     <li class="nav-dropdown" id="nav-moduli-dropdown">
       <button class="nav-dropdown-toggle">Moduli PMI</button>
       <div class="nav-dropdown-menu">
-        <a href="crm_demo.html"><span>👥</span> CRM</a>
-        <a href="erp_demo.html"><span>🏭</span> ERP / MRP</a>
-        <a href="finance_demo.html"><span>💰</span> Finance</a>
-        <a href="procurement_demo.html"><span>📦</span> Procurement</a>
+        <a href="#moduli"><span>👥</span> CRM</a>
+        <a href="#moduli"><span>🏭</span> ERP / MRP</a>
+        <a href="#moduli"><span>💰</span> Finance</a>
+        <a href="#moduli"><span>📦</span> Procurement</a>
         <div class="nav-dropdown-divider"></div>
         <a href="#moduli"><span>⚙️</span> Tutti i moduli</a>
       </div>
@@ -423,12 +423,12 @@ footer{background:var(--navy-dk);padding:48px 7%}
 <!-- Quick Links PMI -->
 <div style="background:var(--off);padding:20px 7%;border-bottom:1px solid var(--border)">
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;max-width:1400px;margin:0 auto">
-    <span style="font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);flex-shrink:0">Demo live →</span>
-    <a href="crm_demo.html" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--white);border:1px solid var(--border);font-size:.83rem;color:var(--navy);text-decoration:none;font-weight:500;transition:all .2s;white-space:nowrap" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">👥 CRM</a>
-    <a href="erp_demo.html" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--white);border:1px solid var(--border);font-size:.83rem;color:var(--navy);text-decoration:none;font-weight:500;transition:all .2s;white-space:nowrap" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">🏭 ERP / MRP</a>
-    <a href="finance_demo.html" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--white);border:1px solid var(--border);font-size:.83rem;color:var(--navy);text-decoration:none;font-weight:500;transition:all .2s;white-space:nowrap" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">💰 Finance</a>
-    <a href="procurement_demo.html" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--white);border:1px solid var(--border);font-size:.83rem;color:var(--navy);text-decoration:none;font-weight:500;transition:all .2s;white-space:nowrap" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">📦 Procurement</a>
-    <a href="crm_demo.html" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--white);border:1px solid var(--border);font-size:.83rem;color:var(--navy);text-decoration:none;font-weight:500;transition:all .2s;white-space:nowrap" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">🔍 Quality</a>
+    <span style="font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);flex-shrink:0">Moduli →</span>
+    <a href="#moduli" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--white);border:1px solid var(--border);font-size:.83rem;color:var(--navy);text-decoration:none;font-weight:500;transition:all .2s;white-space:nowrap" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">👥 CRM</a>
+    <a href="#moduli" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--white);border:1px solid var(--border);font-size:.83rem;color:var(--navy);text-decoration:none;font-weight:500;transition:all .2s;white-space:nowrap" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">🏭 ERP / MRP</a>
+    <a href="#moduli" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--white);border:1px solid var(--border);font-size:.83rem;color:var(--navy);text-decoration:none;font-weight:500;transition:all .2s;white-space:nowrap" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">💰 Finance</a>
+    <a href="#moduli" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--white);border:1px solid var(--border);font-size:.83rem;color:var(--navy);text-decoration:none;font-weight:500;transition:all .2s;white-space:nowrap" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">📦 Procurement</a>
+    <a href="#moduli" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--white);border:1px solid var(--border);font-size:.83rem;color:var(--navy);text-decoration:none;font-weight:500;transition:all .2s;white-space:nowrap" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--navy)'">🔍 Quality</a>
     <a href="#moduli" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;background:var(--teal-lt);border:1px solid rgba(15,110,86,.2);font-size:.83rem;color:var(--teal);text-decoration:none;font-weight:600;white-space:nowrap;margin-left:auto">Tutti i moduli →</a>
   </div>
 </div>
@@ -1121,6 +1121,27 @@ function triggerReveal() {
 }
 
 document.addEventListener('DOMContentLoaded', triggerReveal);
+
+// ── Dropdown PMI moduli: hover con ritardo per evitare chiusura prematura ──
+(function(){
+  document.querySelectorAll('.nav-dropdown').forEach(function(dd){
+    var menu = dd.querySelector('.nav-dropdown-menu');
+    var timer;
+    dd.addEventListener('mouseenter', function(){
+      clearTimeout(timer);
+      menu.classList.add('is-open');
+    });
+    dd.addEventListener('mouseleave', function(){
+      timer = setTimeout(function(){ menu.classList.remove('is-open'); }, 250);
+    });
+    // Click toggle per mobile / accessibilità
+    dd.querySelector('.nav-dropdown-toggle').addEventListener('click', function(e){
+      e.stopPropagation();
+      menu.classList.toggle('is-open');
+    });
+    document.addEventListener('click', function(){ menu.classList.remove('is-open'); });
+  });
+})();
 </script>
 </body>
 </html>
