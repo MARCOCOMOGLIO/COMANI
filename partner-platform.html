@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COMANI Partner Platform — Per Commercialisti e Consulenti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E3A5F;--navy-dk:#132843;--teal:#0F6E56;--teal-lt:#D6F0E8;
+  --teal-md:#1D9E75;--amber:#F59E0B;--ice:#EBF4FA;--white:#FFFFFF;
+  --off:#F7F9FC;--gray:#64748B;--dark:#1E293B;--muted:#94A3B8;--border:#E2E8F0;
+  --fd:'DM Serif Display',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif;
+  --r-sm:6px;--r-md:12px;--r-lg:20px;scroll-behavior:smooth
+}
+html{font-size:16px}
+body{font-family:var(--fb);color:var(--dark);background:var(--white);line-height:1.65;overflow-x:hidden}
+
+/* ── Alert Banner ── */
+.alert-banner{background:var(--amber);color:var(--navy-dk);text-align:center;padding:12px 24px;font-size:.875rem;font-weight:500;letter-spacing:.01em;position:relative;z-index:100}
+.alert-banner a{color:var(--navy-dk);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.alert-tag{display:inline-block;background:var(--navy-dk);color:var(--amber);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-radius:20px;margin-right:10px;vertical-align:middle}
+
+/* ── Nav ── */
+nav{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:var(--fd);font-size:1.4rem;color:var(--navy);text-decoration:none;letter-spacing:-.02em}
+.nav-logo span{color:var(--teal)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:.9rem;color:var(--gray);text-decoration:none;font-weight:400;transition:color .2s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{background:var(--navy)!important;color:var(--white)!important;padding:9px 22px;border-radius:8px;font-weight:500!important;font-size:.875rem!important;transition:background .2s!important}
+.nav-cta:hover{background:var(--teal)!important}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes slideRight{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes countUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.anim-fade-up{animation:fadeUp .65s ease both}
+.anim-fade-in{animation:fadeIn .65s ease both}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}
+.d4{animation-delay:.4s}.d5{animation-delay:.5s}.d6{animation-delay:.6s}
+
+/* scroll-reveal: visibile subito, anima quando entra in viewport */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}
+.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}
+
+/* ── Hero ── */
+.hero{background:var(--navy-dk);min-height:92vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 7%;gap:60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:500px;height:500px;background:var(--teal);border-radius:50%;opacity:.07;animation:float 8s ease-in-out infinite}
+.hero::after{content:'';position:absolute;bottom:-80px;left:30%;width:300px;height:300px;background:var(--teal-md);border-radius:50%;opacity:.06;animation:float 10s ease-in-out infinite .5s}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(15,110,86,.25);border:1px solid rgba(29,158,117,.4);color:#5DCAA5;font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:24px}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:var(--teal-md);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+.hero h1{font-family:var(--fd);font-size:clamp(2.4rem,4vw,3.6rem);color:var(--white);line-height:1.15;letter-spacing:-.02em;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:#5DCAA5}
+.hero-sub{font-size:1.1rem;color:#A8C4D8;line-height:1.7;margin-bottom:40px;font-weight:300;max-width:480px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--teal);color:var(--white);padding:14px 32px;border-radius:8px;font-weight:500;font-size:.95rem;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--teal-md);transform:translateY(-2px)}
+.btn-secondary{background:transparent;color:#A8C4D8;padding:14px 28px;border-radius:8px;font-weight:400;font-size:.95rem;text-decoration:none;border:1px solid rgba(168,196,216,.3);transition:all .2s}
+.btn-secondary:hover{border-color:rgba(168,196,216,.7);color:var(--white)}
+
+/* Portal mockup */
+.portal-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);overflow:hidden;animation:fadeIn .8s ease .3s both}
+.portal-topbar{background:rgba(255,255,255,.08);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08)}
+.portal-dots{display:flex;gap:6px}
+.portal-dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2)}
+.portal-topbar-title{font-size:.8rem;color:rgba(255,255,255,.5)}
+.portal-badge{background:rgba(15,110,86,.4);color:#5DCAA5;font-size:.72rem;padding:3px 10px;border-radius:20px;font-weight:500}
+.portal-body{padding:20px}
+.portal-kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.portal-kpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);padding:14px}
+.portal-kpi .val{font-size:1.5rem;font-weight:600;color:var(--white);font-family:var(--fd);line-height:1}
+.portal-kpi .lbl{font-size:.72rem;color:rgba(255,255,255,.45);margin-top:4px}
+.portal-kpi.accent .val{color:#5DCAA5}
+.portal-alerts{display:flex;flex-direction:column;gap:8px}
+.portal-alert-item{background:rgba(255,255,255,.04);border-left:3px solid;border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 14px}
+.portal-alert-item.warn{border-color:var(--amber)}
+.portal-alert-item.info{border-color:#5DCAA5}
+.portal-alert-item .alert-co{font-size:.8rem;font-weight:500;color:rgba(255,255,255,.8)}
+.portal-alert-item .alert-msg{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:2px}
+
+/* ── Intro Strip ── */
+.intro-strip{background:var(--teal);padding:28px 7%;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.intro-strip p{font-size:1.05rem;color:var(--white);font-weight:400;max-width:680px;opacity:.92}
+.intro-strip p strong{font-weight:600}
+.intro-strip-stat{display:flex;gap:32px}
+.intro-stat{text-align:center;color:var(--white)}
+.intro-stat .n{font-family:var(--fd);font-size:2rem;line-height:1;display:block}
+.intro-stat .d{font-size:.78rem;opacity:.7;margin-top:3px}
+
+/* ── Sections ── */
+section{padding:96px 7%}
+.section-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.section-title{font-family:var(--fd);font-size:clamp(1.9rem,3vw,2.8rem);color:var(--navy);line-height:1.18;letter-spacing:-.02em;margin-bottom:18px}
+.section-sub{font-size:1.05rem;color:var(--gray);line-height:1.7;max-width:580px;font-weight:300}
+
+/* ── Problem ── */
+.problem{background:var(--off)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px}
+.problem-list{display:flex;flex-direction:column;gap:16px}
+.problem-item{display:flex;gap:16px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px 24px;transition:box-shadow .2s,transform .2s}
+.problem-item:hover{box-shadow:0 4px 20px rgba(30,58,95,.08);transform:translateY(-2px)}
+.problem-num{flex-shrink:0;width:32px;height:32px;background:#FEF3C7;color:#92400E;font-size:.8rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.problem-item h4{font-size:.95rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.problem-item p{font-size:.88rem;color:var(--gray);line-height:1.6}
+.opportunity-box{background:var(--navy);border-radius:var(--r-lg);padding:40px;color:var(--white)}
+.opportunity-box h3{font-family:var(--fd);font-size:1.5rem;margin-bottom:16px;color:#5DCAA5}
+.opportunity-box p{font-size:.95rem;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:14px}
+.opportunity-box p:last-child{margin-bottom:0}
+.opportunity-box strong{color:var(--white);font-weight:500}
+
+/* ── Value ── */
+.value{background:var(--white)}
+.value-header{max-width:640px;margin-bottom:64px}
+.value-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.value-card{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.value-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(30,58,95,.12)}
+.value-card-top{padding:28px 28px 24px;background:var(--navy)}
+.value-card-num{font-family:var(--fd);font-size:3rem;color:rgba(255,255,255,.12);line-height:1;margin-bottom:12px}
+.value-card-top h3{font-size:1.05rem;font-weight:600;color:var(--white);line-height:1.3}
+.value-card-top h3 em{font-style:normal;color:#5DCAA5}
+.value-card-body{padding:24px 28px;background:var(--white)}
+.value-card-body p{font-size:.9rem;color:var(--gray);line-height:1.7;margin-bottom:16px}
+.value-card-body p:last-child{margin-bottom:0}
+.value-tag{display:inline-block;background:var(--teal-lt);color:var(--teal);font-size:.75rem;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+
+/* ── Tiers ── */
+.tiers{background:var(--off)}
+.tiers-header{max-width:580px;margin-bottom:56px}
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:32px}
+.tier-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;position:relative;transition:box-shadow .2s,transform .2s}
+.tier-card:hover{box-shadow:0 8px 32px rgba(30,58,95,.1);transform:translateY(-3px)}
+.tier-card.featured{border-color:var(--teal);border-width:2px;box-shadow:0 8px 32px rgba(15,110,86,.15)}
+.tier-featured-label{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--teal);color:var(--white);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 18px;border-radius:0 0 8px 8px}
+.tier-header{padding:32px 28px 20px;border-bottom:1px solid var(--border)}
+.tier-name{font-family:var(--fd);font-size:1.5rem;color:var(--navy);margin-bottom:4px}
+.tier-range{font-size:.83rem;color:var(--gray);margin-bottom:16px}
+.tier-comm{background:var(--teal-lt);border-radius:var(--r-sm);padding:10px 16px;display:inline-block}
+.tier-comm-val{font-size:1.3rem;font-weight:600;color:var(--teal);font-family:var(--fd)}
+.tier-comm-lbl{font-size:.75rem;color:var(--teal);opacity:.8}
+.tier-body{padding:24px 28px}
+.tier-perks{list-style:none;display:flex;flex-direction:column;gap:10px}
+.tier-perks li{font-size:.88rem;color:var(--dark);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.tier-perks li::before{content:'';flex-shrink:0;width:16px;height:16px;background:var(--teal-lt);border-radius:50%;margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 4.5' stroke='%230F6E56' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:contain}
+.tier-footer{padding:0 28px 28px}
+.tier-cta{display:block;text-align:center;padding:12px;border-radius:8px;font-weight:500;font-size:.9rem;text-decoration:none;transition:all .2s}
+.tier-cta.outline{border:1px solid var(--border);color:var(--navy)}
+.tier-cta.outline:hover{border-color:var(--navy);background:var(--off)}
+.tier-cta.solid{background:var(--navy);color:var(--white)}
+.tier-cta.solid:hover{background:var(--teal)}
+.tier-pro-note{background:var(--navy);border-radius:var(--r-md);padding:20px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.tier-pro-note p{color:rgba(255,255,255,.7);font-size:.88rem;flex:1}
+.tier-pro-note p strong{color:var(--white)}
+.tier-pro-badge{background:var(--teal);color:var(--white);padding:6px 16px;border-radius:20px;font-size:.8rem;font-weight:600;white-space:nowrap}
+
+/* ── How it works ── */
+.howto{background:var(--white)}
+.howto-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:56px}
+.steps{display:flex;flex-direction:column}
+.step{display:flex;gap:20px;padding:24px 0 24px 28px;border-left:2px solid var(--border);position:relative;transition:border-color .2s}
+.step:hover{border-color:var(--teal)}
+.step::before{content:attr(data-n);position:absolute;left:-14px;top:24px;width:26px;height:26px;background:var(--white);border:2px solid var(--border);border-radius:50%;font-size:.75rem;font-weight:600;color:var(--navy);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.step:hover::before{background:var(--teal);border-color:var(--teal);color:var(--white)}
+.step:last-child{border-color:transparent}
+.step-content h4{font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.step-timing{display:inline-block;font-size:.72rem;color:var(--teal);font-weight:600;background:var(--teal-lt);padding:2px 8px;border-radius:10px;margin-bottom:8px}
+.step-content p{font-size:.88rem;color:var(--gray);line-height:1.65}
+.howto-visual{background:var(--off);border-radius:var(--r-lg);padding:36px}
+.howto-visual h4{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:20px}
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+.metric-row:last-child{border-bottom:none}
+.metric-label{font-size:.85rem;color:var(--gray)}
+.metric-values{display:flex;gap:20px}
+.metric-val{text-align:right}
+.metric-val .n{font-size:.95rem;font-weight:600;color:var(--navy)}
+.metric-val .p{font-size:.72rem;color:var(--muted)}
+.metric-val.good .n{color:var(--teal)}
+
+/* ── KPIs ── */
+.kpis{background:var(--navy);padding:80px 7%}
+.kpis .section-title{color:var(--white)}
+.kpis .section-sub{color:rgba(255,255,255,.55)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
+.kpi-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:32px 28px;text-align:center;transition:background .2s,transform .2s}
+.kpi-box:hover{background:rgba(255,255,255,.09);transform:translateY(-3px)}
+.kpi-box.hl{background:rgba(15,110,86,.2);border-color:rgba(29,158,117,.4)}
+.kpi-val{font-family:var(--fd);font-size:2.8rem;color:var(--white);line-height:1;margin-bottom:10px}
+.kpi-box.hl .kpi-val{color:#5DCAA5}
+.kpi-lbl{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:4px}
+.kpi-sub{font-size:.78rem;color:rgba(255,255,255,.35)}
+
+/* ── Roadmap ── */
+.roadmap{background:var(--off)}
+.roadmap-header{max-width:560px;margin-bottom:60px}
+.timeline{position:relative}
+.timeline::before{content:'';position:absolute;left:96px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{display:grid;grid-template-columns:96px 1fr;gap:32px;margin-bottom:8px;position:relative}
+.tl-item::before{content:'';position:absolute;left:88px;top:20px;width:18px;height:18px;border-radius:50%;border:2px solid var(--white);background:var(--border);z-index:1;transition:all .3s}
+.tl-item.active::before{background:var(--teal);border-color:var(--teal-lt)}
+.tl-item.milestone::before{background:var(--amber);border-color:#FDE68A;width:22px;height:22px;left:86px}
+.tl-period{text-align:right;padding-top:14px;font-size:.78rem;font-weight:600;color:var(--teal);letter-spacing:.04em}
+.tl-content{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px 24px;margin-bottom:16px;transition:box-shadow .2s,transform .2s}
+.tl-content:hover{box-shadow:0 4px 16px rgba(30,58,95,.07);transform:translateX(4px)}
+.tl-item.milestone .tl-content{border-color:var(--amber);background:#FFFBEB}
+.tl-content h4{font-size:.95rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.tl-content p{font-size:.85rem;color:var(--gray);line-height:1.6}
+
+/* ── CTA ── */
+.cta-section{background:var(--teal);padding:96px 7%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.cta-section .section-title{color:var(--white)}
+.cta-section .section-sub{color:rgba(255,255,255,.75);max-width:none}
+.cta-actions{display:flex;flex-direction:column;gap:12px}
+.cta-item{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:var(--r-md);padding:16px 20px;display:flex;align-items:center;gap:16px;transition:background .2s,transform .2s}
+.cta-item:hover{background:rgba(255,255,255,.18);transform:translateX(4px)}
+.cta-item-icon{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cta-item-icon svg{width:18px;height:18px;stroke:var(--white);fill:none}
+.cta-item-text h5{font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:2px}
+.cta-item-text p{font-size:.8rem;color:rgba(255,255,255,.65)}
+.cta-btns{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn-white{background:var(--white);color:var(--teal);padding:14px 32px;border-radius:8px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s}
+.btn-white:hover{background:#f0f9f6;transform:translateY(-2px)}
+.btn-ghost-white{background:transparent;color:rgba(255,255,255,.8);padding:14px 28px;border-radius:8px;font-weight:400;font-size:.95rem;text-decoration:none;border:1px solid rgba(255,255,255,.3);transition:all .2s}
+.btn-ghost-white:hover{border-color:rgba(255,255,255,.7);color:var(--white)}
+
+/* ── Footer ── */
+footer{background:var(--navy-dk);padding:48px 7%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-brand{font-family:var(--fd);font-size:1.3rem;color:var(--white)}
+.footer-brand span{color:#5DCAA5}
+.footer-links{display:flex;gap:28px;list-style:none}
+.footer-links a{font-size:.85rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.8)}
+.footer-legal{font-size:.78rem;color:rgba(255,255,255,.3);width:100%;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
+
+/* ── Responsive ── */
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding:60px 6%}
+  .hero-visual{display:none}
+  .problem-grid,.howto-grid,.cta-section{grid-template-columns:1fr;gap:40px}
+  .value-cards,.tier-grid{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  nav .nav-links{display:none}
+  .intro-strip{flex-direction:column}
+}
+@media(max-width:600px){
+  section{padding:64px 5%}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .hero{padding:50px 5%}
+}
+</style>
+</head>
+<body>
+
+<div class="alert-banner">
+  <span class="alert-tag">Nuovo</span>
+  <strong>COMANI Partner Platform</strong> — Il modulo dedicato a commercialisti e consulenti è ora disponibile.
+  I tuoi clienti PMI, sotto controllo in tempo reale. <a href="#tiers">Scopri i piani →</a>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">COMA<span>NI</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#value">Come funziona</a></li>
+    <li><a href="#tiers">Piani</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#cta" class="nav-cta">Diventa Partner</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow anim-fade-up">Partner Platform — Nuovo modulo</div>
+    <h1 class="anim-fade-up d1">I tuoi clienti PMI,<br><em>sotto controllo</em><br>in tempo reale.</h1>
+    <p class="hero-sub anim-fade-up d2">
+      Smetti di lavorare con dati contabili vecchi di settimane. COMANI ti dà visibilità live su cash flow, ordini e anomalie operative dei tuoi clienti — e genera le bozze documentali che servono allo studio.
+    </p>
+    <div class="hero-actions anim-fade-up d3">
+      <a href="#cta" class="btn-primary">
+        Inizia gratuitamente
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="#value" class="btn-secondary">Scopri come funziona</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="portal-card">
+      <div class="portal-topbar">
+        <div class="portal-dots"><span></span><span></span><span></span></div>
+        <span class="portal-topbar-title">COMANI Partner Portal</span>
+        <span class="portal-badge">Partner Gold</span>
+      </div>
+      <div class="portal-body">
+        <div class="portal-kpis">
+          <div class="portal-kpi accent"><div class="val">7</div><div class="lbl">PMI clienti attivi</div></div>
+          <div class="portal-kpi"><div class="val">€ 1.260</div><div class="lbl">Commissioni maturate</div></div>
+          <div class="portal-kpi"><div class="val">3</div><div class="lbl">Alert aperti</div></div>
+          <div class="portal-kpi accent"><div class="val">12</div><div class="lbl">Documenti generati</div></div>
+        </div>
+        <div class="portal-alerts">
+          <div class="portal-alert-item warn">
+            <div class="alert-co">Logistica Verdi SpA</div>
+            <div class="alert-msg">3 fornitori in scadenza · cash flow −12%</div>
+          </div>
+          <div class="portal-alert-item info">
+            <div class="alert-co">Meccanica Rossi Srl</div>
+            <div class="alert-msg">P&L Q1 disponibile · upsell suggerito</div>
+          </div>
+          <div class="portal-alert-item warn">
+            <div class="alert-co">TecnoImpianti Bru Srl</div>
+            <div class="alert-msg">OEE in calo −8% · manutenzione programmata</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="intro-strip">
+  <p>In Italia ci sono <strong>120.000 studi di commercialisti</strong>. Il 15-20% gestisce PMI manifatturiere o di distribuzione che hanno bisogno di un gestionale serio ma non possono permettersi SAP. Quello è il tuo vantaggio competitivo — e il nostro.</p>
+  <div class="intro-strip-stat">
+    <div class="intro-stat"><span class="n">18K+</span><span class="d">studi potenziali</span></div>
+    <div class="intro-stat"><span class="n">€ 0</span><span class="d">costo accesso</span></div>
+    <div class="intro-stat"><span class="n">25%</span><span class="d">max commissione</span></div>
+  </div>
+</div>
+
+<!-- PROBLEMA -->
+<section class="problem" id="problem">
+  <div class="section-eyebrow reveal">Il Problema che risolviamo</div>
+  <h2 class="section-title reveal d1">Il canale di affiliazione tradizionale non basta.</h2>
+  <p class="section-sub reveal d2">Portare un cliente e ricevere una commissione è un buon inizio. Ma è ancora una relazione transazionale. COMANI è pensato per qualcosa di più strutturale.</p>
+  <div class="problem-grid">
+    <div class="problem-list">
+      <div class="problem-item reveal">
+        <div class="problem-num">1</div>
+        <div>
+          <h4>Relazione one-shot</h4>
+          <p>Il commercialista porta un cliente, incassa la commissione e poi sparisce dalla piattaforma. Nessuna continuità, nessun valore reciproco nel tempo.</p>
+        </div>
+      </div>
+      <div class="problem-item reveal d1">
+        <div class="problem-num">2</div>
+        <div>
+          <h4>Incentivo solo economico</h4>
+          <p>Quando un concorrente offre il 20%, il canale si sposta in ore. Il vantaggio competitivo basato solo sulla commissione è fragile per definizione.</p>
+        </div>
+      </div>
+      <div class="problem-item reveal d2">
+        <div class="problem-num">3</div>
+        <div>
+          <h4>Dati contabili sempre in ritardo</h4>
+          <p>Come commercialista, lavori su bilanci di 60-90 giorni fa. Quando il problema emerge nei conti, le decisioni sono già state prese — spesso male.</p>
+        </div>
+      </div>
+    </div>
+    <div class="opportunity-box reveal d1">
+      <h3>L'opportunità reale</h3>
+      <p>COMANI ha accesso in tempo reale ai dati operativi delle PMI clienti: <strong>cash flow, stato ordini, ritardi fornitori, OEE di produzione, scadenze</strong>. Questi dati esistono, sono strutturati e aggiornati ogni giorno.</p>
+      <p>Per un commercialista che vuole fare consulenza proattiva — non solo compilare il modello Redditi — questi dati valgono molto più di una commissione una tantum.</p>
+      <p>La Partner Platform trasforma questa asimmetria informativa in un <strong>vantaggio strutturale per il tuo studio</strong>: i tuoi clienti PMI ti scelgono perché sei più informato dei tuoi colleghi. Non perché costi meno.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALORE -->
+<section class="value" id="value">
+  <div class="value-header">
+    <div class="section-eyebrow reveal">Cosa ottieni</div>
+    <h2 class="section-title reveal d1">Tre livelli di valore — subito utilizzabili.</h2>
+    <p class="section-sub reveal d2">Non sono funzionalità future in roadmap. Sono strumenti che trovi nel portale dal primo accesso, alimentati dai dati reali dei tuoi clienti PMI.</p>
+  </div>
+  <div class="value-cards">
+    <div class="value-card reveal">
+      <div class="value-card-top">
+        <div class="value-card-num">01</div>
+        <h3>Visibilità finanziaria <em>in tempo reale</em></h3>
+      </div>
+      <div class="value-card-body">
+        <span class="value-tag">Subito disponibile</span>
+        <p>Vista read-only su P&L, cash flow e budget del cliente PMI, aggiornata ogni giorno. Il commercialista smette di aspettare le situazioni contabili mensili e inizia a fare consulenza quando conta.</p>
+        <p>Costo tecnico per COMANI: una permission flag nel database. Valore percepito dal partner: alto — differenzia il tuo studio rispetto ai colleghi che lavorano ancora con Excel e email.</p>
+      </div>
+    </div>
+    <div class="value-card reveal d2" style="--vc-top:var(--teal)">
+      <div class="value-card-top" style="background:var(--teal)">
+        <div class="value-card-num">02</div>
+        <h3>Generazione documenti <em>con AI</em></h3>
+      </div>
+      <div class="value-card-body">
+        <span class="value-tag">Incluso da tier Gold</span>
+        <p>Bozze automatiche di situazioni contabili intermedie, report per istituti di credito, analisi di liquidità e relazioni accompagnatorie — generate da Claude AI partendo dai dati ERP del cliente.</p>
+        <p>Il professionista rivede, integra e firma. Il tempo di preparazione scende da ore a minuti. Lo studio scala la produttività senza aumentare il personale.</p>
+      </div>
+    </div>
+    <div class="value-card reveal d3">
+      <div class="value-card-top" style="background:var(--navy-dk)">
+        <div class="value-card-num">03</div>
+        <h3>Alert proattivi su <em>anomalie operative</em></h3>
+      </div>
+      <div class="value-card-body">
+        <span class="value-tag">Incluso da tier Gold</span>
+        <p>Soglie configurabili su ritardi fornitori (Procurement), calo OEE (Operations), scadenze fiscali e tensioni di liquidità (Finance). Ricevi la notifica prima che il problema emerga nel bilancio.</p>
+        <p>Nessun software contabile tradizionale può offrire questo — perché non ha accesso ai dati gestionali in tempo reale. Questo è il moat competitivo del tuo studio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="tiers" id="tiers">
+  <div class="tiers-header">
+    <div class="section-eyebrow reveal">Piani Partner</div>
+    <h2 class="section-title reveal d1">Inizia gratis. Cresci con i tuoi clienti.</h2>
+    <p class="section-sub reveal d2">Il portale è sempre gratuito. Le commissioni crescono con il numero di PMI che porti. Nessun lock-in, nessun costo fisso.</p>
+  </div>
+  <div class="tier-grid">
+    <div class="tier-card reveal">
+      <div class="tier-header">
+        <div class="tier-name">Silver</div>
+        <div class="tier-range">1–3 PMI clienti attive</div>
+        <div class="tier-comm"><div class="tier-comm-val">15%</div><div class="tier-comm-lbl">MRR per 12 mesi</div></div>
+      </div>
+      <div class="tier-body">
+        <ul class="tier-perks">
+          <li>Dashboard clienti con stato abbonamenti</li>
+          <li>Report commissioni in tempo reale</li>
+          <li>Link referral personalizzato</li>
+          <li>Materiali commerciali pronti</li>
+        </ul>
+      </div>
+      <div class="tier-footer"><a href="#cta" class="tier-cta outline">Inizia con Silver</a></div>
+    </div>
+    <div class="tier-card featured reveal d2">
+      <div class="tier-featured-label">Più scelto</div>
+      <div class="tier-header">
+        <div class="tier-name">Gold</div>
+        <div class="tier-range">4–9 PMI clienti attive</div>
+        <div class="tier-comm"><div class="tier-comm-val">20%</div><div class="tier-comm-lbl">MRR per 12 mesi</div></div>
+      </div>
+      <div class="tier-body">
+        <ul class="tier-perks">
+          <li>Tutto di Silver</li>
+          <li>Alert proattivi su anomalie operative</li>
+          <li>10 documenti AI generati al mese</li>
+          <li>Vista P&L e cash flow in tempo reale</li>
+          <li>Badge partner sul sito COMANI</li>
+        </ul>
+      </div>
+      <div class="tier-footer"><a href="#cta" class="tier-cta solid">Diventa Partner Gold</a></div>
+    </div>
+    <div class="tier-card reveal d3">
+      <div class="tier-header">
+        <div class="tier-name">Platinum</div>
+        <div class="tier-range">10+ PMI clienti attive</div>
+        <div class="tier-comm"><div class="tier-comm-val">25%</div><div class="tier-comm-lbl">MRR per 12 mesi</div></div>
+      </div>
+      <div class="tier-body">
+        <ul class="tier-perks">
+          <li>Tutto di Gold</li>
+          <li>Documenti AI illimitati</li>
+          <li>Co-marketing e caso studio video</li>
+          <li>Supporto prioritario dedicato</li>
+          <li>Accesso anticipato ai nuovi moduli</li>
+          <li>Webinar co-branded per i tuoi clienti</li>
+        </ul>
+      </div>
+      <div class="tier-footer"><a href="#cta" class="tier-cta outline">Diventa Partner Platinum</a></div>
+    </div>
+  </div>
+  <div class="tier-pro-note reveal">
+    <p>Da mese 18: <strong>Partner Pro opzionale a €49/mese</strong> — alert configurabili avanzati, documenti illimitati, API per integrazione con Zucchetti e TeamSystem. Stima conversione: 30% dei partner attivi.</p>
+    <span class="tier-pro-badge">Prossimamente</span>
+  </div>
+</section>
+
+<!-- COME SI INIZIA -->
+<section class="howto" id="howto">
+  <div class="section-eyebrow reveal">Come si inizia</div>
+  <h2 class="section-title reveal d1">Da registrazione a primo referral<br>in meno di 14 giorni.</h2>
+  <div class="howto-grid">
+    <div class="steps">
+      <div class="step reveal" data-n="1">
+        <div class="step-content">
+          <span class="step-timing">Settimana 1</span>
+          <h4>Registrazione e accesso al portale</h4>
+          <p>Crei il tuo account partner in 5 minuti. Ricevi subito la dashboard, il link referral personalizzato e il kit commerciale con materiali pronti da condividere.</p>
+        </div>
+      </div>
+      <div class="step reveal d1" data-n="2">
+        <div class="step-content">
+          <span class="step-timing">Settimana 1–2</span>
+          <h4>Demo gratuita per i tuoi clienti PMI</h4>
+          <p>Proponi ai tuoi 3-5 clienti PMI più ricettivi una demo di 30 minuti sul modulo più rilevante. COMANI gestisce la demo, tu partecipi.</p>
+        </div>
+      </div>
+      <div class="step reveal d2" data-n="3">
+        <div class="step-content">
+          <span class="step-timing">Settimana 2–3</span>
+          <h4>Onboarding con sconto lancio</h4>
+          <p>I primi 3 clienti che attivi come partner ricevono il 30% di sconto sul primo mese. Il contratto SaaS è mensile, senza vincoli di durata minima.</p>
+        </div>
+      </div>
+      <div class="step reveal d3" data-n="4">
+        <div class="step-content">
+          <span class="step-timing">Dal mese 2</span>
+          <h4>Commissioni automatiche e visibilità dati</h4>
+          <p>Le commissioni vengono calcolate e mostrate in dashboard in tempo reale. Con Gold attivo iniziano gli alert proattivi e la generazione documenti AI.</p>
+        </div>
+      </div>
+      <div class="step reveal d4" data-n="5">
+        <div class="step-content">
+          <span class="step-timing">Ogni trimestre</span>
+          <h4>Review e progressione tier</h4>
+          <p>Ogni tre mesi una call di 30 minuti con il team COMANI: analizziamo i dati, identifichiamo opportunità di upsell, valutiamo l'avanzamento al tier successivo.</p>
+        </div>
+      </div>
+    </div>
+    <div class="howto-visual reveal d2">
+      <h4>KPI target per i partner</h4>
+      <div class="metric-row">
+        <span class="metric-label">PMI per partner attivo</span>
+        <div class="metric-values">
+          <div class="metric-val"><div class="n">M12</div><div class="p">target</div></div>
+          <div class="metric-val good"><div class="n">&gt; 1,5</div><div class="p">obiettivo</div></div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Churn mensile partner</span>
+        <div class="metric-values">
+          <div class="metric-val"><div class="n">M12</div><div class="p">target</div></div>
+          <div class="metric-val good"><div class="n">&lt; 5%</div><div class="p">obiettivo</div></div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Time to first referral</span>
+        <div class="metric-values">
+          <div class="metric-val"><div class="n">M12</div><div class="p">target</div></div>
+          <div class="metric-val good"><div class="n">&lt; 6 sett.</div><div class="p">obiettivo</div></div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">NPS partner</span>
+        <div class="metric-values">
+          <div class="metric-val"><div class="n">M12</div><div class="p">target</div></div>
+          <div class="metric-val good"><div class="n">&gt; 40</div><div class="p">obiettivo</div></div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Partner attivi totali</span>
+        <div class="metric-values">
+          <div class="metric-val"><div class="n">M24</div><div class="p">orizzonte</div></div>
+          <div class="metric-val good"><div class="n">35–50</div><div class="p">proiezione</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KPI -->
+<section class="kpis">
+  <div class="section-eyebrow reveal" style="color:#5DCAA5">I numeri che contano</div>
+  <h2 class="section-title reveal d1">Concreto. Misurabile. Incrementale.</h2>
+  <p class="section-sub reveal d2">Il canale partner non è un'opzione di crescita — è il moltiplicatore del piano principale.</p>
+  <div class="kpi-grid">
+    <div class="kpi-box reveal"><div class="kpi-val">€ 0</div><div class="kpi-lbl">Investimento aggiuntivo</div><div class="kpi-sub">infrastruttura già presente</div></div>
+    <div class="kpi-box hl reveal d1"><div class="kpi-val">3×</div><div class="kpi-lbl">Moltiplicatore acquisizione</div><div class="kpi-sub">ogni partner porta 2-3 PMI</div></div>
+    <div class="kpi-box reveal d2"><div class="kpi-val">+41%</div><div class="kpi-lbl">MRR a M24 vs piano base</div><div class="kpi-sub">scenario conservativo</div></div>
+    <div class="kpi-box hl reveal d3"><div class="kpi-val">18K</div><div class="kpi-lbl">Studi potenziali in Italia</div><div class="kpi-sub">15–20% dei 120K studi totali</div></div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap" id="roadmap">
+  <div class="roadmap-header">
+    <div class="section-eyebrow reveal">Roadmap</div>
+    <h2 class="section-title reveal d1">Da zero a rete strutturata in 24 mesi.</h2>
+    <p class="section-sub reveal d2">Ogni fase si costruisce sulla precedente. Nessun salto nel vuoto — solo passi misurabili con milestone chiare.</p>
+  </div>
+  <div class="timeline">
+    <div class="tl-item active reveal">
+      <div class="tl-period">M1–3</div>
+      <div class="tl-content"><h4>Fondamenta — struttura dati partner</h4><p>Campo partner_id in Supabase, tracking referral attivo, DPA aggiornato per condivisione dati con consenso PMI.</p></div>
+    </div>
+    <div class="tl-item active reveal d1">
+      <div class="tl-period">M5–6</div>
+      <div class="tl-content"><h4>MVP Portale — dashboard base live</h4><p>Dashboard commissioni, lista clienti, stato abbonamenti. Sviluppo in parallelo al lancio del modulo advertising sui portali PMI.</p></div>
+    </div>
+    <div class="tl-item reveal d1">
+      <div class="tl-period">M7–8</div>
+      <div class="tl-content"><h4>Lancio soft — primi 5 partner attivi</h4><p>Webinar di lancio "Digitalizza i tuoi clienti PMI con AI", onboarding guidato, attivazione primo alert live su un cliente pilota.</p></div>
+    </div>
+    <div class="tl-item milestone reveal d1">
+      <div class="tl-period">M8</div>
+      <div class="tl-content"><h4>🏆 Attivazione ufficiale programma tier</h4><p>Silver / Gold / Platinum live. Alert configurabili, generazione documenti AI inclusa da Gold. Partnership formale con i primi studi.</p></div>
+    </div>
+    <div class="tl-item reveal d2">
+      <div class="tl-period">M9–12</div>
+      <div class="tl-content"><h4>Crescita — 10–15 partner attivi</h4><p>LinkedIn Ads B2B dedicati, primo contatto con Ordine Commercialisti per accordo quadro, case study video con 2 partner Gold.</p></div>
+    </div>
+    <div class="tl-item reveal d2">
+      <div class="tl-period">M13–18</div>
+      <div class="tl-content"><h4>Scala — 20–30 partner attivi</h4><p>Partnership con Ordine Commercialisti, co-marketing Platinum, webinar co-branded. MRR da canale partner: €8.000–12.000.</p></div>
+    </div>
+    <div class="tl-item milestone reveal d3">
+      <div class="tl-period">M18</div>
+      <div class="tl-content"><h4>🚀 Partner Pro opzionale — €49/mese</h4><p>Alert avanzati, documenti illimitati, API Zucchetti/TeamSystem. Stima conversione 30% dei partner attivi. Revenue aggiuntiva.</p></div>
+    </div>
+    <div class="tl-item reveal d3">
+      <div class="tl-period">M19–24</div>
+      <div class="tl-content"><h4>Maturità — 35–50 partner attivi</h4><p>Rete strutturata, flywheel attivo: ogni PMI attira partner, ogni partner porta PMI. MRR totale proiettato COMANI: €61.500 (+41% vs piano base).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div>
+    <div class="section-eyebrow reveal" style="color:rgba(255,255,255,.6)">Inizia adesso</div>
+    <h2 class="section-title reveal d1">Il gap di mercato è adesso.<br>Prima che qualcuno lo occupi.</h2>
+    <p class="section-sub reveal d2">Odoo e Zucchetti hanno più clienti ma nessun programma partner pensato per il commercialista italiano che vuole fare consulenza proattiva. Questo è il gap che COMANI sta occupando nei prossimi 18 mesi.</p>
+    <div class="cta-btns reveal d3">
+      <a href="mailto:marco7@yahoo.com?subject=Richiesta%20accesso%20Partner%20Platform%20COMANI" class="btn-white">Richiedi accesso partner</a>
+      <a href="#value" class="btn-ghost-white">Rileggi come funziona</a>
+    </div>
+  </div>
+  <div class="cta-actions">
+    <div class="cta-item reveal"><div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="cta-item-text"><h5>Registrazione in 5 minuti</h5><p>Nessun contratto da firmare, nessun pagamento anticipato</p></div></div>
+    <div class="cta-item reveal d1"><div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="cta-item-text"><h5>Sconto lancio 30% per i primi 3 clienti</h5><p>Valido per i partner che si registrano entro il lancio ufficiale</p></div></div>
+    <div class="cta-item reveal d2"><div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="cta-item-text"><h5>Onboarding dedicato</h5><p>Un call di 30 minuti con il team COMANI per impostare il portale</p></div></div>
+    <div class="cta-item reveal d3"><div class="cta-item-icon"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="cta-item-text"><h5>Business plan completo disponibile</h5><p>Proiezioni finanziarie, roadmap e analisi di mercato su richiesta</p></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">COMA<span>NI</span></div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#value">Partner Platform</a></li>
+    <li><a href="#tiers">Piani</a></li>
+    <li><a href="mailto:marco7@yahoo.com">Contatti</a></li>
+    <li><a href="#">Privacy Policy</a></li>
+  </ul>
+  <p class="footer-legal">© 2026 COMANI — ERP & CRM Web Agency per PMI italiane. Tutti i diritti riservati.</p>
+</footer>
+
+<script>
+// IntersectionObserver per .reveal — attiva l'animazione quando entra in viewport
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Highlight nav link attivo durante lo scroll
+const secs = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a[href^="#"]');
+const onScroll = () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  links.forEach(a => {
+    const active = a.getAttribute('href') === '#' + cur;
+    a.
