@@ -671,4 +671,11 @@ const onScroll = () => {
   secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
   links.forEach(a => {
     const active = a.getAttribute('href') === '#' + cur;
-    a.
+    a.style.color = active ? 'var(--navy)' : '';
+    a.style.fontWeight = active ? '600' : '';
+  });
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+</body>
+</html>
