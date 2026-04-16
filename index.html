@@ -331,6 +331,26 @@ footer{background:var(--navy-dk);padding:48px 7%}
   .footer-top{flex-direction:column}
   .seg-bar-label{display:none}
 }
+
+/* ── Form CTA (conversioni avanzate) ── */
+.cta-form{margin-top:28px;display:flex;flex-direction:column;gap:14px;width:100%;max-width:520px}
+.cta-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cta-form-field{display:flex;flex-direction:column;gap:5px}
+.cta-form-field label{font-size:.8rem;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:.03em;text-transform:uppercase}
+.cta-form-field input,
+.cta-form-field select{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:11px 14px;font-family:var(--fb);font-size:.95rem;color:var(--white);transition:border-color .2s,background .2s;outline:none;-webkit-appearance:none;appearance:none}
+.cta-form-field input::placeholder{color:rgba(255,255,255,.3)}
+.cta-form-field input:focus,
+.cta-form-field select:focus{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.12)}
+.cta-form-field select option{background:var(--navy-dk);color:var(--white)}
+.required-star{color:rgba(245,158,11,.8)}
+.cta-form-submit{width:100%;justify-content:center;margin-top:4px;cursor:pointer;border:none;font-family:var(--fb);font-size:1rem}
+.cta-form-privacy{font-size:.76rem;color:rgba(255,255,255,.35);text-align:center;margin-top:2px}
+.cta-form-privacy a{color:rgba(255,255,255,.45);text-decoration:underline}
+.cta-form-msg{font-size:.88rem;padding:10px 14px;border-radius:8px;display:none}
+.cta-form-msg.error{display:block;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+.cta-form-msg.success{display:block;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6ee7b7}
+@media(max-width:600px){.cta-form-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -698,10 +718,48 @@ footer{background:var(--navy-dk);padding:48px 7%}
   <div>
     <h2 class="section-title">Partiamo con una<br>demo gratuita di 30 minuti.</h2>
     <p class="section-sub">Mostriamo come funziona il modulo che ti interessa sulla tua tipologia di produzione. Nessun obbligo, nessun commerciale aggressivo.</p>
-    <div class="cta-btns">
-      <a href="mailto:info@comani.it?subject=Demo gratuita PMI" class="btn-white">Prenota la demo →</a>
-      <a href="#moduli" class="btn-ghost-white">Esplora i moduli</a>
-    </div>
+
+    <!-- Form contatti PMI con conversioni avanzate Google Ads -->
+    <form id="form-pmi" class="cta-form" novalidate>
+      <div class="cta-form-row">
+        <div class="cta-form-field">
+          <label for="pmi-nome">Nome e cognome</label>
+          <input type="text" id="pmi-nome" name="nome" placeholder="Mario Rossi" autocomplete="name" required>
+        </div>
+        <div class="cta-form-field">
+          <label for="pmi-azienda">Azienda</label>
+          <input type="text" id="pmi-azienda" name="azienda" placeholder="Rossi Srl" autocomplete="organization">
+        </div>
+      </div>
+      <div class="cta-form-row">
+        <div class="cta-form-field">
+          <label for="pmi-email">Email aziendale <span class="required-star">*</span></label>
+          <input type="email" id="pmi-email" name="email" placeholder="mario@rossisrl.it" autocomplete="email" required>
+        </div>
+        <div class="cta-form-field">
+          <label for="pmi-tel">Telefono</label>
+          <input type="tel" id="pmi-tel" name="telefono" placeholder="+39 02 1234567" autocomplete="tel">
+        </div>
+      </div>
+      <div class="cta-form-field">
+        <label for="pmi-modulo">Modulo di interesse</label>
+        <select id="pmi-modulo" name="modulo">
+          <option value="">Seleziona un modulo…</option>
+          <option value="MRP Produzione">MRP / Produzione</option>
+          <option value="CRM">CRM</option>
+          <option value="Procurement">Procurement</option>
+          <option value="Finance">Finance</option>
+          <option value="Operations">Operations</option>
+          <option value="Bundle completo">Bundle completo</option>
+        </select>
+      </div>
+      <div id="pmi-form-msg" class="cta-form-msg" aria-live="polite"></div>
+      <button type="submit" class="btn-white cta-form-submit">
+        Prenota la demo gratuita
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+      <p class="cta-form-privacy">Nessuno spam. I tuoi dati non vengono ceduti a terzi. <a href="#">Privacy Policy</a></p>
+    </form>
   </div>
   <div class="cta-items">
     <div class="cta-item"><div class="cta-item-icon">⚡</div><div class="cta-item-text"><h5>Proposta in 24 ore</h5><p>Preventivo personalizzato dopo la call, non un listino generico</p></div></div>
@@ -1014,10 +1072,47 @@ footer{background:var(--navy-dk);padding:48px 7%}
   <div>
     <h2 class="section-title">Scopri quanto stai perdendo<br>sul food cost.</h2>
     <p class="section-sub">In 30 minuti calcoliamo insieme il tuo food cost attuale e ti mostriamo dove intervenire. Gratis, senza impegno.</p>
-    <div class="cta-btns">
-      <a href="mailto:info@comani.it?subject=Demo gratuita F%26B" class="btn-white">Prenota la demo →</a>
-      <a href="#moduli-fb" class="btn-ghost-white">Vedi i moduli</a>
-    </div>
+
+    <!-- Form contatti F&B con conversioni avanzate Google Ads -->
+    <form id="form-fb" class="cta-form" novalidate>
+      <div class="cta-form-row">
+        <div class="cta-form-field">
+          <label for="fb-nome">Nome e cognome</label>
+          <input type="text" id="fb-nome" name="nome" placeholder="Luca Bianchi" autocomplete="name" required>
+        </div>
+        <div class="cta-form-field">
+          <label for="fb-locale">Nome del locale</label>
+          <input type="text" id="fb-locale" name="locale" placeholder="Trattoria da Luca" autocomplete="organization">
+        </div>
+      </div>
+      <div class="cta-form-row">
+        <div class="cta-form-field">
+          <label for="fb-email">Email <span class="required-star">*</span></label>
+          <input type="email" id="fb-email" name="email" placeholder="luca@trattoriadluca.it" autocomplete="email" required>
+        </div>
+        <div class="cta-form-field">
+          <label for="fb-tel">Telefono</label>
+          <input type="tel" id="fb-tel" name="telefono" placeholder="+39 02 1234567" autocomplete="tel">
+        </div>
+      </div>
+      <div class="cta-form-field">
+        <label for="fb-tipo">Tipo di locale</label>
+        <select id="fb-tipo" name="tipo">
+          <option value="">Seleziona…</option>
+          <option value="Ristorante">Ristorante</option>
+          <option value="Pizzeria">Pizzeria</option>
+          <option value="Bar / Caffetteria">Bar / Caffetteria</option>
+          <option value="Catering">Catering</option>
+          <option value="Altro">Altro</option>
+        </select>
+      </div>
+      <div id="fb-form-msg" class="cta-form-msg" aria-live="polite"></div>
+      <button type="submit" class="btn-white cta-form-submit">
+        Calcola il mio food cost gratis
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+      <p class="cta-form-privacy">Nessuno spam. I tuoi dati non vengono ceduti a terzi. <a href="#">Privacy Policy</a></p>
+    </form>
   </div>
   <div class="cta-items">
     <div class="cta-item"><div class="cta-item-icon">🍳</div><div class="cta-item-text"><h5>Specifico per il F&B</h5><p>Non un ERP da manifattura. Moduli nati per ristoratori</p></div></div>
@@ -1153,14 +1248,79 @@ document.addEventListener('DOMContentLoaded', triggerReveal);
 })();
 </script>
 
-<!-- Google Ads Conversion Tracking — click su "Prenota la demo" -->
+<!-- Google Ads Conversion Tracking — mailto legacy + form conversioni avanzate -->
 <script>
+  // ── Legacy: click su link mailto ──
   document.querySelectorAll('a[href^="mailto:info@comani.it"]').forEach(function(link) {
     link.addEventListener('click', function() {
       gtag('event', 'conversion', {
         'send_to': 'AW-18027513471/wTBkCKnt04scEP-MmJRD'
       });
     });
+  });
+
+  // ── Conversioni Avanzate: submit form PMI ──
+  document.getElementById('form-pmi').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('pmi-email').value.trim();
+    var nome  = document.getElementById('pmi-nome').value.trim();
+    var tel   = document.getElementById('pmi-tel').value.trim();
+    var msg   = document.getElementById('pmi-form-msg');
+
+    if (!email) {
+      msg.textContent = 'Inserisci la tua email per procedere.';
+      msg.className = 'cta-form-msg error';
+      return;
+    }
+
+    // Conversione avanzata: passa i dati utente hashati a Google Ads
+    gtag('set', 'user_data', {
+      'email': email,
+      'phone_number': tel || undefined,
+      'address': { 'first_name': nome.split(' ')[0] || undefined, 'last_name': nome.split(' ').slice(1).join(' ') || undefined }
+    });
+    gtag('event', 'conversion', { 'send_to': 'AW-18027513471/wTBkCKnt04scEP-MmJRD' });
+
+    // Invia via mailto con i dati precompilati
+    var soggetto = 'Demo gratuita PMI — ' + (document.getElementById('pmi-modulo').value || 'Info generali');
+    var corpo = 'Nome: ' + nome + '\nEmail: ' + email + '\nTelefono: ' + tel + '\nAzienda: ' + document.getElementById('pmi-azienda').value + '\nModulo: ' + document.getElementById('pmi-modulo').value;
+    window.location.href = 'mailto:info@comani.it?subject=' + encodeURIComponent(soggetto) + '&body=' + encodeURIComponent(corpo);
+
+    msg.textContent = '✓ Grazie! Ti contatteremo entro 24 ore.';
+    msg.className = 'cta-form-msg success';
+    document.getElementById('form-pmi').reset();
+  });
+
+  // ── Conversioni Avanzate: submit form F&B ──
+  document.getElementById('form-fb').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('fb-email').value.trim();
+    var nome  = document.getElementById('fb-nome').value.trim();
+    var tel   = document.getElementById('fb-tel').value.trim();
+    var msg   = document.getElementById('fb-form-msg');
+
+    if (!email) {
+      msg.textContent = 'Inserisci la tua email per procedere.';
+      msg.className = 'cta-form-msg error';
+      return;
+    }
+
+    // Conversione avanzata: passa i dati utente hashati a Google Ads
+    gtag('set', 'user_data', {
+      'email': email,
+      'phone_number': tel || undefined,
+      'address': { 'first_name': nome.split(' ')[0] || undefined, 'last_name': nome.split(' ').slice(1).join(' ') || undefined }
+    });
+    gtag('event', 'conversion', { 'send_to': 'AW-18027513471/wTBkCKnt04scEP-MmJRD' });
+
+    // Invia via mailto con i dati precompilati
+    var soggetto = 'Demo gratuita F&B — ' + (document.getElementById('fb-tipo').value || 'Info generali');
+    var corpo = 'Nome: ' + nome + '\nEmail: ' + email + '\nTelefono: ' + tel + '\nLocale: ' + document.getElementById('fb-locale').value + '\nTipo: ' + document.getElementById('fb-tipo').value;
+    window.location.href = 'mailto:info@comani.it?subject=' + encodeURIComponent(soggetto) + '&body=' + encodeURIComponent(corpo);
+
+    msg.textContent = '✓ Perfetto! Ti ricontatteremo per calcolare insieme il tuo food cost.';
+    msg.className = 'cta-form-msg success';
+    document.getElementById('form-fb').reset();
   });
 </script>
 <!-- Fine Conversion Tracking -->
